@@ -1,8 +1,19 @@
-<template>
-  <div>
-    <nuxt />
-  </div>
+<template lang="pug">
+  container
+    header
+    nuxt
 </template>
+
+<script>
+import PageHeader from '~/components/Header.vue'
+
+export default {
+  component: {
+    PageHeader
+  }
+}
+</script>
+
 
 <style>
 html {
