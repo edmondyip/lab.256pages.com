@@ -1,23 +1,25 @@
 <template lang="pug">
-  section.container main content
+  section.container 
+    Projects
+    Projects
+    Projects
+    Projects
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Projects from '~/layouts/ProjectList.vue'
 
 export default {
   components: {
-    Logo
+    Projects,
   }
 }
 </script>
 
-<style lang="stylus">
-.container
-  margin: 0 auto
-  min-height: 100vh
-  display: flex
-  justify-content: center
-  align-items: center
-  text-align: center
+
+<style lang="stylus" scoped>
+  section.container
+    margin 0 auto
+    max-width 1000px
+    position relative
 </style>

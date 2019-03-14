@@ -35,7 +35,20 @@ module.exports = {
   */
   plugins: [
   ],
-
+  // module: {
+  //   rules: [
+  //     { test: /\.vue$/, use: 'vue-loader' },
+  //     { test: /\.pug$/, use: 'pug-plain-loader' },
+  //     {
+  //         test: /\.styl(us)?$/,
+  //         use: [
+  //             'vue-style-loader',
+  //             'css-loader',
+  //             'stylus-loader'
+  //         ]
+  //     },
+  //   ],
+  // },
   /*
   ** Nuxt.js modules
   */
