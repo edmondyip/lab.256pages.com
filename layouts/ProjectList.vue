@@ -3,11 +3,11 @@
     div(v-on:click="PopupProject()")
       h2 Project title
       p Details description for this project
-      Ball(v-if="!popup")
+      //- Ball(v-if="!popup")
 </template>
 
 <script>
-import Ball from '~/components/Ball.vue'
+// import Ball from '~/components/Ball.vue'
 
 export default {
   data() {
@@ -16,7 +16,7 @@ export default {
     }
   },
   componends: {
-    Ball,
+    // Ball,
   },
   methods: {
     PopupProject() {

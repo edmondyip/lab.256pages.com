@@ -5,13 +5,11 @@
 <script>
 /* eslint-disable */
   import * as THREE from 'three';
-  // import OrbitControls from 'three-dlc/src/controls/OrbitControls';
+  import OrbitControls from 'three-dlc/src/controls/OrbitControls';
 
   export default {
-    created() {
-      this.$nextTick(() => {
-        this.init();
-      })
+    mounted() {
+      this.init();
     },
     methods: {
       init() {
@@ -21,7 +19,7 @@
       initMesh() {
         // Scene
         this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color().setHSL(0.6, 0, 1);
+        // this.scene.background = new THREE.Color().setHSL(0.6, 0, 1);
 
         // Camera
         this.camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight , 0.01, 200);
@@ -51,7 +49,7 @@
         const textureCube = loader.load('img/paper.jpg');
         const backgroundImage = ['img/hdri/nx.png', 'img/hdri/ny.png', 'img/hdri/nz.png', 'img/hdri/px.png', 'img/hdri/py.png', 'img/hdri/pz.png'];
         const backgroundTexture = new THREE.CubeTextureLoader().load(backgroundImage);
-        const cubeMaterial = new THREE.MeshLambertMaterial({color: 0xb6f8ff, envMap: backgroundTexture});
+        const cubeMaterial = new THREE.MeshLambertMaterial({color: 0xb6f8ff,});
 
         // Object
         const cubeGeometry = new THREE.SphereGeometry(10, 25, 25);
@@ -59,6 +57,7 @@
         this.cube.castShadow = true;
         this.scene.add(this.cube);
 
+        this.scene.background = backgroundTexture;
         this.renderScene();
       },
       renderScene() {

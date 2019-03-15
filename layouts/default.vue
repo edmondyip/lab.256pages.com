@@ -1,8 +1,8 @@
 <template lang="pug">
   #container
-    PageHeader
+    //- PageHeader
     nuxt
-    PageFooter
+    //- PageFooter
 </template>
 
 <script>
