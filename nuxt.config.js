@@ -34,21 +34,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    {src:'~plugins/Three.js', ssr:false},
   ],
-  // module: {
-  //   rules: [
-  //     { test: /\.vue$/, use: 'vue-loader' },
-  //     { test: /\.pug$/, use: 'pug-plain-loader' },
-  //     {
-  //         test: /\.styl(us)?$/,
-  //         use: [
-  //             'vue-style-loader',
-  //             'css-loader',
-  //             'stylus-loader'
-  //         ]
-  //     },
-  //   ],
-  // },
   /*
   ** Nuxt.js modules
   */
@@ -71,6 +58,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+   vendor: ['three'],
     extend(config, ctx) {
       
     }

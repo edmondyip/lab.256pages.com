@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(id='container')
+  div#three
 </template>
 
 <script>
@@ -58,7 +58,7 @@
         this.renderer.shadowMap.enabled = true; // Renderer Cast Shadow
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.setSize(this.width, this.height); // Renderer Size
-        document.getElementById("container").appendChild(this.renderer.domElement); // Add Canvas to Container
+        document.getElementById("three").appendChild(this.renderer.domElement); // Add Canvas to Container
         window.addEventListener('resize', this.handleWindowResize.bind(this), false);
 
       },

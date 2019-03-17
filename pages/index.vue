@@ -1,17 +1,18 @@
 <template lang="pug">
   section.container
-    Projects
+    no-ssr
+      Test
 </template>
 
 <script>
 import Projects from '~/layouts/ProjectList.vue'
-// import Ball from '~/components/Ball.vue'
+import Test from '~/components/Test.vue'
 
 export default {
   components: {
     Projects,
-    // Ball
-  }
+    Test,
+  },
 }
 </script>
 
