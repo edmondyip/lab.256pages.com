@@ -3,8 +3,6 @@
 </template>
 
 <script>
-// import OrbitControls from '~/plugins/ThreeDLC.client.js';
-
   export default {
     mounted() {
       this.init();
@@ -28,11 +26,13 @@
 
         const controls = new this.$controls(this.camera, this.renderer.domElement);
 
-        const backgroundImage = ['img/hdri/px.png', 'img/hdri/nx.png', 'img/hdri/py.png', 'img/hdri/ny.png',
-          'img/hdri/pz.png', 'img/hdri/nz.png'
+        const backgroundImage = ['img/hdri/px.png', 'img/hdri/nx.png', 'img/hdri/py.png', 'img/hdri/ny.png', 'img/hdri/pz.png', 'img/hdri/nz.png'
         ];
         const backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
         this.scene.background = backgroundTexture;
+        
+        const Light = new this.$THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+        this.scene.add(Light);
 
         const cubeTexture = new this.$THREE.TextureLoader().load('img/brick.jpg')
         const cubeGeometry = new this.$THREE.PlaneBufferGeometry(600, 600)
@@ -42,7 +42,7 @@
         });
         const object = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
         object.rotation.x = - Math.PI / 2;
-        this.scene.add(object)
+        this.scene.add(object);
 
         this.renderScene();
       },
