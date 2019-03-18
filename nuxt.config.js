@@ -46,7 +46,7 @@ module.exports = {
    */
   plugins: [
     '~plugins/Three.client.js',
-    '~plugins/ThreeDLC.client.js',
+    // '~plugins/ThreeEffect.client.js',
   ],
   /*
    ** Nuxt.js modules

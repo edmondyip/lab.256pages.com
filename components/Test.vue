@@ -17,14 +17,15 @@
       runTime() {
         this.scene = new this.$THREE.Scene();
         this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.poistion = (0,0,400);
+        this.camera.position.set(150, 100, -150);
+
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer();
         this.renderer.setPixelRatio(window.devicePixelRatio);
         document.getElementById("three").appendChild(this.renderer.domElement);
 
-        const controls = new this.$controls(this.camera, this.renderer.domElement);
+        const controls = new this.$controls.OrbitControls(this.camera, this.renderer.domElement);
 
         const backgroundImage = ['img/hdri/px.png', 'img/hdri/nx.png', 'img/hdri/py.png', 'img/hdri/ny.png', 'img/hdri/pz.png', 'img/hdri/nz.png'
         ];
