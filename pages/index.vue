@@ -1,5 +1,6 @@
 <template lang="pug">
   section.container
+    Projects
     no-ssr
       Test
 </template>

@@ -1,14 +1,12 @@
 import Vue from 'vue';
 import * as THREE from 'three';
-import Controls from 'three-dlc/src/controls/';
-
-// import EffectComposer from 'three-dlc/src/postprocessing/EffectComposer';
-// import GlitchPass from '~plugins/GlitchPass';
-
+import OrbitControls from 'three-dlc/src/controls/OrbitControls.js';
+import * as postprocessing from 'postprocessing';
 
 Vue.use({
   install(Vue, options) {
     Vue.prototype.$THREE = THREE;
-    Vue.prototype.$controls = Controls;
+    Vue.prototype.$controls = OrbitControls;
+    Vue.prototype.$postprocessing = postprocessing;
   }
 });

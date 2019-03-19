@@ -1,6 +1,5 @@
 const pkg = require('./package')
 
-
 module.exports = {
   mode: 'universal',
 
@@ -46,7 +45,6 @@ module.exports = {
    */
   plugins: [
     '~plugins/Three.client.js',
-    // '~plugins/ThreeEffect.client.js',
   ],
   /*
    ** Nuxt.js modules
@@ -79,7 +77,7 @@ module.exports = {
     /*
      ** You can extend webpack config here 
      */
-    vendor: ['three', 'three-dlc'],
+    vendor: ['three', 'three-dlc', 'postprocessing'],
     extend(config, ctx) {
 
     }

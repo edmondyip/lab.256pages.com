@@ -3,12 +3,9 @@
     div(v-on:click="PopupProject()")
       h2 Project title
       p Details description for this project
-      //- Ball(v-if="!popup")
 </template>
 
 <script>
-// import Ball from '~/components/Ball.vue'
-
 export default {
   data() {
     return {
@@ -34,18 +31,17 @@ export default {
     display flex
     flex-direction row
     div
-      // background url("img/paper.jpg") center center
-      width 100%
-      height 200px
+      width 98%
+      height 190px
       background #fff
       display block
       border 3px solid #111
       border-radius 10px
       padding 20px
-      box-shadow 0px 50px 50px -30px rgba(0,0,0,0.2)
+      box-shadow 0px 20px 20px -10px rgba(0,0,0,0.2)
       transition 0.5s
       cursor pointer
-      margin 10px 0
+      margin 15px 1% 15px
       h2
         font-size 20px
         color #000
@@ -56,9 +52,10 @@ export default {
         line-height 12px
         font-family Arial, Helvetica, sans-serif
       &:hover
-        width 98%
-        height 190px
-        margin 15px 1% 15px
+        width 100%
+        height 200px
+        margin 10px 0
+        box-shadow 0px 50px 50px -30px rgba(0,0,0,0.2)
         h2
           font-size 30px
 </style>
