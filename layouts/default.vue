@@ -1,18 +1,23 @@
 <template lang="pug">
   #container
     //- PageHeader
-    nuxt
-    //- PageFooter
+    //- Projects
+    <transition name="background" mode="out-in">
+      nuxt
+    </transition>
+    PageFooter
 </template>
 
 <script>
 import PageHeader from '~/layouts/Header.vue'
 import PageFooter from '~/layouts/Footer.vue'
+import Projects from '~/layouts/ProjectList.vue'
 
 export default {
   components: {
     PageHeader,
-    PageFooter
+    PageFooter,
+    Projects
   }
 }
 </script>

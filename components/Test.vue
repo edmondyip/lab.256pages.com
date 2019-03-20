@@ -29,7 +29,8 @@
         document.getElementById("three").appendChild(this.renderer.domElement);
 
         this.controls = new this.$controls(this.camera, this.renderer.domElement);
-        this.controls.autoRotate = true;
+        this.controls.enabled = false;
+        // this.controls.autoRotate = true;
 
         const backgroundImage = ['img/hdri/px.png', 'img/hdri/nx.png', 'img/hdri/py.png', 'img/hdri/ny.png', 'img/hdri/pz.png', 'img/hdri/nz.png'
         ];
@@ -47,12 +48,12 @@
         const cubeMaterial = new this.$THREE.MeshLambertMaterial({
           color: 0xffeeee, 
           map: cubeTexture,
-          wireframe: true
+          // wireframe: true
         });
-        const box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
-        box.receiveShadow = true;
+        this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
+        this.box.receiveShadow = true;
         // object.rotation.x = - Math.PI / 2;
-        this.scene.add(box);
+        this.scene.add(this.box);
 
         this.composer = new this.$postprocessing.EffectComposer(this.renderer);
         this.composer.setSize(window.innerWidth, window.innerHeight);
@@ -71,13 +72,15 @@
           scene,
           renderer,
           camera,
-          composer, 
-          controls
+          composer,
+          controls,
+          box,
         } = this;
 
-        // renderer.render(scene, camera);
-        composer.render(0.05);
-        controls.update();
+        renderer.render(scene, camera);
+        box.rotation.y += 0.005;
+        // composer.render(0.05);
+        // controls.update();
         requestAnimationFrame(this.renderScene);
       }
     }

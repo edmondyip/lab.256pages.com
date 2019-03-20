@@ -1,8 +1,11 @@
 <template lang="pug">
+div#project-list
   section
     div(v-on:click="PopupProject()")
       h2 Project title
       p Details description for this project
+      button
+        a View Source
 </template>
 
 <script>
@@ -27,6 +30,10 @@ export default {
 
 
 <style lang="stylus" scoped>
+div#project-list
+  margin 0 auto
+  max-width 1000px
+  position relative
   section
     display flex
     flex-direction row
@@ -36,9 +43,7 @@ export default {
       background #fff
       display block
       border 3px solid #111
-      border-radius 10px
       padding 20px
-      box-shadow 0px 20px 20px -10px rgba(0,0,0,0.2)
       transition 0.5s
       cursor pointer
       margin 15px 1% 15px
@@ -55,7 +60,6 @@ export default {
         width 100%
         height 200px
         margin 10px 0
-        box-shadow 0px 50px 50px -30px rgba(0,0,0,0.2)
         h2
           font-size 30px
 </style>
