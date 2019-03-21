@@ -44,11 +44,11 @@
         this.scene.add(Light);
 
         const cubeTexture = new this.$THREE.TextureLoader().load('img/brick.jpg');
-        const cubeGeometry = new this.$THREE.BoxBufferGeometry(60, 60, 60, 5, 5,5);
+        const cubeGeometry = new this.$THREE.BoxBufferGeometry(80, 80, 80, 5, 5,5);
         const cubeMaterial = new this.$THREE.MeshLambertMaterial({
           color: 0xffeeee, 
           map: cubeTexture,
-          // wireframe: true
+          wireframe: true,
         });
         this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
         this.box.receiveShadow = true;
@@ -87,9 +87,15 @@
   }
 </script>
 
-<style>
-  canvas {
-    width: 100%;
-    height: 100%;
-  } 
+<style lang="stylus" scoped>
+  div#three
+    position fixed
+    top 0
+    bottom 0
+    left 0
+    right 0
+    z-index 0
+    canvas
+      width 100%
+      height 100%
 </style>

@@ -1,7 +1,8 @@
 <template lang="pug">
   #container
-    //- PageHeader
-    //- Projects
+    PageHeader
+    First
+    Projects
     <transition name="background" mode="out-in">
       nuxt
     </transition>
@@ -11,13 +12,15 @@
 <script>
 import PageHeader from '~/layouts/Header.vue'
 import PageFooter from '~/layouts/Footer.vue'
+import First from '~/components/FirstBlock.vue'
 import Projects from '~/layouts/ProjectList.vue'
 
 export default {
   components: {
     PageHeader,
     PageFooter,
-    Projects
+    Projects,
+    First
   }
 }
 </script>
