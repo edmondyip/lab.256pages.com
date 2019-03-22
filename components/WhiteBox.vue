@@ -15,57 +15,82 @@
         runTime();
       },
       runTime() {
+        const height = window.innerHeight;
+        const width = window.innerWidth;
+
+        this.createScene();
+        this.createLights();
+        this.createBox();
+        this.createPlane();
+        this.createEffect();
+
+        this.controls = new this.$controls(this.camera, this.renderer.domElement);
+        this.controls.enabled = false;
+
+        window.addEventListener('resize', this.windowResize.bind(this), false);
+        this.renderScene();
+      },
+      createScene() {
         this.scene = new this.$THREE.Scene();
+        this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
         this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
         this.camera.position.set(150, 100, -150);
-
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({ alpha: true, antialias: true });
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap;
 
-        // this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setPixelRatio(window.devicePixelRatio);
         document.getElementById("three").appendChild(this.renderer.domElement);
-
-        this.controls = new this.$controls(this.camera, this.renderer.domElement);
-        this.controls.enabled = false;
-        // this.controls.autoRotate = true;
-
-        const backgroundImage = ['img/hdri/px.png', 'img/hdri/nx.png', 'img/hdri/py.png', 'img/hdri/ny.png', 'img/hdri/pz.png', 'img/hdri/nz.png'
-        ];
-        const backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
-        // this.scene.background = backgroundTexture;
-        
-        const Light = new this.$THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-        // Light.position.set(10, 50, 10);
-        // Light.castShadow = true;
-        // Light.shadow.radius = 50;
+      },
+      createLights() {
+        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.8);
         this.scene.add(Light);
 
-        const cubeTexture = new this.$THREE.TextureLoader().load('img/brick.jpg');
-        const cubeGeometry = new this.$THREE.BoxBufferGeometry(80, 80, 80, 5, 5,5);
+        const PointLight = new this.$THREE.PointLight(0xffffff, 1, 100);
+        PointLight.position.set(0, 20, -60);
+        PointLight.castShadow = true;
+        this.scene.add(PointLight);
+      },
+      createBox() {
+        const cubeGeometry = new this.$THREE.BoxBufferGeometry(60, 60, 60, 5, 5,5);
         const cubeMaterial = new this.$THREE.MeshLambertMaterial({
-          color: 0xffeeee, 
-          map: cubeTexture,
-          wireframe: true,
+          color: 0xffeeee,
         });
         this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
+        this.box.position.y = 30;
+        this.box.castShadow = true;
         this.box.receiveShadow = true;
-        // object.rotation.x = - Math.PI / 2;
         this.scene.add(this.box);
-
+      },
+      createPlane() {
+        const planeGeometry = new this.$THREE.PlaneBufferGeometry(400, 400);
+        const planeMaterial = new this.$THREE.MeshToonMaterial({
+          color: 0xcccccc,
+          side: this.$THREE.DoubleSide,
+        });
+        const land = new this.$THREE.Mesh(planeGeometry, planeMaterial);
+        land.receiveShadow = true;
+        land.rotation.x = Math.PI / 2;
+        land.position.y = -40;
+        this.scene.add(land);
+      },
+      createEffect() {
         this.composer = new this.$postprocessing.EffectComposer(this.renderer);
         this.composer.setSize(window.innerWidth, window.innerHeight);
-
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
 
         const effectPass = new this.$postprocessing.EffectPass(this.camera, new this.$postprocessing.GlitchEffect(0.5));
-
         effectPass.renderToScreen = true;
         this.composer.addPass(effectPass);
-
-        this.renderScene();
+      },
+      windowResize() {
+        this.height = window.innerHeight;
+        this.width = window.innerWidth;
+        this.renderer.setSize(this.width, this.height);
+        this.camera.aspect = this.width / this.height;
+        this.camera.updateProjectionMatrix();
       },
       renderScene() {
         const {
@@ -79,8 +104,6 @@
 
         renderer.render(scene, camera);
         box.rotation.y += 0.005;
-        // composer.render(0.05);
-        // controls.update();
         requestAnimationFrame(this.renderScene);
       }
     }
@@ -94,7 +117,7 @@
     bottom 0
     left 0
     right 0
-    z-index 0
+    z-index -1
     canvas
       width 100%
       height 100%

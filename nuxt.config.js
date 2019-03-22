@@ -8,6 +8,7 @@ module.exports = {
    */
   head: {
     title: pkg.name,
+    titleTemplate: '%s - webGL Lab',
     meta: [{
         charset: 'utf-8'
       },
@@ -22,10 +23,15 @@ module.exports = {
       }
     ],
     link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    }]
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      },
+      // {
+      //   rel: 'stylesheet',
+      //   href: 'https://fonts.googleapis.com/css?family=Noto+Serif+TC',
+      // },
+    ],
   },
 
   /*

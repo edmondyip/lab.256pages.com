@@ -1,13 +1,16 @@
 <template lang="pug">
-  Test
+  TopEffect
 </template>
 
 <script>
-import Test from '~/components/Test.vue'
+import TopEffect from '~/components/WhiteBox.vue'
 
 export default {
+  head:{
+    title: "Edmond Yip Web Development"
+  },
   components: {
-    Test,
+    TopEffect,
   },
 }
 </script>
