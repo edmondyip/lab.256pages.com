@@ -23,4 +23,4 @@ export const state = () => ({
       frameColor: '#ffee00',
     },
   ],
-})
+});

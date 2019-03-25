@@ -1,8 +1,9 @@
 <template lang="pug">
   div
-    span.line
-    span.line
-    span.line
+    nuxt-link(to="/")
+      span.line
+      span.line
+      span.line
 </template>
 
 <script>
@@ -26,6 +27,7 @@ export default {
     cursor pointer
     transition .5s
     border-bottom-right-radius 20px
+    z-index 3
     .line
       width 20px
       height 3px

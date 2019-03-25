@@ -18,15 +18,15 @@ import Projects from '~/layouts/ProjectList.vue'
 import {mapState} from 'vuex'
 
 export default {
-  methods: {
-    projectID(id) {
-      return this.projectList.findIndex(obj => obj.id === this.$route.params.path);
-    }
-  },
+  // methods: {
+  //   projectID(id) {
+  //     return this.projectList.findIndex(obj => obj.id === this.$route.params.path);
+  //   }
+  // },
   computed: {
     ...mapState({
       projectList: state => state.projectList
-    })
+    }),
   },
   components: {
     PageHeader,
