@@ -7,7 +7,7 @@ import TopEffect from '~/components/WhiteBox.vue'
 
 export default {
   head:{
-    title: "Edmond Yip Web Development"
+    title: "Edmond Yip WebGL 3D Development"
   },
   components: {
     TopEffect,

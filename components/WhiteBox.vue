@@ -21,7 +21,7 @@
         this.createScene();
         this.createLights();
         this.createBox();
-        this.createPlane();
+        // this.createPlane();
         this.createEffect();
 
         this.controls = new this.$controls(this.camera, this.renderer.domElement);
@@ -34,7 +34,7 @@
         this.scene = new this.$THREE.Scene();
         this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
         this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(150, 100, -150);
+        this.camera.position.set(150, 150, 150);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -45,36 +45,41 @@
         document.getElementById("three").appendChild(this.renderer.domElement);
       },
       createLights() {
-        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.7);
+        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.8);
         this.scene.add(Light);
 
-        const PointLight = new this.$THREE.PointLight(0xffffff, 0.5, 100);
-        PointLight.position.set(0, 100, -50);
+        const PointLight = new this.$THREE.PointLight(0xffffff, 1, 400);
+        PointLight.position.set(150, 0, 50);
         PointLight.castShadow = true;
-        this.scene.add(PointLight);
+        // this.scene.add(PointLight);
+
+        // const PointLightHelper = new this.$THREE.PointLightHelper(PointLight, 400);
+        // this.scene.add(PointLightHelper);
       },
       createBox() {
-        const cubeGeometry = new this.$THREE.BoxBufferGeometry(60, 60, 60, 5, 5,5);
+        const cubeGeometry = new this.$THREE.BoxBufferGeometry(100, 100, 100, 5, 5,5);
         const cubeMaterial = new this.$THREE.MeshLambertMaterial({
           color: 0xffeeee,
+          wireframe: true,
         });
         this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
-        this.box.position.y = 30;
+        this.box.position.set(30, 0, -50);
         this.box.castShadow = true;
         this.box.receiveShadow = true;
         this.scene.add(this.box);
       },
       createPlane() {
-        const planeGeometry = new this.$THREE.PlaneBufferGeometry(400, 400);
+        const planeGeometry = new this.$THREE.PlaneBufferGeometry(600, 600, 10, 10);
         const planeMaterial = new this.$THREE.MeshLambertMaterial({
           color: 0xcccccc,
-          side: this.$THREE.DoubleSide,
+          // side: this.$THREE.DoubleSide,
+          wireframe: true,
         });
         const land = new this.$THREE.Mesh(planeGeometry, planeMaterial);
         land.receiveShadow = true;
         land.rotation.x = Math.PI / 2;
         land.position.y = -40;
-        this.scene.add(land);
+        // this.scene.add(land);
       },
       createEffect() {
         this.composer = new this.$postprocessing.EffectComposer(this.renderer);

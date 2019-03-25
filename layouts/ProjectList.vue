@@ -2,11 +2,12 @@
 div#project-list.container
   section
     div(v-for="project in projectList")
-      h2 {{project.title}}
+      NuxtLink(:to="'/projects/' + project.path")
+        h2 {{project.title}}
       p {{project.description}}
       ul
         li(v-for="tag in project.tags") {{tag}}
-      a(:href="project.source") View Source
+      //- a(:href="project.source") View Source
 </template>
 
 <script>
@@ -42,7 +43,7 @@ export default {
       div
         width calc(98% - 40px)
         height 190px
-        background rgba(255,255,255,0.4)
+        background rgba(0,0,0,0.1)
         display block
         // border 1px solid #fff
         padding 20px
@@ -63,22 +64,22 @@ export default {
           display flex
           flex-wrap wrap
           padding 5px
-          li 
+          l
             font-size .8rem
             padding 2px 5px
             border 1px solid #ccc
             margin 5px
         a
-          display inline
-          padding 5px 10px
-          background rgba(0,0,0,0.5)
           text-decoration none
-          color #fff
-          font-size 10px
+        //   display inline
+        //   padding 5px 10px
+        //   background rgba(0,0,0,0.5)
+        //   color #fff
+        //   font-size 10px
         &:hover
           width calc(100% - 40px)
-          height 200px
-          margin 10px 0
+          // height 200px
+          margin 15px 0 100px
           h2
             font-size 30px
   @media screen and (max-width: 1020px)

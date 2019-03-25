@@ -1,6 +1,7 @@
 <template lang="pug">
   header
-   nav-btn
+    h1 title
+  //-  nav-btn
 </template>
 
 <script>

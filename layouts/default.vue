@@ -1,13 +1,13 @@
 <template lang="pug">
   #container
-    //- PageHeader
+    PageHeader
     First
     Projects
     div#frame
     <transition name="background" mode="out-in">
       nuxt
     </transition>
-    //- PageFooter
+    PageFooter
 </template>
 
 <script>
@@ -15,8 +15,19 @@ import PageHeader from '~/layouts/Header.vue'
 import PageFooter from '~/layouts/Footer.vue'
 import First from '~/components/FirstBlock.vue'
 import Projects from '~/layouts/ProjectList.vue'
+import {mapState} from 'vuex'
 
 export default {
+  methods: {
+    projectID(id) {
+      return this.projectList.findIndex(obj => obj.id === this.$route.params.path);
+    }
+  },
+  computed: {
+    ...mapState({
+      projectList: state => state.projectList
+    })
+  },
   components: {
     PageHeader,
     PageFooter,
@@ -58,8 +69,9 @@ export default {
     #frame
       background none
       position fixed
-      border 10px solid #ffee00
-      height calc(100% - 20px)
+      border-left 10px solid #ffee00
+      border-right 10px solid #ffee00
+      height 100vh
       width calc(100% - 20px)
       top 0
       bottom 0
