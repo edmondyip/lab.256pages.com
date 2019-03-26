@@ -68,6 +68,20 @@
         this.renderer.render(scene, camera);
         requestAnimationFrame(this.renderScene);
       }
+    },
+    destory() {
+      this.scene.remove(this.box);
+      this.camera.dispose();
+      this.loader.dispose();
+      this.textureCube.dispose();
+      this.backgroundTexture.dispose();
+      this.cubeGeometry.dispose();
+			this.cubeMaterial.dispose();
+      this.controls.dispose();
+      this.renderer.dispose();
+      this.scene.dispose();
+      window.removeEventListener('resize', this.windowResize.bind(this), false);
+      window.removeEventListener('resize', this.windowResize.bind(this), true);
     }
   };
 </script>

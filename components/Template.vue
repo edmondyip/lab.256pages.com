@@ -21,6 +21,8 @@
         this.createScene();
         this.createLights();
         this.createBox();
+        // this.createPlane();
+        // this.createEffect();
 
         this.controls = new this.$controls(this.camera, this.renderer.domElement);
         this.controls.enabled = false;
@@ -50,6 +52,10 @@
         const PointLight = new this.$THREE.PointLight(0xffffff, 1, 400);
         PointLight.position.set(150, 0, 50);
         PointLight.castShadow = true;
+        // this.scene.add(PointLight);
+
+        // const PointLightHelper = new this.$THREE.PointLightHelper(PointLight, 400);
+        // this.scene.add(PointLightHelper);
       },
       createBox() {
         const cubeGeometry = new this.$THREE.BoxBufferGeometry(100, 100, 100, 5, 5,5);
@@ -63,6 +69,28 @@
         this.box.receiveShadow = true;
         this.scene.add(this.box);
       },
+      // createPlane() {
+      //   const planeGeometry = new this.$THREE.PlaneBufferGeometry(600, 600, 10, 10);
+      //   const planeMaterial = new this.$THREE.MeshLambertMaterial({
+      //     color: 0xcccccc,
+          // side: this.$THREE.DoubleSide,
+        //   wireframe: true,
+        // });
+        // const land = new this.$THREE.Mesh(planeGeometry, planeMaterial);
+        // land.receiveShadow = true;
+        // land.rotation.x = Math.PI / 2;
+        // land.position.y = -40;
+        // this.scene.add(land);
+      // },
+      // createEffect() {
+      //   this.composer = new this.$postprocessing.EffectComposer(this.renderer);
+      //   this.composer.setSize(window.innerWidth, window.innerHeight);
+      //   this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
+
+      //   const effectPass = new this.$postprocessing.EffectPass(this.camera, new this.$postprocessing.GlitchEffect(0.5));
+      //   effectPass.renderToScreen = true;
+      //   this.composer.addPass(effectPass);
+      // },
       windowResize() {
         this.height = window.innerHeight;
         this.width = window.innerWidth;
@@ -75,6 +103,7 @@
           scene,
           renderer,
           camera,
+          composer,
           controls,
           box,
         } = this;
@@ -86,12 +115,10 @@
     },
     destory() {
       this.scene.remove(this.box);
-      this.camera.dispose();
       this.cubeGeometry.dispose();
 			this.cubeMaterial.dispose();
       this.controls.dispose();
       this.renderer.dispose();
-      this.scene.dispose();
       window.removeEventListener('resize', this.windowResize.bind(this), false);
       window.removeEventListener('resize', this.windowResize.bind(this), true);
     }
