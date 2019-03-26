@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.text Path:{{$route.params}} | Title: {{projectList[projectID($route.params.path)].title}}
+  .text Path:{{$route.params}} | Title: {{projectList[projectID($route.params.path)].frameColor}}
 </template>
 
 <script>

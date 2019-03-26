@@ -1,16 +1,16 @@
 <template lang="pug">
-  TopEffect
+  Effect
 </template>
 
 <script>
-import TopEffect from '~/components/WhiteBox.vue'
+import Effect from '~/components/WireframeBox.vue'
 
 export default {
   head:{
     title: "Edmond Yip WebGL 3D Development"
   },
   components: {
-    TopEffect,
+    Effect,
   },
 }
 </script>

@@ -1,20 +1,28 @@
 <template lang="pug">
-  section 
-    p &copy 256pages
+  section(:style="{background: bgColor}")
+    #copy &copy Edmond Yip
 </template>
+
+<script>
+export default {
+  props: [
+    'bgColor'
+  ]
+}
+</script>
+
 
 <style lang="stylus" scoped>
   section
-    width 100%
     position fixed
     bottom 0px
-    left 0px
-    right 0px
-    background rgba(0,0,0,0.2)
-    padding 5px
-    text-align center
-    p
-      font-family Arial, Helvetica, sans-serif
-      font-size 11px
-      color #666
+    left 20px
+    right 20px
+    height 20px
+    text-align right
+    #copy
+      font-size 10px
+      color #000
+      line-height 20px
+      text-transform uppercase
 </style>

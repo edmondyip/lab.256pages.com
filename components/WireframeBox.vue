@@ -1,5 +1,5 @@
 <template lang="pug">
-  div#three
+  #three
 </template>
 
 <script>
@@ -114,16 +114,3 @@
     }
   }
 </script>
-
-<style lang="stylus" scoped>
-  div#three
-    position fixed
-    top 0
-    bottom 0
-    left 0
-    right 0
-    z-index -1
-    canvas
-      width 100%
-      height 100%
-</style>

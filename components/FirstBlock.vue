@@ -1,8 +1,8 @@
 <template lang="pug">
-  div#first.container
+  #first.container
     section
       h1 Real time 3D Web Experiment
-      p By Edmond Yip
+      //- p By Edmond Yip
       span Designer & Developer from Hong Kong
 </template>
 

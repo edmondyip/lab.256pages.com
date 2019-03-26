@@ -1,8 +1,8 @@
 <template lang="pug">
-div#project-list.container
+#project-list.container
   section
-    div(v-for="project in projectList")
-      NuxtLink(:to="'/projects/' + project.path")
+    div(v-for="project in homelessList")
+      NuxtLink(:to="project.path")
         h2 {{project.title}}
       p {{project.description}}
       ul
@@ -12,27 +12,16 @@ div#project-list.container
 
 <script>
 import {mapState} from 'vuex'
+
 export default {
   computed: {
     ...mapState({
       projectList: state => state.projectList
-    })
-  },
-  data() {
-    return {
-      popup: false,
+    }),
+    homelessList() {
+      return this.projectList.slice(1);
     }
   },
-  componends: {
-    // Ball,
-  },
-  methods: {
-    PopupProject() {
-      console.log('Pass');
-      this.popup = true;
-      console.log(this.popup)
-    }
-  }
 }
 </script>
 

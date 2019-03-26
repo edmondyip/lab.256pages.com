@@ -31,6 +31,10 @@ module.exports = {
       //   rel: 'stylesheet',
       //   href: 'https://fonts.googleapis.com/css?family=Noto+Serif+TC',
       // },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Oswald:300',
+      },
     ],
   },
 

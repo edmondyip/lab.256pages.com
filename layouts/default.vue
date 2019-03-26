@@ -1,32 +1,41 @@
 <template lang="pug">
   #container
-    PageHeader
+    PageHeader(:bgColor="bgColor" :projectTitle="projectTitle")
     First
     Projects
-    div#frame
+    #frame(:style="{background: bgColor}")
     <transition name="background" mode="out-in">
       nuxt
     </transition>
-    PageFooter
+    PageFooter(:bgColor="bgColor")
 </template>
 
 <script>
-import PageHeader from '~/layouts/Header.vue'
-import PageFooter from '~/layouts/Footer.vue'
-import First from '~/components/FirstBlock.vue'
-import Projects from '~/layouts/ProjectList.vue'
-import {mapState} from 'vuex'
+import PageHeader from '~/layouts/Header.vue';
+import PageFooter from '~/layouts/Footer.vue';
+import First from '~/components/FirstBlock.vue';
+import Projects from '~/layouts/ProjectList.vue';
+import {mapState} from 'vuex';
 
 export default {
-  // methods: {
-  //   projectID(id) {
-  //     return this.projectList.findIndex(obj => obj.id === this.$route.params.path);
-  //   }
-  // },
+  methods: {
+    projectID(path) {
+      return this.projectList.findIndex(obj => obj.id === this.$route.params.path);
+    }
+  },
   computed: {
     ...mapState({
-      projectList: state => state.projectList
+      projectList: state => state.projectList,
     }),
+    projectID() {
+      return this.projectList.findIndex(obj => obj.path === this.$route.path);
+    },
+    projectTitle() {
+      return this.projectList[this.projectID].title;
+    },
+    bgColor() {
+      return this.projectList[this.projectID].frameColor;
+    },
   },
   components: {
     PageHeader,
@@ -55,6 +64,22 @@ export default {
       @media screen and (max-width 1020px)
         width calc(100% - 20px)
         margin 0
+    .background-enter-active, .background-leave-active
+      transition opacity .65s
+    .background-enter, .background-leave-top
+      opacity 0
+    #three
+      background #fff
+      position fixed
+      top 0
+      bottom 0
+      left 20px
+      right 20px
+      z-index 0
+      overflow hidden
+      canvas
+        width 100%
+        height 100%
 </style>
 
 <style lang="stylus" scoped>
@@ -67,16 +92,14 @@ export default {
     @media screen and (max-width 1020px)
       width calc(100% - 40px)
     #frame
-      background none
+      padding 0 20px
       position fixed
-      border-left 10px solid #ffee00
-      border-right 10px solid #ffee00
       height 100vh
-      width calc(100% - 20px)
+      width 100%
       top 0
       bottom 0
       left 0
       right 0
-      z-index 0
+      z-index -1
 </style>
 
