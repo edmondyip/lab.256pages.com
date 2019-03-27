@@ -13,7 +13,16 @@
     methods: {
       init() {
         const {
-          runTime
+          runTime,
+          scene,
+          renderer,
+          camera,
+          controls,
+          box,
+          cubeGeometry,
+          cubeMaterial,
+          textureCube,
+          backgroundTexture,
         } = this;
         runTime();
       },
@@ -58,18 +67,18 @@
       },
       createObject() {
         const loader = new this.$THREE.TextureLoader();
-        const textureCube = loader.load('img/paper.jpg');
+        this.textureCube = loader.load('img/paper.jpg');
         const backgroundImage = ['img/hdri/px.png', 'img/hdri/nx.png', 'img/hdri/py.png', 'img/hdri/ny.png', 'img/hdri/pz.png', 'img/hdri/nz.png'];
-        const backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
-        const cubeGeometry = new this.$THREE.SphereBufferGeometry(50, 20, 20);
-        const cubeMaterial = new this.$THREE.MeshPhongMaterial({
+        this.backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
+        this.cubeGeometry = new this.$THREE.SphereBufferGeometry(50, 20, 20);
+        this.cubeMaterial = new this.$THREE.MeshPhongMaterial({
           color: 0xffeeee,
-          envMap: backgroundTexture,
+          envMap: this.backgroundTexture,
         });
-        this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
+        this.box = new this.$THREE.Mesh(this.cubeGeometry, this.cubeMaterial);
         this.box.castShadow = true;
         this.box.receiveShadow = true;
-        this.scene.background = backgroundTexture;
+        this.scene.background = this.backgroundTexture;
         this.scene.add(this.box);
       },
       windowResize() {
@@ -80,18 +89,20 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
-        const {
-          scene,
-          renderer,
-          camera,
-          controls,
-          box,
-        } = this;
-
-        renderer.render(scene, camera);
-        // box.rotation.y += 0.005;
+        this.renderer.render(this.scene, this.camera);
         requestAnimationFrame(this.renderScene);
       }
+    },
+    beforeDestroy() {
+      this.scene.remove(this.cube);
+      this.renderer.dispose();
+      
+      window.removeEventListener('resize', this.windowResize.bind(this), false);
+      window.removeEventListener('resize', this.windowResize.bind(this), true);
+
+      // this.renderer.context = null;
+      // this.renderer.domElement = null;
+      this.scene = null;
     }
   }
 </script>

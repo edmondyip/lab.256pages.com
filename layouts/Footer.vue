@@ -1,5 +1,5 @@
 <template lang="pug">
-  section(:style="{background: bgColor}")
+  footer(:style="{background: bgColor}")
     #copy &copy Edmond Yip
 </template>
 
@@ -13,7 +13,8 @@ export default {
 
 
 <style lang="stylus" scoped>
-  section
+  footer
+    transition .5s
     position fixed
     bottom 0px
     left 20px

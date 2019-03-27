@@ -1,38 +1,35 @@
 export const state = () => ({
-  projectID: 0,
+  fullScreen: false,
   projectList: [
     {
       id: 0,
       path: '/',
-      title: 'Build with Vuejs, Nuxtjs, webGL, Threejs',
+      title: 'Build with VueJS & webGL',
       description: 'HomePage',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
       frameColor: '#ffffff',
+      theme: 'dark',
     },
     {
       id: 1,
-      path: '/ball',
+      path: '/sphere',
       title: 'Metal Sphere',
       description: 'Simple wireframe',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
-      frameColor: '#ffee00',
-    },
-    {
-      id: 2,
-      path: '/wire',
-      title: 'Wireframe',
-      description: 'Simple wireframe',
-      tags: [
-        'threejs', 'webGL', 'Mar2019'
-      ],
-      source: 'https://github.com/',
-      frameColor: '#000000',
+      frameColor: '#999999',
+      theme: 'light'
     },
   ],
 });
+
+export const mutations = {
+  toggle(state) {
+    state.fullScreen = !state.fullScreen;
+  }
+}

@@ -87,7 +87,7 @@ module.exports = {
     /*
      ** You can extend webpack config here 
      */
-    vendor: ['three', 'three-dlc', 'postprocessing'],
+    vendor: ['three', 'three-orbitcontrols', 'postprocessing'],
     extend(config, ctx) {
 
     }

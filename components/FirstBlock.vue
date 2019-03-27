@@ -2,7 +2,7 @@
   #first.container
     section
       h1 Real time 3D Web Experiment
-      //- p By Edmond Yip
+      p By Edmond Yip
       span Designer & Developer from Hong Kong
 </template>
 
@@ -19,7 +19,7 @@
       margin 0 1%
       // background rgba(0,0,0,0.1)
       h1
-        font-family 'Noto Serif TC', serif
+        font-family 'Oswald', sans-serif
         font-size 2rem
         text-transform uppercase
       span

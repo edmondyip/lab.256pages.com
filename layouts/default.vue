@@ -4,7 +4,7 @@
     First
     Projects
     #frame(:style="{background: bgColor}")
-    <transition name="background" mode="out-in">
+    <transition name="background" mode="in-out">
       nuxt
     </transition>
     PageFooter(:bgColor="bgColor")
@@ -60,8 +60,8 @@ export default {
         width calc(100% - 20px)
         margin 0
     .background-enter-active, .background-leave-active
-      transition opacity .65s
-    .background-enter, .background-leave-top
+      transition opacity 3s
+    .background-enter, .background-leave-to
       opacity 0
     #three
       background #fff
@@ -87,6 +87,7 @@ export default {
     @media screen and (max-width 1020px)
       width calc(100% - 40px)
     #frame
+      transition .5s
       padding 0 20px
       position fixed
       height 100vh
@@ -96,5 +97,7 @@ export default {
       left 0
       right 0
       z-index -1
+      @media screen and (max-width 1020px)
+        padding 0 2px
 </style>
 

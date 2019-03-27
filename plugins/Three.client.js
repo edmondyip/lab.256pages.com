@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import * as THREE from 'three';
-import OrbitControls from 'three-dlc/src/controls/OrbitControls.js';
+import OrbitControls from 'three-orbitcontrols';
 import * as postprocessing from 'postprocessing';
 
 Vue.use({

@@ -8,7 +8,7 @@
   div
     width 12px
     height 12px
-    right 8px
+    right 28px
     top 8px
     position fixed
 </style>
