@@ -37,17 +37,18 @@ export default {
     section
       position relative
       div
-        width calc(98% - 40px)
+        width 400px
         height 190px
         background rgba(255,255,255,.5)
         display block
-        border 1px solid #eeeeee
-        // padding 20px
+        border-right 1px solid #cccccc
+        border-bottom 1px solid #cccccc
         transition 0.5s
         cursor pointer
         margin 15px 1% 100px
         h2
-          font-size 20px
+          font-family 'Oswald', sans-serif
+          font-size 1.6rem
           color #000
           transition .8s
         p
@@ -81,9 +82,10 @@ export default {
           display block
         &:hover
           width calc(100% - 40px)
+          background rgba(255,255,255,.8)
           margin 15px 0 100px
           h2
-            font-size 1.2rem
+            font-size 2rem
   @media screen and (max-width: 1020px)
     div#project-list
       section

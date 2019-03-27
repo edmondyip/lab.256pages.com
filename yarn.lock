@@ -7906,22 +7906,10 @@ thread-loader@^1.2.0:
     loader-runner "^2.3.0"
     loader-utils "^1.1.0"
 
-three-dlc@^0.100.0-alpha-2:
-  version "0.100.0-alpha-2"
-  resolved "https://registry.yarnpkg.com/three-dlc/-/three-dlc-0.100.0-alpha-2.tgz#127099937209368eb9d55a8c262740f448aef3cd"
-  integrity sha512-OA4jWX9uxb0GLLgdlsxL0hi/rouGZn0grZBcpKVjQctriIrqsXoHLR1le61f29/Ua38ku3kIzR8Z8rulpEKgVQ==
-  dependencies:
-    three "^0.100.0"
-
 three-orbitcontrols@^2.102.1:
   version "2.102.1"
   resolved "https://registry.yarnpkg.com/three-orbitcontrols/-/three-orbitcontrols-2.102.1.tgz#f4071e79f1c12e2b7668992cb06cfa29a816629d"
   integrity sha512-mp5qc5mooCtjgSloMFzIEI2VQVkvBDWDMYtbxY3TFB/BCCYpR6NV7/dD5+EUyzR90/a9H356s9QR+2PhH48f6w==
-
-three@^0.100.0:
-  version "0.100.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.100.0.tgz#262841c0b7d88ebd62af73f28d9f578963b3aa00"
-  integrity sha512-/lN2rdE1OqIwJr4/HcSaOisiCY0uVA0sqPpbCG5nil2uICEdS0LfGwSVYTtZDsIpR76r3++h5H3Hzg5D+SJBRQ==
 
 three@^0.102.1:
   version "0.102.1"
