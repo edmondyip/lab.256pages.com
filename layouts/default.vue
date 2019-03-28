@@ -1,13 +1,13 @@
 <template lang="pug">
   #container
-    PageHeader(:bgColor="bgColor" :projectTitle="projectTitle")
-    First
-    Projects
+    PageHeader(:bgColor="bgColor" :projectTitle="projectTitle" :class="{'open':showUI}")
+    First(v-show="!showUI")
+    Projects(v-show="!showUI")
     #frame(:style="{background: bgColor}")
     <transition name="background" mode="in-out">
-      nuxt
+      nuxt(:class="{'open':showUI}")
     </transition>
-    PageFooter(:bgColor="bgColor")
+    PageFooter(:bgColor="bgColor" :class="{'open':showUI}")
 </template>
 
 <script>
@@ -21,6 +21,7 @@ export default {
   computed: {
     ...mapState({
       projectList: state => state.projectList,
+      showUI: state => state.gui,
     }),
     projectID() {
       return this.projectList.findIndex(obj => obj.path === this.$route.path);
@@ -50,32 +51,11 @@ export default {
     text-rendering optimizeLegibility
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
-    .container
-      padding 10px
-      width 1000px
-      margin 0 auto
-      position relative
-      z-index 1
-      @media screen and (max-width 1020px)
-        width calc(100% - 20px)
-        margin 0
-    .background-enter-active, .background-leave-active
-      transition opacity 3s
-    .background-enter, .background-leave-to
-      opacity 0
-    #three
-      background #fff
-      position fixed
-      top 0
-      bottom 0
-      left 20px
-      right 20px
-      z-index 0
-      overflow hidden
-      canvas
-        width 100%
-        height 100%
+    h1, h2
+      font-family: titleFont
+      font-weight: 300
 </style>
+
 
 <style lang="stylus" scoped>
   #container
@@ -85,10 +65,9 @@ export default {
     position relative
     z-index 1
     @media screen and (max-width 1020px)
-      width calc(100% - 40px)
+      width calc(100% - (frameWidth * 2))
     #frame
       transition .5s
-      padding 0 20px
       position fixed
       height 100vh
       width 100%

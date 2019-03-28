@@ -17,13 +17,18 @@ export default {
     transition .5s
     position fixed
     bottom 0px
-    left 20px
-    right 20px
-    height 20px
+    left frameWidth
+    right frameWidth
+    height frameWidth
     text-align right
     #copy
       font-size 10px
       color #000
-      line-height 20px
+      line-height frameWidth
       text-transform uppercase
+    &.open
+      left 0
+      right 0
+      padding 0 frameWidth
+      bottom -(frameWidth)
 </style>

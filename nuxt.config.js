@@ -63,16 +63,13 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/style-resources'
   ],
-  // rules: [{
-  //     test: require.resolve('three-dlc/src/controls/OrbitControls'),
-  //     use: 'imports-loader?THREEDLC=three-dlc'
-  //   },
-  //   {
-  //     test: require.resolve('three-dlc/src/controls/OrbitControls'),
-  //     use: 'exports-loader?THREEDLC.OrbitControls'
-  //   }
-  // ],
+  styleResources: {
+    stylus: [
+      './assets/css/_mixins.styl',
+    ]
+  },
   /*
    ** Axios module configuration
    */

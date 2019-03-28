@@ -20,7 +20,13 @@
           controls,
           sphere,
           pointLight,
-          pointLight2
+          pointLight2,
+          backgroundTexture,
+          cubeGeometry,
+          cubeMaterial,
+          planeTexture,
+          PlaneGeometry,
+          PlaneMaterial
         } = this;
         runTime();
       },
@@ -69,39 +75,34 @@
       },
       createObject() {
         const backgroundImage = ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'];
-        const backgroundTexture = new this.$THREE.CubeTextureLoader().setPath('img/hdri/').load(backgroundImage);
-        const cubeGeometry = new this.$THREE.SphereBufferGeometry(5, 50, 50);
-        const cubeMaterial = new this.$THREE.MeshStandardMaterial({
+        this.backgroundTexture = new this.$THREE.CubeTextureLoader().setPath('img/hdri/').load(backgroundImage);
+        this.cubeGeometry = new this.$THREE.SphereBufferGeometry(5, 50, 50);
+        this.cubeMaterial = new this.$THREE.MeshStandardMaterial({
           color: 0xffffff,
           metalness: 0.7,
           roughness: 0.3,
-          envMap: backgroundTexture
+          envMap: this.backgroundTexture
         });
-        this.sphere = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
+        this.sphere = new this.$THREE.Mesh(this.cubeGeometry, this.cubeMaterial);
         this.sphere.castShadow = true;
         this.sphere.receiveShadow = true;
         this.sphere.position.y = 10;
 
         this.scene.add(this.sphere);
 
-        const planeTexture = new this.$THREE.TextureLoader().load('img/brick.jpg');
-        planeTexture.wrapS = this.$THREE.RepeatWrapping;
-        planeTexture.wrapT = this.$THREE.RepeatWrapping;
-        planeTexture.repeat.x = 6;
-        planeTexture.repeat.y = 6;
-        const planeBumpTexture = new this.$THREE.TextureLoader().load('img/brick.jpg');
-        planeBumpTexture.wrapS = this.$THREE.RepeatWrapping;
-        planeBumpTexture.wrapT = this.$THREE.RepeatWrapping;
-        planeBumpTexture.repeat.x = 6;
-        planeBumpTexture.repeat.y = 6;
+        this.planeTexture = new this.$THREE.TextureLoader().load('img/brick.jpg');
+        this.planeTexture.wrapS = this.$THREE.RepeatWrapping;
+        this.planeTexture.wrapT = this.$THREE.RepeatWrapping;
+        this.planeTexture.repeat.x = 6;
+        this.planeTexture.repeat.y = 6;
 
-        const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(800, 800);
-        const PlaneMaterial = new this.$THREE.MeshStandardMaterial({
+        this.PlaneGeometry = new this.$THREE.PlaneBufferGeometry(800, 800);
+        this.PlaneMaterial = new this.$THREE.MeshStandardMaterial({
           color: 0xffeeee,
-          map: planeTexture,
-          bumpMap: planeTexture
+          map: this.planeTexture,
+          bumpMap: this.planeTexture
         });
-        this.floor = new this.$THREE.Mesh(PlaneGeometry, PlaneMaterial);
+        this.floor = new this.$THREE.Mesh(this.PlaneGeometry, this.PlaneMaterial);
         this.floor.rotation.x = -Math.PI / 2;
         this.floor.receiveShadow = true;
         this.scene.add(this.floor);
@@ -112,23 +113,25 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
-        const timer = Date.now() * 0.00025;
+        requestAnimationFrame(this.renderScene);
 
+        const timer = Date.now() * 0.00025;
         this.pointLight.position.x = Math.sin( timer * 3 ) * 20;
         this.pointLight.position.z = Math.cos( timer * 1 ) * 30;
         this.pointLight2.position.x = Math.sin( timer * 2 ) * 30;
         this.pointLight2.position.z = Math.cos( timer * 4 ) * 20;
-
         this.sphere.position.x = Math.sin( timer * 5 ) * 20;
 				this.sphere.position.y = Math.cos( timer * 3 ) * 10 + 20;
         this.sphere.position.z = Math.cos( timer * 2 ) * 30;
+
         this.renderer.render(this.scene, this.camera);
-        requestAnimationFrame(this.renderScene);
-      }
+      },
     },
     beforeDestroy() {
-      this.renderer.dispose();
-      this.scene = null;
+      while (this.scene.children.length > 0) {
+        this.scene.remove(this.scene.children[0]);
+      }
+      this.renderer.forceContextLoss();
       window.removeEventListener('resize', this.windowResize.bind(this), false);
       window.removeEventListener('resize', this.windowResize.bind(this), true);
     }

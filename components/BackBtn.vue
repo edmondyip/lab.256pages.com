@@ -8,7 +8,7 @@
   div
     width 12px
     height 12px
-    right 28px
-    top 8px
+    right frameWidth + 10px
+    top (frameWidth * 2) + 10px
     position fixed
 </style>

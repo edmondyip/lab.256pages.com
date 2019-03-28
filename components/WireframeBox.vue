@@ -14,8 +14,10 @@
           scene,
           renderer,
           camera,
-          controls, 
+          controls,
           box,
+          cubeGeometry,
+          cubeMaterial,
         } = this;
         runTime();
       },
@@ -74,14 +76,16 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
-        this.renderer.render(this.scene, this.camera);
-        this.box.rotation.y += 0.005;
         requestAnimationFrame(this.renderScene);
-      }
+        this.box.rotation.y += 0.005;
+        this.renderer.render(this.scene, this.camera);
+      },
     },
     beforeDestroy() {
-      this.scene = null;
-      // this.renderer.dispose();
+      while (this.scene.children.length > 0) {
+        this.scene.remove(this.scene.children[0]);
+      }
+      this.renderer.forceContextLoss();
       window.removeEventListener('resize', this.windowResize.bind(this), false);
       window.removeEventListener('resize', this.windowResize.bind(this), true);
     }

@@ -1,14 +1,16 @@
 <template lang="pug">
 #project-list.container
-  section
-    div(v-for="project in homelessList")
-      span {{projectID(project.id)}}
+  section(v-for="project in homelessList")
+    span {{projectID(project.id)}}
+    div  
       NuxtLink(:to="project.path")
-        h2 {{project.title}}
+        h2 // {{project.title}}
         p {{project.description}}
         ul
           li(v-for="tag in project.tags") {{tag}}
         //- a(:href="project.source") View Source
+      video
+         source(src="~/assets/video/01.mp4" type="video/mp4")
 </template>
 
 <script>
@@ -33,21 +35,35 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  div#project-list
+  #project-list
+    padding 30px
     section
       position relative
+      width 500px
+      background rgba(255,255,255,.5)
+      display block
+      border 1px solid #eeeeee
+      margin 15px 50px 100px
+      span
+        position absolute
+        transition .5s
+        left -20px
+        top 0
+        font-family titleFont
+        font-size 8rem
+        color rgba(0,0,0,.2)
       div
-        width calc(98% - 40px)
-        height 190px
-        background rgba(255,255,255,.5)
-        display block
-        border 1px solid #eeeeee
-        // padding 20px
+        position relative
+        overflow hidden 
         transition 0.5s
         cursor pointer
-        margin 15px 1% 100px
+        video
+          position absolute
+          top 0
+          right 0
+          width 100%
+          z-index -2
         h2
-          font-size 20px
           color #000
           transition .8s
         p
@@ -66,24 +82,18 @@ export default {
             margin 5px
             color #333333
             text-direction none
-        span
-          position absolute
-          left -40px
-          top -100px
-          font-family 'Oswald', sans-serif
-          font-size 8rem
-          color rgba(0,0,0,.2)
         a
           text-decoration none
-          width calc(100%-40px)
-          height calc(100%-40px)
-          padding 20px
+          height 100%
+          padding 20px 20px 20px 80px
           display block
-        &:hover
-          width calc(100% - 40px)
-          margin 15px 0 100px
-          h2
-            font-size 1.2rem
+      &:hover
+        h2
+          font-size 1.8rem
+        span
+          left -80px
+          top -100px
+          font-size 12rem
   @media screen and (max-width: 1020px)
     div#project-list
       section

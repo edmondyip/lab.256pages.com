@@ -1,5 +1,5 @@
 export const state = () => ({
-  fullScreen: false,
+  gui: false,
   projectList: [
     {
       id: 0,
@@ -10,14 +10,26 @@ export const state = () => ({
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
-      frameColor: '#ffffff',
+      frameColor: 'rgba(255,255,255,1)',
       theme: 'dark',
     },
     {
       id: 1,
       path: '/sphere',
-      title: 'Metal Sphere',
-      description: 'Simple wireframe',
+      title: 'Practice 1',
+      description: 'Practice using texture mapping',
+      tags: [
+        'threejs', 'webGL', 'Mar2019'
+      ],
+      source: 'https://github.com/',
+      frameColor: '#999999',
+      theme: 'light'
+    },
+    {
+      id: 2,
+      path: '/reflection',
+      title: 'Practice 2',
+      description: 'Practice using texture mapping',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],
@@ -30,6 +42,6 @@ export const state = () => ({
 
 export const mutations = {
   toggle(state) {
-    state.fullScreen = !state.fullScreen;
+    state.gui = !state.gui;
   }
 }
