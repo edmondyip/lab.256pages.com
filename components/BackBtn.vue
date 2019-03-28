@@ -6,9 +6,9 @@
 
 <style lang="stylus" scoped>
   div
-    width 20px
-    height 20px
-    right 30px
-    top 40px
+    width 12px
+    height 12px
+    right frameWidth + 10px
+    top (frameWidth * 2) + 10px
     position fixed
 </style>

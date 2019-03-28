@@ -53,12 +53,8 @@ export default {
         font-size 8rem
         color rgba(0,0,0,.2)
       div
-        width 400px
-        height 190px
-        background rgba(255,255,255,.5)
-        display block
-        border-right 1px solid #cccccc
-        border-bottom 1px solid #cccccc
+        position relative
+        overflow hidden 
         transition 0.5s
         cursor pointer
         video
@@ -68,8 +64,6 @@ export default {
           width 100%
           z-index -2
         h2
-          font-family 'Oswald', sans-serif
-          font-size 1.6rem
           color #000
           transition .8s
         p
@@ -93,12 +87,13 @@ export default {
           height 100%
           padding 20px 20px 20px 80px
           display block
-        &:hover
-          width calc(100% - 40px)
-          background rgba(255,255,255,.8)
-          margin 15px 0 100px
-          h2
-            font-size 2rem
+      &:hover
+        h2
+          font-size 1.8rem
+        span
+          left -80px
+          top -100px
+          font-size 12rem
   @media screen and (max-width: 1020px)
     div#project-list
       section
