@@ -1,7 +1,8 @@
   frameWidth = 40px
+  frameWidthx2 = frameWidth * 2
   titleFont ='Oswald', sans-serif
 
-  .container
+  #container
     padding 10px
     width 1000px
     margin 0 auto
@@ -10,20 +11,20 @@
     @media screen and (max-width 1020px)
       width calc(100% - frameWidth)
       margin 0
-  .background-enter-active, .background-leave-active
-    transition opacity 3s
-  .background-enter, .background-leave-to
-    opacity 0
-  #three
-    transition .5s
-    background #fff
-    position fixed
-    top 0
-    bottom 0
-    left frameWidth
-    right frameWidth
-    z-index 0
-    overflow hidden
+    .background-enter-active, .background-leave-active
+      transition opacity 3s
+    .background-enter, .background-leave-to
+      opacity 0
+    #three
+      transition .5s
+      background #fff
+      position fixed
+      top 0
+      bottom 0
+      left frameWidth
+      right frameWidth
+      z-index 0
+      overflow hidden
     canvas
       width 100%
       height 100%

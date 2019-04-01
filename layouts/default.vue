@@ -58,25 +58,17 @@ export default {
 
 
 <style lang="stylus" scoped>
-  #container
-    padding 10px
-    width 1000px
-    margin 0 auto
-    position relative
-    z-index 1
+  #frame
+    transition .5s
+    position fixed
+    height 100vh
+    width 100%
+    top 0
+    bottom 0
+    left 0
+    right 0
+    z-index -1
     @media screen and (max-width 1020px)
-      width calc(100% - (frameWidth * 2))
-    #frame
-      transition .5s
-      position fixed
-      height 100vh
-      width 100%
-      top 0
-      bottom 0
-      left 0
-      right 0
-      z-index -1
-      @media screen and (max-width 1020px)
-        padding 0 2px
+      padding 0 2px
 </style>
 

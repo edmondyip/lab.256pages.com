@@ -44,7 +44,8 @@ export default {
       left 0
       right 0
       padding 0 frameWidth
-      top -(frameWidth * 2)
-      opacity 0
+      height frameWidth
+      h1
+        line-height frameWidth
 </style>
 
