@@ -1,13 +1,12 @@
 <template lang="pug">
   #container
-    PageHeader(:bgColor="bgColor" :projectTitle="projectTitle" :class="{'open':showUI}")
+    #frame(:style="{borderColor: bgColor}")
+    transition(name="ease" mode="in-out")
+      nuxt(:class="{'open':showUI}")
+    PageFooter(:bgColor="bgColor" :class="{'open':showUI}")
     First(v-show="!showUI")
     Projects(v-show="!showUI")
-    #frame(:style="{background: bgColor}")
-    <transition name="background" mode="in-out">
-      nuxt(:class="{'open':showUI}")
-    </transition>
-    PageFooter(:bgColor="bgColor" :class="{'open':showUI}")
+    PageHeader(:bgColor="bgColor" :projectTitle="projectTitle" :class="{'open':showUI}")
 </template>
 
 <script>
@@ -52,23 +51,26 @@ export default {
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
     h1, h2
-      font-family: titleFont
+      font-family: $titleFont
       font-weight: 300
 </style>
 
 
 <style lang="stylus" scoped>
   #frame
+    pointer-events none
     transition .5s
     position fixed
+    border-left solid var(--frameWidth)
+    border-right solid var(--frameWidth)
     height 100vh
-    width 100%
+    width calc(100vw - var(--frameWidthx2))
     top 0
     bottom 0
     left 0
     right 0
-    z-index -1
-    @media screen and (max-width 1020px)
-      padding 0 2px
+    z-index 10
+    @media screen and (max-width $maxWidth)
+      padding 0
 </style>
 

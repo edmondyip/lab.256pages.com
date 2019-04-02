@@ -6,9 +6,9 @@
 
 <style lang="stylus" scoped>
   div
-    width 12px
-    height 12px
-    right frameWidth + 10px
-    top (frameWidth * 2) + 10px
+    width 30px
+    height 30px
+    right calc(var(--frameWidth) + 10px)
+    top calc(var(--frameWidthx2) + 10px)
     position fixed
 </style>

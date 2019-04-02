@@ -1,12 +1,13 @@
 <template lang="pug">
-  div
-    div(@click="mode") FullScreen
+  div(@click="hide()") Hide UI
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
-
-export default {
-
-}
+  export default {
+    methods: {
+      hide() {
+        this.$store.commit('toggle');
+      }
+    }
+  }
 </script>

@@ -1,26 +1,22 @@
 <template lang="pug">
   header(:style="{background: bgColor}")
-    //- nav-btn
-    h1 // {{projectTitle}}
+    transition(name="ease" mode="in-out")
+      h1 // {{projectTitle}}
     BackBtn(v-show="$route.name !== 'index'")
-    button(@click="hide()") Hide UI
 </template>
 
 <script>
 import NavBtn from '~/components/NavBtn.vue';
 import BackBtn from '~/components/BackBtn.vue';
+import HideUI from '~/components/HideUI.vue';
 
 export default {
   props: ['bgColor', 'projectTitle'],
   components: {
     NavBtn,
-    BackBtn
+    BackBtn,
+    HideUI,
   },
-  methods:{
-    hide() {
-      this.$store.commit('toggle');
-    }
-  }
 }
 </script>
 
@@ -28,24 +24,20 @@ export default {
   header
     transition .5s
     position fixed
-    top 0px
-    left frameWidth
-    right frameWidth
-    height frameWidth * 2
-    z-index 2
+    top 0
+    left 0
+    right 0
+    height var(--frameWidthx2)
     h1
       font-size 2rem
       transition .5s
-      padding 0
+      padding 0 var(--frameWidthx2)
       margin 0
       color #000
-      line-height frameWidth * 2
+      line-height var(--frameWidthx2)
     &.open
-      left 0
-      right 0
-      padding 0 frameWidth
-      height frameWidth
+      height var(--frameWidth)
       h1
-        line-height frameWidth
+        line-height var(--frameWidth)
 </style>
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-#project-list.container
+#project-list
   section(v-for="project in homelessList")
     span {{projectID(project.id)}}
     div  
@@ -9,8 +9,8 @@
         ul
           li(v-for="tag in project.tags") {{tag}}
         //- a(:href="project.source") View Source
-      video
-         source(src="~/assets/video/01.mp4" type="video/mp4")
+      //- video
+      //-    source(src="~/assets/video/01.mp4" type="video/mp4")
 </template>
 
 <script>
@@ -37,25 +37,27 @@ export default {
 <style lang="stylus" scoped>
   #project-list
     padding 30px
+    position relative
+    margin 0 auto
     section
       position relative
-      width 500px
+      width 400px
       background rgba(255,255,255,.5)
       display block
       border 1px solid #eeeeee
-      margin 15px 50px 100px
+      margin 15px 50px 150px
       span
         position absolute
         transition .5s
-        left -20px
+        left -40px
         top 0
-        font-family titleFont
+        font-family $titleFont
         font-size 8rem
         color rgba(0,0,0,.2)
       div
         position relative
         overflow hidden 
-        transition 0.5s
+        transition .5s
         cursor pointer
         video
           position absolute
@@ -65,7 +67,7 @@ export default {
           z-index -2
         h2
           color #000
-          transition .8s
+          transition .5s
         p
           font-size 12px
           color #333
@@ -92,9 +94,9 @@ export default {
           font-size 1.8rem
         span
           left -80px
-          top -100px
+          top -50px
           font-size 12rem
-  @media screen and (max-width: 1020px)
+  @media screen and (max-width $maxWidth)
     div#project-list
       section
         div

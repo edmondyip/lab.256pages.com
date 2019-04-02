@@ -8,16 +8,13 @@
 
 <style lang="stylus" scoped>
   #first
+    position relative
     height 100vh
     display flex
     align-items center
     color #111
     section
-      // width 200px
-      // height 200px
       padding 20px
-      margin 0 1%
-      // background rgba(0,0,0,0.1)
       h1
         font-family 'Oswald', sans-serif
         font-size 2rem

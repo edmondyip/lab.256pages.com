@@ -10,7 +10,7 @@ export const state = () => ({
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
-      frameColor: 'rgba(255,255,255,1)',
+      frameColor: 'rgba(255,255,255,.5)',
       theme: 'dark',
     },
     {
@@ -22,7 +22,7 @@ export const state = () => ({
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
-      frameColor: '#999999',
+      frameColor: 'rgba(0,0,0,.5)',
       theme: 'light'
     },
     {
@@ -34,7 +34,7 @@ export const state = () => ({
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
-      frameColor: '#999999',
+      frameColor: 'rgba(155,255,133,.5)',
       theme: 'light'
     },
   ],
