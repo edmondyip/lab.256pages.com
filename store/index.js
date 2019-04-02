@@ -22,7 +22,7 @@ export const state = () => ({
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
-      frameColor: 'rgba(0,0,0,.5)',
+      frameColor: 'rgba(0,0,0,.3)',
       theme: 'light'
     },
     {

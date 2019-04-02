@@ -42,7 +42,7 @@ export default {
     section
       position relative
       width 400px
-      background rgba(255,255,255,.5)
+      background rgba(255,255,255,.2)
       display block
       border 1px solid #eeeeee
       margin 15px 50px 150px
