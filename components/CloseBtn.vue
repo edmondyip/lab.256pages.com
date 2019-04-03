@@ -8,7 +8,12 @@
   div
     width 30px
     height 30px
-    right calc(var(--frameWidth) + 10px)
-    top calc(var(--frameWidthx2) + 10px)
+    right 20px
+    top 20px
     position fixed
+    @media screen and (max-width $maxWidth)
+      width 20px
+      height 20px
+      right 10px
+      top 10px
 </style>

@@ -1,20 +1,20 @@
 <template lang="pug">
   header(:style="{background: bgColor}")
-    transition(name="ease" mode="in-out")
+    transition(name="ease" mode="in-out" tag="div")
       h1 // {{projectTitle}}
-    BackBtn(v-show="$route.name !== 'index'")
+    Close(v-show="$route.name !== 'index'")
 </template>
 
 <script>
 import NavBtn from '~/components/NavBtn.vue';
-import BackBtn from '~/components/BackBtn.vue';
+import Close from '~/components/CloseBtn.vue';
 import HideUI from '~/components/HideUI.vue';
 
 export default {
-  props: ['bgColor', 'projectTitle'],
+  props: ['bgColor', 'projectTitle', 'source'],
   components: {
     NavBtn,
-    BackBtn,
+    Close,
     HideUI,
   },
 }
@@ -38,6 +38,14 @@ export default {
     &.open
       height var(--frameWidth)
       h1
+        line-height var(--frameWidth)
+
+  @media screen and (max-width $maxWidth)
+    header
+      height var(--frameWidth)
+      h1
+        font-size 1.8rem
+        padding 0 var(--frameWidth)
         line-height var(--frameWidth)
 </style>
 

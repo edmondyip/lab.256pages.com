@@ -1,20 +1,22 @@
 <template lang="pug">
   #container
-    #frame(:style="{borderColor: bgColor}")
+    //- #frame(:style="{borderColor: bgColor}" :class="{'index': $route.name === 'index'}")
     transition(name="ease" mode="in-out")
       nuxt(:class="{'open':showUI}")
-    PageFooter(:bgColor="bgColor" :class="{'open':showUI}")
+    ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
     First(v-show="!showUI")
     Projects(v-show="!showUI")
+    PageFooter(:bgColor="bgColor" :class="{'open':showUI}")
     PageHeader(:bgColor="bgColor" :projectTitle="projectTitle" :class="{'open':showUI}")
 </template>
 
 <script>
+import {mapState} from 'vuex';
 import PageHeader from '~/layouts/Header.vue';
 import PageFooter from '~/layouts/Footer.vue';
 import First from '~/components/FirstBlock.vue';
 import Projects from '~/layouts/ProjectList.vue';
-import {mapState} from 'vuex';
+import ViewSource from '~/components/ViewSource.vue';
 
 export default {
   computed: {
@@ -31,12 +33,16 @@ export default {
     bgColor() {
       return this.projectList[this.projectID].frameColor;
     },
+    sourceURL() {
+      return this.projectList[this.projectID].source;
+    }
   },
   components: {
     PageHeader,
     PageFooter,
     Projects,
-    First
+    First,
+    ViewSource
   }
 }
 </script>
@@ -72,5 +78,8 @@ export default {
     z-index 10
     @media screen and (max-width $maxWidth)
       padding 0
+    &.index
+      border-width 0px
+      width 100vw
 </style>
 

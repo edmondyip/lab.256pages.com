@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import Effect from '~/components/WireframeBox.vue'
+  import Effect from '~/components/Effect/WireframeBox.vue'
 
-export default {
-  head:{
-    title: "Edmond Yip WebGL 3D Development"
-  },
-  components: {
-    Effect,
-  },
-}
+  export default {
+    head: {
+      title: "Edmond Yip WebGL 3D Development"
+    },
+    components: {
+      Effect,
+    },
+  }
 </script>

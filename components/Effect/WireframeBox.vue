@@ -16,18 +16,21 @@
           camera,
           controls,
           box,
-          cubeGeometry,
-          cubeMaterial,
+          stats,
         } = this;
         runTime();
       },
       runTime() {
+
         this.createScene();
         this.createLights();
         this.createBox();
 
         this.controls = new this.$controls(this.camera);
         this.controls.enabled = false;
+
+        // this.stats = new this.$stats();
+        // document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         this.renderScene();
@@ -53,21 +56,15 @@
       createLights() {
         const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.8);
         this.scene.add(Light);
-
-        const PointLight = new this.$THREE.PointLight(0xffffff, 1, 400);
-        PointLight.position.set(150, 0, 50);
-        PointLight.castShadow = true;
       },
       createBox() {
-        this.cubeGeometry = new this.$THREE.BoxBufferGeometry(100, 100, 100, 5, 5, 5);
-        this.cubeMaterial = new this.$THREE.MeshLambertMaterial({
+        const cubeGeometry = new this.$THREE.BoxBufferGeometry(100, 100, 100, 5, 5, 5);
+        const cubeMaterial = new this.$THREE.MeshLambertMaterial({
           color: 0xffeeee,
           wireframe: true,
         });
-        this.box = new this.$THREE.Mesh(this.cubeGeometry, this.cubeMaterial);
+        this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
         this.box.position.set(30, 0, -50);
-        this.box.castShadow = true;
-        this.box.receiveShadow = true;
         this.scene.add(this.box);
       },
       windowResize() {
@@ -76,6 +73,7 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
+        // this.stats.update();
         requestAnimationFrame(this.renderScene);
         this.box.rotation.y += 0.005;
         this.renderer.render(this.scene, this.camera);

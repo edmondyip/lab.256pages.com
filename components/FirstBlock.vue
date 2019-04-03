@@ -14,9 +14,8 @@
     align-items center
     color #111
     section
-      padding 20px
+      padding 40px
       h1
-        font-family 'Oswald', sans-serif
         font-size 2rem
         text-transform uppercase
       span
