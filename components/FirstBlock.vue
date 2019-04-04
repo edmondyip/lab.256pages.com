@@ -14,13 +14,15 @@
     align-items center
     color #111
     section
-      padding 40px
+      // padding 40px
       h1
-        font-size 2rem
+        font-size 2.5rem
         text-transform uppercase
+        margin 10px 0
       span
         font-size .8rem
         color #666
       p
         font-size 1rem
+        margin 0
 </style>

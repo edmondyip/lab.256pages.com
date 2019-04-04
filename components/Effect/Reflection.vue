@@ -15,19 +15,21 @@
           renderer,
           camera,
           controls,
-          box,
+          sphere,
+          innerSphere,
           stats,
         } = this;
         runTime();
       },
       runTime() {
-
         this.createScene();
         this.createLights();
-        this.createBox();
+        this.createObject();
 
         this.controls = new this.$controls(this.camera);
-        this.controls.enabled = false;
+        this.controls.enableZoom = false;
+        this.controls.autoRotate = true;
+        // this.controls.enabled = false;
 
         this.stats = new this.$stats();
         // document.getElementById("three").appendChild(this.stats.dom);
@@ -37,14 +39,14 @@
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
-        this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
-        this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(150, 150, 150);
+        // this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 500);
+        this.camera = new this.$THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 2000);
+        this.camera.position.set(150, 100, -150);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
           alpha: true,
-          antialias: true
+          antialias: true,
         });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -57,15 +59,34 @@
         const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.8);
         this.scene.add(Light);
       },
-      createBox() {
-        const cubeGeometry = new this.$THREE.BoxBufferGeometry(100, 100, 100, 5, 5, 5);
-        const cubeMaterial = new this.$THREE.MeshLambertMaterial({
-          color: 0xffeeee,
-          wireframe: true,
+      createObject() {
+        const backgroundImage = [          
+          require('~/assets/img/tunnel/px.jpg'),
+          require('~/assets/img/tunnel/nx.jpg'),
+          require('~/assets/img/tunnel/py.jpg'),
+          require('~/assets/img/tunnel/ny.jpg'),
+          require('~/assets/img/tunnel/pz.jpg'),
+          require('~/assets/img/tunnel/nz.jpg')
+          ];
+        const backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
+        const sphereGeometry = new this.$THREE.SphereBufferGeometry(15, 20, 20);
+        const torusGeometry = new this.$THREE.TorusBufferGeometry(35, 15, 10, 40);
+        const sphereMaterial = new this.$THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          metalness: 0.2,
+          roughness: 0.2,
+          envMap: backgroundTexture
         });
-        this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
-        this.box.position.set(30, 0, -50);
-        this.scene.add(this.box);
+        this.sphere = new this.$THREE.Mesh(torusGeometry, sphereMaterial);
+        this.sphere.castShadow = true;
+        this.sphere.receiveShadow = true;
+        this.scene.add(this.sphere);
+
+        this.innerSphere = new this.$THREE.Mesh(sphereGeometry, sphereMaterial);
+        this.innerSphere.receiveShadow = true;
+        this.scene.add(this.innerSphere);
+
+        this.scene.background = backgroundTexture;
       },
       windowResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -75,7 +96,14 @@
       renderScene() {
         this.stats.update();
         requestAnimationFrame(this.renderScene);
-        this.box.rotation.y += 0.005;
+
+        const timer = Date.now() * 0.00025;
+        // this.sphere.position.x = Math.sin( timer * 5 ) * 20;
+				// this.sphere.position.y = Math.cos( timer * 3 ) * 10 + 20;
+        // this.sphere.position.z = Math.cos( timer * 2 ) * 30;
+
+        this.controls.update();
+
         this.renderer.render(this.scene, this.camera);
       },
     },

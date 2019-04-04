@@ -1,9 +1,9 @@
 <template lang="pug">
   #container
     //- #frame(:style="{borderColor: bgColor}" :class="{'index': $route.name === 'index'}")
-    transition(name="ease" mode="in-out")
+    transition(name="ease" mode="out-in")
       nuxt(:class="{'open':showUI}")
-    ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
+    //- ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
     First(v-show="!showUI")
     Projects(v-show="!showUI")
     PageFooter(:bgColor="bgColor" :class="{'open':showUI}")
@@ -51,7 +51,7 @@ export default {
   body
     padding 0px
     margin 0px
-    font-family Arial, Helvetica, sans-serif
+    font-family 'Lato', sans-serif
     font-size 12px
     text-rendering optimizeLegibility
     -webkit-font-smoothing antialiased
@@ -59,8 +59,12 @@ export default {
     h1, h2
       font-family: $titleFont
       font-weight: 300
+    .ease-enter-active, .ease-leave-active
+      transition opacity 5s
+    .ease-enter, .ease-leave-to
+      opacity 0
+      margin-top -20px
 </style>
-
 
 <style lang="stylus" scoped>
   #frame

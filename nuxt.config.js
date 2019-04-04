@@ -33,7 +33,7 @@ module.exports = {
       // },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Oswald:300',
+        href: 'https://fonts.googleapis.com/css?family=Lato:300|Oswald:300',
       },
     ],
   },
@@ -42,7 +42,7 @@ module.exports = {
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#fff'
+    color: '#ffee00'
   },
 
   /*

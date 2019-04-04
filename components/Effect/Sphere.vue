@@ -29,8 +29,11 @@
 
         this.controls = new this.$controls(this.camera);
         this.controls.enabled = false;
+        this.controls.enableZoom = false;
+        this.controls.minPolarAngle = Math.PI/4;
+        this.controls.maxPolarAngle = Math.PI/4;
 
-        // this.stats = new this.$stats();
+        this.stats = new this.$stats();
         // document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
@@ -40,7 +43,7 @@
         this.scene = new this.$THREE.Scene();
         this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 500);
         this.camera = new this.$THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(150, 100, -150);
+        this.camera.position.set(100, 100, -150);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
@@ -69,8 +72,14 @@
         this.scene.add(this.pointLight2);
       },
       createObject() {
-        const backgroundImage = ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'];
-        const backgroundTexture = new this.$THREE.CubeTextureLoader().setPath('img/hdri/').load(backgroundImage);
+        const backgroundImage = [
+          require('~/assets/img/hdri/px.png'),
+          require('~/assets/img/hdri/nx.png'),
+          require('~/assets/img/hdri/py.png'),
+          require('~/assets/img/hdri/ny.png'),
+          require('~/assets/img/hdri/pz.png'),
+          require('~/assets/img/hdri/nz.png')];
+        const backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
         const cubeGeometry = new this.$THREE.SphereBufferGeometry(8, 50, 50);
         const cubeMaterial = new this.$THREE.MeshStandardMaterial({
           color: 0xffffff,
@@ -85,7 +94,7 @@
 
         this.scene.add(this.sphere);
 
-        const planeTexture = new this.$THREE.TextureLoader().load('img/brick.jpg');
+        const planeTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/brick.jpg'));
         planeTexture.wrapS = this.$THREE.RepeatWrapping;
         planeTexture.wrapT = this.$THREE.RepeatWrapping;
         planeTexture.repeat.x = 6;
@@ -108,7 +117,7 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
-        // this.stats.update();
+        this.stats.update();
         requestAnimationFrame(this.renderScene);
 
         const timer = Date.now() * 0.00025;
