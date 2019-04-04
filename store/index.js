@@ -29,7 +29,7 @@ export const state = () => ({
       id: 2,
       path: '/reflection',
       title: 'Practice 2',
-      description: 'Practice using texture mapping',
+      description: 'Practice reflection of object',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],
