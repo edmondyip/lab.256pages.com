@@ -29,10 +29,10 @@
         this.controls = new this.$controls(this.camera);
         this.controls.enableZoom = false;
         this.controls.autoRotate = true;
-        // this.controls.enabled = false;
+        this.controls.enabled = false;
 
         this.stats = new this.$stats();
-        // document.getElementById("three").appendChild(this.stats.dom);
+        document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         this.renderScene();
@@ -61,20 +61,20 @@
       },
       createObject() {
         const backgroundImage = [          
-          require('~/assets/img/tunnel/px.jpg'),
-          require('~/assets/img/tunnel/nx.jpg'),
-          require('~/assets/img/tunnel/py.jpg'),
-          require('~/assets/img/tunnel/ny.jpg'),
-          require('~/assets/img/tunnel/pz.jpg'),
-          require('~/assets/img/tunnel/nz.jpg')
+          require('~/assets/img/low/px.jpg'),
+          require('~/assets/img/low/nx.jpg'),
+          require('~/assets/img/low/py.jpg'),
+          require('~/assets/img/low/ny.jpg'),
+          require('~/assets/img/low/pz.jpg'),
+          require('~/assets/img/low/nz.jpg')
           ];
         const backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
-        const sphereGeometry = new this.$THREE.SphereBufferGeometry(15, 20, 20);
-        const torusGeometry = new this.$THREE.TorusBufferGeometry(35, 15, 10, 40);
+        const sphereGeometry = new this.$THREE.SphereBufferGeometry(15, 15, 15);
+        const torusGeometry = new this.$THREE.TorusBufferGeometry(35, 15, 25, 50);
         const sphereMaterial = new this.$THREE.MeshStandardMaterial({
           color: 0xffffff,
           metalness: 0.2,
-          roughness: 0.2,
+          roughness: 0.1,
           envMap: backgroundTexture
         });
         this.sphere = new this.$THREE.Mesh(torusGeometry, sphereMaterial);
@@ -101,6 +101,9 @@
         // this.sphere.position.x = Math.sin( timer * 5 ) * 20;
 				// this.sphere.position.y = Math.cos( timer * 3 ) * 10 + 20;
         // this.sphere.position.z = Math.cos( timer * 2 ) * 30;
+        this.sphere.rotation.x += 0.005;
+        this.sphere.rotation.y += 0.005;
+        this.sphere.rotation.z += 0.005;
 
         this.controls.update();
 

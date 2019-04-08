@@ -38,32 +38,27 @@ export default {
     section
       position relative
       width auto
-      // background rgba(255,255,255,.2)
-      // border 1px solid #eeeeee
       margin 50px 30px
       > a
         width auto
         display inline-block
         text-decoration none
-        // height 100%
         padding 20px
-        // position relative
         &.nuxt-link-active
           h2
-            color rgba(255,255,255,.5)
+            color rgba(200,200,200,.5)
           span
-            color rgba(255,255,255,.5)
+            color rgba(200,200,200,.5)
           p
-            color rgba(255,255,255,.5)
+            color rgba(200,200,200,.5)
         span
           position absolute
-          // top -20px
+          top 0px
           left -45px
-          transition 2s
           font-family $titleFont
           font-size 4rem
           color rgba(20,20,20,.2)
-          transition 2s
+          transition 1s ease
         h2
           font-size: 2.5rem
           color #111
@@ -73,7 +68,7 @@ export default {
           color #333
           line-height 12px
           margin 0 20px
-          transition 2s
+          transition 2s ease
         ul
           list-style none
           display flex
@@ -89,7 +84,9 @@ export default {
           h2
             color #eee
           span
-            color rgba(200,200,200,.2)
+            color #eee
+            top -20px
+            font-size 5rem
           p
             color #eee
 

@@ -1,7 +1,6 @@
 export const state = () => ({
   gui: false,
-  projectList: [
-    {
+  projectList: [{
       id: 0,
       path: '/',
       title: 'Build with VueJS & webGL',
@@ -15,9 +14,9 @@ export const state = () => ({
     },
     {
       id: 1,
-      path: '/sphere',
-      title: 'Practice 1',
-      description: 'Practice using texture mapping',
+      path: '/box',
+      title: 'Box',
+      description: 'Simple wireframe box',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],
@@ -27,14 +26,38 @@ export const state = () => ({
     },
     {
       id: 2,
+      path: '/sphere',
+      title: 'Sphere',
+      description: 'Pricatice Texture mapping Environment mapping',
+      tags: [
+        'threejs', 'webGL', 'Mar2019'
+      ],
+      source: 'https://github.com/',
+      frameColor: 'rgba(40,55,71,.9)',
+      theme: 'light'
+    },
+    {
+      id: 3,
       path: '/reflection',
-      title: 'Practice 2',
+      title: 'Gardan',
       description: 'Practice reflection of object',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
-      frameColor: 'rgba(255,195,0,1)',
+      frameColor: 'rgba(244,208,63,.9)',
+      theme: 'light'
+    },
+    {
+      id: 4,
+      path: '/glitch',
+      title: 'Wood Box',
+      description: 'Glitch Post Processing fliter',
+      tags: [
+        'threejs', 'webGL', 'Mar2019'
+      ],
+      source: 'https://github.com/',
+      frameColor: 'rgba(244,208,63,.9)',
       theme: 'light'
     },
   ],

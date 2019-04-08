@@ -4,6 +4,7 @@
       h1 Real time 3D Web Experiment
       p By Edmond Yip
       span Designer & Developer from Hong Kong
+      span Use Computer with over 1080P resolution for better experience
 </template>
 
 <style lang="stylus" scoped>
@@ -22,6 +23,7 @@
       span
         font-size .8rem
         color #666
+        display block
       p
         font-size 1rem
         margin 0

@@ -14,7 +14,11 @@ module.exports = {
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        content: 'width=device-width, initial-scale=1',
+        minimumScale: '1.0',
+        maximumScale: '1.0',
+        userScalable: 'no',
+        shrinkToFit: 'no',
       },
       {
         hid: 'description',
@@ -42,7 +46,7 @@ module.exports = {
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#ffee00'
+    color: '#F3D03F'
   },
 
   /*
