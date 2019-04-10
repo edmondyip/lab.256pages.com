@@ -1,13 +1,12 @@
 <template lang="pug">
   #container
-    //- #frame(:style="{borderColor: bgColor}" :class="{'index': $route.name === 'index'}")
     transition(name="ease" mode="out-in")
-      nuxt(:class="{'open':showUI}")
+      nuxt
     //- ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
-    First(v-show="!showUI")
-    Projects(v-show="!showUI")
-    PageFooter(:bgColor="bgColor" :class="{'open':showUI}")
-    PageHeader(:bgColor="bgColor" :projectTitle="projectTitle" :class="{'open':showUI}")
+    First
+    Projects
+    //- PageFooter(:bgColor="bgColor" :theme="theme")
+    //- PageHeader(:bgColor="bgColor" :projectTitle="projectTitle" :theme="theme")
 </template>
 
 <script>
@@ -22,20 +21,22 @@ export default {
   computed: {
     ...mapState({
       projectList: state => state.projectList,
-      showUI: state => state.gui,
     }),
     projectID() {
       return this.projectList.findIndex(obj => obj.path === this.$route.path);
     },
-    projectTitle() {
-      return this.projectList[this.projectID].title;
-    },
-    bgColor() {
-      return this.projectList[this.projectID].frameColor;
-    },
-    sourceURL() {
-      return this.projectList[this.projectID].source;
-    }
+    // projectTitle() {
+    //   return this.projectList[this.projectID].title;
+    // },
+    // bgColor() {
+    //   return this.projectList[this.projectID].frameColor;
+    // },
+    // theme() {
+    //   return this.projectList[this.projectID].darkTheme;
+    // },
+    // sourceURL() {
+    //   return this.projectList[this.projectID].source;
+    // },
   },
   components: {
     PageHeader,
@@ -65,25 +66,3 @@ export default {
       opacity 0
       margin-top -20px
 </style>
-
-<style lang="stylus" scoped>
-  #frame
-    pointer-events none
-    transition .5s
-    position fixed
-    border-left solid var(--frameWidth)
-    border-right solid var(--frameWidth)
-    height 100vh
-    width calc(100vw - var(--frameWidthx2))
-    top 0
-    bottom 0
-    left 0
-    right 0
-    z-index 10
-    @media screen and (max-width $maxWidth)
-      padding 0
-    &.index
-      border-width 0px
-      width 100vw
-</style>
-

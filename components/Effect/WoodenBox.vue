@@ -13,7 +13,6 @@
           runTime,
           scene,
           renderer,
-          composer,
           camera,
           pointLight,
           controls,
@@ -26,7 +25,6 @@
 
         this.createScene();
         this.createLights();
-        this.createEffect();
         this.createBox();
 
         this.controls = new this.$controls(this.camera);
@@ -40,7 +38,6 @@
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
-        // this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
         this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
         this.camera.position.set(150, 150, 150);
         this.scene.add(this.camera);
@@ -60,46 +57,27 @@
         const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 1);
         this.scene.add(Light);
 
-        this.pointLight = new this.$THREE.PointLight(0xffffff, 3, 1000);
+        this.pointLight = new this.$THREE.PointLight(0xffffff, 1, 1000);
         this.pointLight.position.set(200, 100, 200);
         this.pointLight.castShadow = true;
         this.pointLight.shadow.radius = 20;
         this.scene.add(this.pointLight);
       },
-      createEffect() {
-        this.composer = new this.$postprocessing.EffectComposer(this.renderer);
-        this.composer.setSize(window.innerWidth, window.innerHeight);
-        this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
-
-        const vignetteEffect = new this.$postprocessing.DotScreenEffect({
-          blendFunction: this.$postprocessing.BlendFunction.OVERLAY,
-          scale: 1.0,
-          angle: Math.PI * 0.58
-        });
-        const noiseEffect = new this.$postprocessing.ColorAverageEffect();
-        const effectPass = new this.$postprocessing.EffectPass(this.camera, vignetteEffect, noiseEffect);
-        effectPass.renderToScreen = true;
-        this.composer.addPass(effectPass);
-        },
       createBox() {
         const cubeTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/wood.jpg'));
-        // this.group = new this.$THREE.Group();
-
-        for (let i = 0; i < 100; i++) {
-          const cubeGeometry = new this.$THREE.BoxBufferGeometry(20, 20, 20);
-          const cubeMaterial = new this.$THREE.MeshStandardMaterial({
-            map: cubeTexture,
-            bumpMap: cubeTexture,
-          });
-          this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
-          this.box.position.set(30, 0, -50);
-          this.box.position.x = Math.random() * 200 - 80;
-          this.box.position.y = Math.random() * 200 - 80;
-          this.box.position.z = Math.random() * 200 - 80;
-          this.box.castShadow = true;
-          this.box.receiveShadow = true;
-          this.scene.add(this.box);
-        }
+        const cubeBumpTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/wood_bump.jpg'));
+        const cubeGeometry = new this.$THREE.BoxBufferGeometry(80, 80, 80);
+        const cubeMaterial = new this.$THREE.MeshStandardMaterial({
+          map: cubeTexture,
+          bumpMap: cubeBumpTexture,
+          metalness: 0.1,
+        });
+        this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
+        this.box.position.set(30, 0, -30);
+        this.box.castShadow = true;
+        this.box.receiveShadow = true;
+        this.scene.add(this.box);
+      
       },
       windowResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -109,9 +87,9 @@
       renderScene() {
         this.stats.update();
         requestAnimationFrame(this.renderScene);
-        // this.box.rotation.y += 0.005;
-        // this.box.rotation.x += 0.005;
-        this.composer.render(0.03);
+        this.box.rotation.y += 0.005;
+        this.box.rotation.x += 0.005;
+        this.renderer.render(this.scene, this.camera);
       },
     },
     beforeDestroy() {

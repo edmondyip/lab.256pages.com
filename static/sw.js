@@ -2,36 +2,48 @@ importScripts('/_nuxt/workbox.4c4f5ca6.js')
 
 workbox.precaching.precacheAndRoute([
   {
-    "url": "/_nuxt/2a570312ad9938cac7cf.js",
-    "revision": "e42cff86fd9b9ebe09433755ce1cd528"
+    "url": "/_nuxt/02f826ea6601e48ca4f5.js",
+    "revision": "5dc5a29dbe0ac11b877b6905a8b6d84e"
   },
   {
-    "url": "/_nuxt/715c62c0df270e34e23e.js",
-    "revision": "015cae3133fc15ffbeb99db33e20afdd"
+    "url": "/_nuxt/0f118db0220647ed2d77.js",
+    "revision": "f57a729e8fafb44e3370f472f08ed510"
   },
   {
-    "url": "/_nuxt/807437e823a3eb5c1182.js",
-    "revision": "76981b4aa1360f98cf01ba29ca3ea3ce"
+    "url": "/_nuxt/3d651a613d8e855306d6.js",
+    "revision": "bd809bc18fa9829f421496e0c3d0aa8c"
   },
   {
-    "url": "/_nuxt/969e3ce583019d49559e.js",
-    "revision": "4596d5ca1cdabe8b8b6cc87385e09b2d"
+    "url": "/_nuxt/52dc2965b3ba9ad6b663.js",
+    "revision": "18b7cebe3721315321018aaed13b6130"
   },
   {
-    "url": "/_nuxt/98b3cd9290eace0c8e9e.js",
-    "revision": "cbe2adffc7fb9167006bb2e9400a56c4"
+    "url": "/_nuxt/7dfac1bf8a428e7ff4d2.js",
+    "revision": "a957be7bfa891e3961a7e9b036045323"
   },
   {
-    "url": "/_nuxt/9fc33d73b2a35ddf2b91.js",
-    "revision": "f7dd9292234e5f6459d6762f56abf11d"
+    "url": "/_nuxt/82d7692c037ce7f5688d.js",
+    "revision": "c5a7ab458ec8092d1f71a7ee364384e8"
   },
   {
-    "url": "/_nuxt/bebad695c33559cbe852.js",
-    "revision": "b6d8d3d8ad26485910059d00a99d9343"
+    "url": "/_nuxt/995e4330905fca7c5d90.js",
+    "revision": "d31c2aac64d119309f24ca31367a43fc"
   },
   {
-    "url": "/_nuxt/e8c8c59db989d10165ca.js",
-    "revision": "4f001a378b883a99041383068515fd69"
+    "url": "/_nuxt/a8a36e5df4e44c8f216b.js",
+    "revision": "dc50df64e54ac788b84e52c660bd457d"
+  },
+  {
+    "url": "/_nuxt/c8c6be057e8447e1d726.js",
+    "revision": "721d5e917a0c2d1fa37368a759eacddd"
+  },
+  {
+    "url": "/_nuxt/c9561961113b38c7e791.js",
+    "revision": "55e4cde43f885c836f6af52555532e43"
+  },
+  {
+    "url": "/_nuxt/dc31fef80c344150dfe6.js",
+    "revision": "348be444e8684966a52a896180821e97"
   }
 ], {
   "cacheId": "webgl",

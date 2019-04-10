@@ -1,12 +1,12 @@
 <template lang="pug">
   footer(:style="{background: bgColor}")
-    #copy &copy Edmond Yip
+    #copy(:class="{dark: theme}") &copy Edmond Yip
 </template>
 
 <script>
 export default {
   props: [
-    'bgColor'
+    'bgColor', 'theme'
   ]
 }
 </script>
@@ -23,8 +23,16 @@ export default {
     text-align right
     #copy
       font-size 10px
-      color #000
+      color #111111
       line-height var(--frameWidth)
       padding 0 var(--frameWidth)
       text-transform uppercase
+      &.dark
+        color #eeeeee
+  @media screen and (max-width $maxWidth)
+    footer
+      height calc(var(--frameWidth) / 2)
+      #copy
+        line-height calc(var(--frameWidth) / 2)
+        text-align center
 </style>

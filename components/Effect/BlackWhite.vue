@@ -3,7 +3,17 @@
 </template>
 
 <script>
+  import {
+    ArcCurve
+  } from 'three';
   export default {
+    data() {
+      return {
+        opacity: 0,
+        radius: 100,
+        theta: 0,
+      }
+    },
     mounted() {
       this.init();
     },
@@ -40,7 +50,7 @@
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
-        // this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
+        this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 500);
         this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
         this.camera.position.set(150, 150, 150);
         this.scene.add(this.camera);
@@ -60,7 +70,7 @@
         const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 1);
         this.scene.add(Light);
 
-        this.pointLight = new this.$THREE.PointLight(0xffffff, 3, 1000);
+        this.pointLight = new this.$THREE.PointLight(0xffffff, 1, 2000);
         this.pointLight.position.set(200, 100, 200);
         this.pointLight.castShadow = true;
         this.pointLight.shadow.radius = 20;
@@ -71,31 +81,34 @@
         this.composer.setSize(window.innerWidth, window.innerHeight);
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
 
-        const vignetteEffect = new this.$postprocessing.DotScreenEffect({
+        const dotScreen = new this.$postprocessing.DotScreenEffect({
           blendFunction: this.$postprocessing.BlendFunction.OVERLAY,
           scale: 1.0,
           angle: Math.PI * 0.58
         });
-        const noiseEffect = new this.$postprocessing.ColorAverageEffect();
-        const effectPass = new this.$postprocessing.EffectPass(this.camera, vignetteEffect, noiseEffect);
+        const colorAverage = new this.$postprocessing.ColorAverageEffect();
+        const glitch = new this.$postprocessing.GlitchEffect();
+        const effectPass = new this.$postprocessing.EffectPass(this.camera, dotScreen, colorAverage, glitch);
         effectPass.renderToScreen = true;
         this.composer.addPass(effectPass);
-        },
+      },
       createBox() {
         const cubeTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/wood.jpg'));
-        // this.group = new this.$THREE.Group();
+        const cubeBumpTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/wood_bump.jpg'));
 
-        for (let i = 0; i < 100; i++) {
-          const cubeGeometry = new this.$THREE.BoxBufferGeometry(20, 20, 20);
+        for (let i = 0; i < 20; i++) {
+          const cubeGeometry = new this.$THREE.BoxBufferGeometry(15, 15, 15);
           const cubeMaterial = new this.$THREE.MeshStandardMaterial({
             map: cubeTexture,
-            bumpMap: cubeTexture,
+            bumpMap: cubeBumpTexture,
+            bumpScale: 0.8,
+            metalness: 0,
           });
           this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
-          this.box.position.set(30, 0, -50);
-          this.box.position.x = Math.random() * 200 - 80;
-          this.box.position.y = Math.random() * 200 - 80;
-          this.box.position.z = Math.random() * 200 - 80;
+          this.box.position.x = Math.random() * 220 - 100;
+          this.box.position.y = Math.random() * 220 - 100;
+          this.box.position.z = Math.random() * 220 - 100;
+          this.box.scale.x = this.box.scale.y = this.box.scale.z = Math.random() * 2 + 1;
           this.box.castShadow = true;
           this.box.receiveShadow = true;
           this.scene.add(this.box);
@@ -109,9 +122,12 @@
       renderScene() {
         this.stats.update();
         requestAnimationFrame(this.renderScene);
-        // this.box.rotation.y += 0.005;
-        // this.box.rotation.x += 0.005;
-        this.composer.render(0.03);
+        this.theta += 0.1;
+        this.camera.position.x = this.radius * Math.sin(this.$THREE.Math.degToRad(this.theta));
+        this.camera.position.y = this.radius * Math.sin(this.$THREE.Math.degToRad(this.theta));
+        this.camera.position.z = this.radius * Math.cos(this.$THREE.Math.degToRad(this.theta));
+        this.camera.lookAt(this.scene.position);
+        this.composer.render(0.02);
       },
     },
     beforeDestroy() {
@@ -119,6 +135,7 @@
         this.scene.remove(this.scene.children[0]);
       }
       this.renderer.forceContextLoss();
+      this.composer.dispose();
       window.removeEventListener('resize', this.windowResize.bind(this), false);
       window.removeEventListener('resize', this.windowResize.bind(this), true);
     }

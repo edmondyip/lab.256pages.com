@@ -1,8 +1,8 @@
 {
   "name": "webgl",
   "version": "1.0.0",
-  "description": "My spectacular Nuxt.js project",
-  "author": "Edmond",
+  "description": "Edmond Yip's WebGL Project",
+  "author": "EdmondYip",
   "private": true,
   "scripts": {
     "dev": "nuxt",

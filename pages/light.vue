@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import Effect from '~/components/Effect/Glitch.vue'
+  import Effect from '~/components/Effect/DarkRoom.vue'
 
   export default {
     head: {

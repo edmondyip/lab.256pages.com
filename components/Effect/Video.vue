@@ -60,7 +60,7 @@
         const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 1);
         this.scene.add(Light);
 
-        this.pointLight = new this.$THREE.PointLight(0xffffff, 3, 1000);
+        this.pointLight = new this.$THREE.PointLight(0xffffff, 2, 1000);
         this.pointLight.position.set(200, 100, 200);
         this.pointLight.castShadow = true;
         this.pointLight.shadow.radius = 20;
@@ -71,13 +71,14 @@
         this.composer.setSize(window.innerWidth, window.innerHeight);
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
 
-        const vignetteEffect = new this.$postprocessing.DotScreenEffect({
-          blendFunction: this.$postprocessing.BlendFunction.OVERLAY,
-          scale: 1.0,
-          angle: Math.PI * 0.58
-        });
-        const noiseEffect = new this.$postprocessing.ColorAverageEffect();
-        const effectPass = new this.$postprocessing.EffectPass(this.camera, vignetteEffect, noiseEffect);
+        const glitchEffect = new this.$postprocessing.GlitchEffect();
+        glitchEffect.delay.x = 5;
+        glitchEffect.dtSize = 1;
+        const noiseEffect = new this.$postprocessing.NoiseEffect({
+          blendFunction: this.$postprocessing.BlendFunction.COLOR_DODGE
+        })
+        noiseEffect.renderToScreen = true;
+        const effectPass = new this.$postprocessing.EffectPass(this.camera, glitchEffect, noiseEffect);
         effectPass.renderToScreen = true;
         this.composer.addPass(effectPass);
         },
@@ -93,9 +94,9 @@
           });
           this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
           this.box.position.set(30, 0, -50);
-          this.box.position.x = Math.random() * 200 - 80;
-          this.box.position.y = Math.random() * 200 - 80;
-          this.box.position.z = Math.random() * 200 - 80;
+          this.box.position.x = Math.random() * 200 - 100;
+          this.box.position.y = Math.random() * 200 - 100;
+          this.box.position.z = Math.random() * 200 - 100;
           this.box.castShadow = true;
           this.box.receiveShadow = true;
           this.scene.add(this.box);

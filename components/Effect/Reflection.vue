@@ -32,7 +32,7 @@
         this.controls.enabled = false;
 
         this.stats = new this.$stats();
-        document.getElementById("three").appendChild(this.stats.dom);
+        // document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         this.renderScene();
@@ -61,12 +61,12 @@
       },
       createObject() {
         const backgroundImage = [          
-          require('~/assets/img/low/px.jpg'),
-          require('~/assets/img/low/nx.jpg'),
-          require('~/assets/img/low/py.jpg'),
-          require('~/assets/img/low/ny.jpg'),
-          require('~/assets/img/low/pz.jpg'),
-          require('~/assets/img/low/nz.jpg')
+          require('~/assets/img/garden/px.jpg'),
+          require('~/assets/img/garden/nx.jpg'),
+          require('~/assets/img/garden/py.jpg'),
+          require('~/assets/img/garden/ny.jpg'),
+          require('~/assets/img/garden/pz.jpg'),
+          require('~/assets/img/garden/nz.jpg')
           ];
         const backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
         const sphereGeometry = new this.$THREE.SphereBufferGeometry(15, 15, 15);
@@ -77,12 +77,18 @@
           roughness: 0.1,
           envMap: backgroundTexture
         });
+        const innerSphereMaterial = new this.$THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          metalness: 0.8,
+          roughness: 0.1,
+          envMap: backgroundTexture
+        });
         this.sphere = new this.$THREE.Mesh(torusGeometry, sphereMaterial);
         this.sphere.castShadow = true;
         this.sphere.receiveShadow = true;
         this.scene.add(this.sphere);
 
-        this.innerSphere = new this.$THREE.Mesh(sphereGeometry, sphereMaterial);
+        this.innerSphere = new this.$THREE.Mesh(sphereGeometry, innerSphereMaterial);
         this.innerSphere.receiveShadow = true;
         this.scene.add(this.innerSphere);
 

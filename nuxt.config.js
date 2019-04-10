@@ -8,7 +8,7 @@ module.exports = {
    */
   head: {
     title: pkg.name,
-    titleTemplate: '%s - webGL Lab',
+    titleTemplate: '%s - WebGL Lab',
     meta: [{
         charset: 'utf-8'
       },
@@ -24,23 +24,64 @@ module.exports = {
         hid: 'description',
         name: 'description',
         content: pkg.description
+      },
+      {
+        name: 'msapplication-TileColor',
+        content: '#ffffff',
       }
     ],
     link: [{
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/apple-touch-icon.png',
       },
-      // {
-      //   rel: 'stylesheet',
-      //   href: 'https://fonts.googleapis.com/css?family=Noto+Serif+TC',
-      // },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png',
+      },
+      {
+        rel: 'mask-icon',
+        href: '/safari-pinned-tab/svg',
+        color: '#5bbad5',
+      },
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Lato:300|Oswald:300',
       },
     ],
   },
+  /*
+   ** PWA setting
+   */
+
+  // manifest: {
+  //   name: 'Real 3D Web Experiment',
+  //   short_name: 'WebGL',
+  //   description: 'Real Time 3D Web Experiment by Edmond Yip',
+  //   display: 'fullscreen',
+  //   lang: "en",
+  //   theme_color: '#F3D03F',
+  //   background_color: '#ffffff',
+  //   icons: [{
+  //       "src": "/android-chrome-192x192.png",
+  //       "sizes": "192x192",
+  //       "type": "image/png"
+  //     },
+  //     {
+  //       "src": "/android-chrome-512x512.png",
+  //       "sizes": "512x512",
+  //       "type": "image/png"
+  //     }
+  //   ],
+  // },
 
   /*
    ** Customize the progress-bar color
@@ -91,6 +132,6 @@ module.exports = {
     vendor: ['three', 'three-orbitcontrols', 'postprocessing', 'stats-js'],
     extend(config, ctx) {
 
-    }
+    },
   }
 }

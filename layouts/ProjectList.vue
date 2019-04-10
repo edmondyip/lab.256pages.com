@@ -1,6 +1,6 @@
 <template lang="pug">
 #project-list
-  section(v-for="project in homelessList")
+  section(v-for="project in homelessList" :key="project.id")
     NuxtLink(:to="project.path")
       span {{projectID(project.id)}}
       h2 // {{project.title}}
@@ -12,14 +12,25 @@
 <script>
 import {mapState} from 'vuex'
 import Left from 'left-pad'
-
+2
 export default {
   computed: {
     ...mapState({
       projectList: state => state.projectList
     }),
     homelessList() {
-      return (this.projectList.slice(1)).reverse();
+      let array = (this.projectList.slice(1)).reverse();
+      array.sort((a, b) => {
+        let objectA = a.id;
+        let objectB = b.id;
+        if (objectA > objectB) {
+          return -1;
+        };
+        if (objectA < objectB) {
+          return 1;
+        }
+      });
+      return array;
     }, 
   },
   methods: {
@@ -93,15 +104,12 @@ export default {
   @media screen and (max-width $maxWidth)
     div#project-list
       padding 10px
-      width 100%
+      width calc(100% - 20px)
       section
         width 100%
         margin 0
-        div
-          width 100%
-          a
-            h2
-              font-size 3rem
-          &:hover
-            width 100%
+        a
+          padding 20px 20px 20px 40px
+        span
+          left -10px
 </style>

@@ -13,11 +13,11 @@
           runTime,
           scene,
           renderer,
+          composer,
           camera,
           controls,
           sphere,
-          pointLight,
-          pointLight2,
+          particleLight,
           stats,
         } = this;
         runTime();
@@ -25,15 +25,11 @@
       runTime() {
         this.createScene();
         this.createLights();
+        this.createEffect();
         this.createObject();
 
         this.controls = new this.$controls(this.camera);
-        // this.controls.enabled = false;
-        this.controls.enableZoom = false;
-        this.controls.minPolarAngle = Math.PI/4;
-        this.controls.maxPolarAngle = Math.PI/4;
-        this.controls.autoRotate = true;
-        this.controls.autoRotateSpeed = 1;
+        this.controls.enabled = false;
 
         this.stats = new this.$stats();
         // document.getElementById("three").appendChild(this.stats.dom);
@@ -43,15 +39,16 @@
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
-        this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 400);
-        this.camera = new this.$THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(40, 150, -150);
+        this.scene.fog = new this.$THREE.Fog(0x000000, 200, 400);
+        this.camera = new this.$THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+        this.camera.position.set(100, 100, 150);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
           alpha: true,
           antialias: true
         });
+        this.renderer.setClearColor(0x000000, 1);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.shadowMap.enabled = true;
@@ -60,37 +57,29 @@
         document.getElementById("three").appendChild(this.renderer.domElement);
       },
       createLights() {
-        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.7);
-        this.scene.add(Light);
+        this.particleLight = new this.$THREE.Mesh(new this.$THREE.SphereBufferGeometry(1, 8, 8), new this.$THREE
+          .MeshBasicMaterial({
+            color: 0xffffff
+          }));
+        this.particleLight.position.y = 60;
+        this.scene.add(this.particleLight);
 
-        this.pointLight = new this.$THREE.PointLight(0xffffff, 2, 300);
-        this.pointLight.position.set(0, 200, 0);
-        this.pointLight.castShadow = true;
-        this.pointLight.shadow.radius = 20;
-        this.scene.add(this.pointLight);
+        const pointLight = new this.$THREE.PointLight(0xffeeee, 1, 800);
+        pointLight.castShadow = true;
+        this.particleLight.add(pointLight);
       },
       createObject() {
-        const backgroundImage = [
-          require('~/assets/img/sphere/px.jpg'),
-          require('~/assets/img/sphere/nx.jpg'),
-          require('~/assets/img/sphere/py.jpg'),
-          require('~/assets/img/sphere/ny.jpg'),
-          require('~/assets/img/sphere/pz.jpg'),
-          require('~/assets/img/sphere/nz.jpg')];
-        const backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
-        const cubeGeometry = new this.$THREE.SphereBufferGeometry(10, 30, 30);
+        const cubeTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/wood.jpg'));
+        const cubeGeometry = new this.$THREE.BoxBufferGeometry(40, 40, 40);
         const cubeMaterial = new this.$THREE.MeshStandardMaterial({
-          color: 0xffffff,
-          metalness: 0.8,
-          roughness: 0.2,
-          envMap: backgroundTexture
+          map: cubeTexture,
+          bumpMap: cubeTexture,
+          metalness: 0.1,
         });
-        this.sphere = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
-        this.sphere.castShadow = true;
-        this.sphere.receiveShadow = true;
-        this.sphere.position.y = 10;
-
-        this.scene.add(this.sphere);
+        this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
+        this.box.castShadow = true;
+        this.box.receiveShadow = true;
+        this.scene.add(this.box);
 
         const planeTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/brick.jpg'));
         planeTexture.wrapS = this.$THREE.RepeatWrapping;
@@ -100,15 +89,24 @@
 
         const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(600, 600);
         const PlaneMaterial = new this.$THREE.MeshStandardMaterial({
-          color: 0xffeeee,
           map: planeTexture,
-          bumpMap: planeTexture
+          bumpMap: planeTexture,
+          metalness: 0.1,
         });
         this.floor = new this.$THREE.Mesh(PlaneGeometry, PlaneMaterial);
         this.floor.rotation.x = -Math.PI / 2;
-        this.floor.position.y = -10;
+        this.floor.position.y = -15;
         this.floor.receiveShadow = true;
         this.scene.add(this.floor);
+      },
+      createEffect() {
+        this.composer = new this.$postprocessing.EffectComposer(this.renderer);
+        this.composer.setSize(window.innerWidth, window.innerHeight);
+        this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
+        const bloom = new this.$postprocessing.BloomEffect();
+        const effectPass = new this.$postprocessing.EffectPass(this.camera, bloom);
+        effectPass.renderToScreen = true;
+        this.composer.addPass(effectPass);
       },
       windowResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -117,15 +115,13 @@
       },
       renderScene() {
         this.stats.update();
-        this.controls.update();
         requestAnimationFrame(this.renderScene);
-
         const timer = Date.now() * 0.00025;
-        this.sphere.position.x = Math.sin( timer * 5 ) * 20;
-				this.sphere.position.y = Math.cos( timer * 3 ) * 10 + 20;
-        this.sphere.position.z = Math.cos( timer * 2 ) * 30;
+        this.particleLight.position.x = Math.sin(timer * 7) * 60;
+        this.particleLight.position.z = Math.cos(timer * 3) * 60;
+        // this.renderer.render(this.scene, this.camera);
+        this.composer.render(60);
 
-        this.renderer.render(this.scene, this.camera);
       },
     },
     beforeDestroy() {
@@ -138,3 +134,8 @@
     }
   }
 </script>
+
+<style lang="stylus" scoped>
+  #three 
+    background #000000
+</style>
