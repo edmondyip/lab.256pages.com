@@ -5,8 +5,8 @@
     //- ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
     First
     Projects
-    //- PageFooter(:bgColor="bgColor" :theme="theme")
-    //- PageHeader(:bgColor="bgColor" :projectTitle="projectTitle" :theme="theme")
+    PageFooter(:bgColor="bgColor" :theme="theme")
+    PageHeader(:bgColor="bgColor" :projectTitle="projectTitle" :theme="theme")
 </template>
 
 <script>
@@ -25,18 +25,18 @@ export default {
     projectID() {
       return this.projectList.findIndex(obj => obj.path === this.$route.path);
     },
-    // projectTitle() {
-    //   return this.projectList[this.projectID].title;
-    // },
-    // bgColor() {
-    //   return this.projectList[this.projectID].frameColor;
-    // },
-    // theme() {
-    //   return this.projectList[this.projectID].darkTheme;
-    // },
-    // sourceURL() {
-    //   return this.projectList[this.projectID].source;
-    // },
+    projectTitle() {
+      return this.projectList[this.projectID].title;
+    },
+    bgColor() {
+      return this.projectList[this.projectID].frameColor;
+    },
+    theme() {
+      return this.projectList[this.projectID].darkTheme;
+    },
+    sourceURL() {
+      return this.projectList[this.projectID].source;
+    },
   },
   components: {
     PageHeader,

@@ -6,13 +6,11 @@
 </template>
 
 <script>
-import NavBtn from '~/components/NavBtn.vue';
 import Close from '~/components/CloseBtn.vue';
 
 export default {
   props: ['bgColor', 'projectTitle', 'source', 'theme'],
   components: {
-    NavBtn,
     Close,
   },
 }
@@ -23,16 +21,16 @@ export default {
     transition .5s
     position fixed
     top 0
-    left 0
     right 0
-    height var(--frameWidthx2)
+    bottom 0
+    width  60px
+    padding 60px 0 0
     h1
       font-size 2rem
+      white-space nowrap
       transition .5s
-      padding 0 var(--frameWidthx2)
-      margin 0
+      transform rotate(90deg)
       color #111111
-      line-height var(--frameWidthx2)
       &.dark
         color #eeeeee
 
