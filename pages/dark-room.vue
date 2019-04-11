@@ -95,7 +95,7 @@
         });
         this.floor = new this.$THREE.Mesh(PlaneGeometry, PlaneMaterial);
         this.floor.rotation.x = -Math.PI / 2;
-        this.floor.position.y = -15;
+        this.floor.position.y = -20;
         this.floor.receiveShadow = true;
         this.scene.add(this.floor);
       },

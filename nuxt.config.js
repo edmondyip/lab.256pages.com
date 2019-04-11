@@ -62,32 +62,33 @@ module.exports = {
    ** PWA setting
    */
 
-  // manifest: {
-  //   name: 'Real 3D Web Experiment',
-  //   short_name: 'WebGL',
-  //   description: 'Real Time 3D Web Experiment by Edmond Yip',
-  //   display: 'fullscreen',
-  //   lang: "en",
-  //   theme_color: '#F3D03F',
-  //   background_color: '#ffffff',
-  //   icons: [{
-  //       "src": "/android-chrome-192x192.png",
-  //       "sizes": "192x192",
-  //       "type": "image/png"
-  //     },
-  //     {
-  //       "src": "/android-chrome-512x512.png",
-  //       "sizes": "512x512",
-  //       "type": "image/png"
-  //     }
-  //   ],
-  // },
+  manifest: {
+    name: 'Real 3D Web Experiment',
+    short_name: 'WebGL',
+    description: 'Real Time 3D Web Experiment by Edmond Yip',
+    display: 'fullscreen',
+    lang: "en",
+    theme_color: '#F3D03F',
+    background_color: '#ffffff',
+    icons: [{
+        "src": "/android-chrome-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+  },
 
   /*
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#F3D03F'
+    color: '#F3D03F',
+    height: "100px"
   },
 
   /*
@@ -131,7 +132,9 @@ module.exports = {
      */
     vendor: ['three', 'three-orbitcontrols', 'postprocessing', 'stats-js'],
     extend(config, ctx) {
-
+      config.performance = config.performance || {}
+      config.performance.maxEntrypointSize = 1200 * 1024
+      config.performance.maxAssetSize = 700 * 1024
     },
   }
 }

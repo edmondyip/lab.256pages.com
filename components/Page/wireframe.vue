@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import Effect from './wireframe.vue'
+  import Effect from '~/components/Effect/WireframeBox.vue'
 
   export default {
     head: {

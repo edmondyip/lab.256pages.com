@@ -1,4 +1,5 @@
 export const state = () => ({
+  darkTheme: false,
   projectList: [{
       id: 0,
       path: '/',
@@ -13,7 +14,7 @@ export const state = () => ({
     },
     {
       id: 1,
-      path: '/wireframe',
+      path: 'wireframe',
       title: 'Wireframe',
       description: 'Wireframe Box Geometry',
       tags: [
@@ -25,7 +26,7 @@ export const state = () => ({
     },
     {
       id: 4,
-      path: '/texture-env-map',
+      path: 'sphere',
       title: 'Sphere',
       description: 'Texture and Environment mapping',
       tags: [
@@ -37,7 +38,7 @@ export const state = () => ({
     },
     {
       id: 3,
-      path: '/env-map',
+      path: 'garden',
       title: 'Gardan',
       description: 'Environment Reflection',
       tags: [
@@ -49,7 +50,7 @@ export const state = () => ({
     },
     {
       id: 2,
-      path: '/texture-map',
+      path: 'wooden-box',
       title: 'Wooden Box',
       description: 'Texture Mapping',
       tags: [
@@ -61,7 +62,7 @@ export const state = () => ({
     },
     {
       id: 6,
-      path: '/dot-screen-color-average',
+      path: 'black-white',
       title: 'Black & White',
       description: 'Dot Screen, Color Average and Glitch Filter',
       tags: [
@@ -73,7 +74,7 @@ export const state = () => ({
     },
     {
       id: 5,
-      path: '/light',
+      path: 'dark-room',
       title: 'Dark Room',
       description: 'Dynamic Light',
       tags: [
@@ -85,3 +86,9 @@ export const state = () => ({
     },
   ],
 });
+
+export const mutations = {
+  themeToolge(state) {
+    state.darkTheme = !darkTheme
+  },
+};

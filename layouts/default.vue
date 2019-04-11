@@ -5,8 +5,8 @@
     //- ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
     First
     Projects
-    PageFooter(:bgColor="bgColor" :theme="theme")
-    PageHeader(:bgColor="bgColor" :projectTitle="projectTitle" :theme="theme")
+    PageFooter
+    PageHeader(:style="{background: bgColor}" :projectTitle="projectTitle" :theme="theme")
 </template>
 
 <script>
@@ -15,7 +15,7 @@ import PageHeader from '~/layouts/Header.vue';
 import PageFooter from '~/layouts/Footer.vue';
 import First from '~/components/FirstBlock.vue';
 import Projects from '~/layouts/ProjectList.vue';
-import ViewSource from '~/components/ViewSource.vue';
+// import ViewSource from '~/components/ViewSource.vue';
 
 export default {
   computed: {
@@ -34,16 +34,15 @@ export default {
     theme() {
       return this.projectList[this.projectID].darkTheme;
     },
-    sourceURL() {
-      return this.projectList[this.projectID].source;
-    },
+    // sourceURL() {
+    //   return this.projectList[this.projectID].source;
+    // },
   },
   components: {
     PageHeader,
     PageFooter,
     Projects,
     First,
-    ViewSource
   }
 }
 </script>

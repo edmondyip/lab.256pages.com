@@ -1,18 +1,18 @@
 <template lang="pug">
-#project-list
-  section(v-for="project in homelessList" :key="project.id")
-    NuxtLink(:to="project.path")
-      span {{projectID(project.id)}}
-      h2 // {{project.title}}
-      p {{project.description}}
-      //- ul
-      //-   li(v-for="tag in project.tags") {{tag}}
+  #project-list
+    section(v-for="project in homelessList" :key="project.id")
+      NuxtLink(:to="project.path")
+        span {{projectID(project.id)}}
+        h2 // {{project.title}}
+        p {{project.description}}
+        //- ul
+        //-   li(v-for="tag in project.tags") {{tag}}
 </template>
 
 <script>
 import {mapState} from 'vuex'
 import Left from 'left-pad'
-2
+
 export default {
   computed: {
     ...mapState({

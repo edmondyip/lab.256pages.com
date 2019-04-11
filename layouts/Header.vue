@@ -1,5 +1,5 @@
 <template lang="pug">
-  header(:style="{background: bgColor}")
+  header
     transition(name="ease" mode="in-out" tag="div")
       h1(:class="{dark: theme}") // {{projectTitle}}
     Close(v-show="$route.name !== 'index'" :class="{dark: theme}")
@@ -9,7 +9,7 @@
 import Close from '~/components/CloseBtn.vue';
 
 export default {
-  props: ['bgColor', 'projectTitle', 'source', 'theme'],
+  props: ['projectTitle', 'theme'],
   components: {
     Close,
   },
