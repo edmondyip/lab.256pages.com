@@ -18,6 +18,16 @@ import Projects from '~/layouts/ProjectList.vue';
 // import ViewSource from '~/components/ViewSource.vue';
 
 export default {
+  head() {
+    return {
+      title: this.projectTitle,
+      meta:[{
+        hid: 'description',
+        name: 'description',
+        content: this.projectDescription,
+      }]
+    }
+  },
   computed: {
     ...mapState({
       projectList: state => state.projectList,
@@ -37,6 +47,9 @@ export default {
     // sourceURL() {
     //   return this.projectList[this.projectID].source;
     // },
+    projectDescription() {
+      return this.projectList[this.projectID].description;
+    }
   },
   components: {
     PageHeader,
