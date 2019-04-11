@@ -23,6 +23,7 @@ export default {
     position relative
     background rgba(0,0,0,0.5)
     padding 10px
+    
     #copy
       position absolute
       right 10px
@@ -36,7 +37,5 @@ export default {
   @media screen and (max-width $maxWidth)
     footer
       // height calc(var(--frameWidth) / 2)
-      #copy
-        // line-height calc(var(--frameWidth) / 2)
-        text-align center
+      width 100%
 </style>

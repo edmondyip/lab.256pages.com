@@ -14,7 +14,7 @@ export const state = () => ({
     },
     {
       id: 1,
-      path: 'wireframe',
+      path: '/wireframe',
       title: 'Wireframe',
       description: 'Wireframe Box Geometry',
       tags: [
@@ -26,7 +26,7 @@ export const state = () => ({
     },
     {
       id: 4,
-      path: 'sphere',
+      path: '/sphere',
       title: 'Sphere',
       description: 'Texture and Environment mapping',
       tags: [
@@ -38,7 +38,7 @@ export const state = () => ({
     },
     {
       id: 3,
-      path: 'garden',
+      path: '/garden',
       title: 'Gardan',
       description: 'Environment Reflection',
       tags: [
@@ -50,7 +50,7 @@ export const state = () => ({
     },
     {
       id: 2,
-      path: 'wooden-box',
+      path: '/wooden-box',
       title: 'Wooden Box',
       description: 'Texture Mapping',
       tags: [
@@ -62,7 +62,7 @@ export const state = () => ({
     },
     {
       id: 6,
-      path: 'black-white',
+      path: '/black-white',
       title: 'Black & White',
       description: 'Dot Screen, Color Average and Glitch Filter',
       tags: [
@@ -74,7 +74,7 @@ export const state = () => ({
     },
     {
       id: 5,
-      path: 'dark-room',
+      path: '/dark-room',
       title: 'Dark Room',
       description: 'Dynamic Light',
       tags: [

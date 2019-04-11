@@ -17,13 +17,9 @@
     &:hover
       transition .5s
       transform rotate(180deg)
-    @media screen and (max-width $maxWidth)
-      width 20px
-      height 20px
-      right 10px
-      top 10px
-    &.dark
-      a
-        svg
-          fill #eeeeee
+
+  &.dark
+    a
+      svg
+        fill #eeeeee
 </style>

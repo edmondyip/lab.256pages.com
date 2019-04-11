@@ -75,6 +75,7 @@ export default {
           color #111
           transition 2s
           margin 0 20px
+          white-space nowrap
         p
           color #333
           line-height 12px
@@ -103,7 +104,7 @@ export default {
 
   @media screen and (max-width $maxWidth)
     div#project-list
-      padding 10px
+      padding 10px 20px
       width calc(100% - 20px)
       section
         width 100%

@@ -60,10 +60,10 @@
         document.getElementById("three").appendChild(this.renderer.domElement);
       },
       createLights() {
-        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.7);
+        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.5);
         this.scene.add(Light);
 
-        this.pointLight = new this.$THREE.PointLight(0xffffff, 2, 300);
+        this.pointLight = new this.$THREE.PointLight(0xffffff, 1, 200);
         this.pointLight.position.set(0, 200, 0);
         this.pointLight.castShadow = true;
         this.pointLight.shadow.radius = 20;
@@ -87,7 +87,6 @@
         });
         this.sphere = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
         this.sphere.castShadow = true;
-        this.sphere.receiveShadow = true;
         this.sphere.position.y = 10;
 
         this.scene.add(this.sphere);
@@ -98,7 +97,7 @@
         planeTexture.repeat.x = 6;
         planeTexture.repeat.y = 6;
 
-        const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(600, 600);
+        const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(700, 700);
         const PlaneMaterial = new this.$THREE.MeshStandardMaterial({
           color: 0xffeeee,
           map: planeTexture,

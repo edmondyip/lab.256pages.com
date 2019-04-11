@@ -15,7 +15,7 @@
     align-items center
     color #111
     section
-      // padding 40px
+      padding 0 20px
       h1
         font-size 2.5rem
         text-transform uppercase
