@@ -60,10 +60,10 @@
         document.getElementById("three").appendChild(this.renderer.domElement);
       },
       createLights() {
-        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.5);
+        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.7);
         this.scene.add(Light);
 
-        this.pointLight = new this.$THREE.PointLight(0xffffff, 1, 200);
+        this.pointLight = new this.$THREE.PointLight(0xffffff, 1, 600);
         this.pointLight.position.set(0, 200, 0);
         this.pointLight.castShadow = true;
         this.pointLight.shadow.radius = 20;
@@ -87,8 +87,8 @@
         });
         this.sphere = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
         this.sphere.castShadow = true;
+        this.sphere.receiveShadow = true;
         this.sphere.position.y = 10;
-
         this.scene.add(this.sphere);
 
         const planeTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/brick.jpg'));
@@ -120,6 +120,8 @@
         requestAnimationFrame(this.renderScene);
 
         const timer = Date.now() * 0.00025;
+        this.pointLight.position.x = Math.sin( timer * 3 ) * 20;
+        this.pointLight.position.z = Math.cos( timer * 1 ) * 30;
         this.sphere.position.x = Math.sin( timer * 5 ) * 20;
 				this.sphere.position.y = Math.cos( timer * 3 ) * 10 + 20;
         this.sphere.position.z = Math.cos( timer * 2 ) * 30;

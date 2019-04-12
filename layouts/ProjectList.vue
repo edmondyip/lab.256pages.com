@@ -10,14 +10,17 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import Left from 'left-pad'
+// import {mapState} from 'vuex';
+import Left from 'left-pad';
 
 export default {
+  props: [
+    'projectList'
+  ],
   computed: {
-    ...mapState({
-      projectList: state => state.projectList
-    }),
+    // ...mapState({
+    //   projectList: state => state.projectList
+    // }),
     homelessList() {
       let array = (this.projectList.slice(1)).reverse();
       array.sort((a, b) => {
