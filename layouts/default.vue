@@ -113,6 +113,18 @@
             frameColor: 'rgba(0,0,0,0.9)',
             darkTheme: true,
           },
+          {
+            id: 7,
+            path: '/video',
+            title: 'Video',
+            description: 'Video as texture',
+            tags: [
+              'threejs', 'webGL', 'Mar2019'
+            ],
+            source: 'https://github.com/',
+            frameColor: 'rgba(125,206,160,0.9)',
+            darkTheme: true,
+          },
         ],
       }
     },

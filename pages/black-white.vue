@@ -9,7 +9,6 @@
   export default {
     data() {
       return {
-        opacity: 0,
         radius: 100,
         theta: 0,
       }

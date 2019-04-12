@@ -1,5 +1,8 @@
 <template lang="pug">
-  #three
+  div
+    video#video(autoplay loop muted playsinline)
+      source(src="~/assets/video/bg.mp4" type="video/mp4")
+    #three
 </template>
 
 <script>
@@ -19,6 +22,8 @@
           controls,
           box,
           stats,
+          mouseX,
+          mouseY
         } = this;
         runTime();
       },
@@ -34,15 +39,20 @@
 
         this.stats = new this.$stats();
         // document.getElementById("three").appendChild(this.stats.dom);
-
+        this.mouseX = 0;
+        this.mouseY = 0;
         window.addEventListener('resize', this.windowResize.bind(this), false);
+        window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
+
         this.renderScene();
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
         // this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
-        this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(150, 150, 150);
+        this.camera = new this.$THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // this.camera.position.set(150, 150, 150);
+        this.camera.position.z = 500;
+
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
@@ -71,36 +81,36 @@
         this.composer.setSize(window.innerWidth, window.innerHeight);
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
 
-        const glitchEffect = new this.$postprocessing.GlitchEffect();
-        glitchEffect.delay.x = 5;
-        glitchEffect.dtSize = 1;
-        const noiseEffect = new this.$postprocessing.NoiseEffect({
-          blendFunction: this.$postprocessing.BlendFunction.COLOR_DODGE
-        })
-        noiseEffect.renderToScreen = true;
-        const effectPass = new this.$postprocessing.EffectPass(this.camera, glitchEffect, noiseEffect);
+        const dotScreen = new this.$postprocessing.DotScreenEffect({
+          blendFunction: this.$postprocessing.BlendFunction.OVERLAY,
+          scale: 1.0,
+          angle: Math.PI * 0.58
+        });
+        const colorAverage = new this.$postprocessing.ColorAverageEffect();
+        const glitch = new this.$postprocessing.GridEffect();
+        const effectPass = new this.$postprocessing.EffectPass(this.camera, dotScreen, glitch);
         effectPass.renderToScreen = true;
         this.composer.addPass(effectPass);
         },
       createBox() {
-        const cubeTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/wood.jpg'));
-        // this.group = new this.$THREE.Group();
+        const video = document.getElementById('video');
+        const videoTexture = new this.$THREE.VideoTexture(video);
 
-        for (let i = 0; i < 100; i++) {
-          const cubeGeometry = new this.$THREE.BoxBufferGeometry(20, 20, 20);
-          const cubeMaterial = new this.$THREE.MeshStandardMaterial({
-            map: cubeTexture,
-            bumpMap: cubeTexture,
-          });
-          this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
-          this.box.position.set(30, 0, -50);
-          this.box.position.x = Math.random() * 200 - 100;
-          this.box.position.y = Math.random() * 200 - 100;
-          this.box.position.z = Math.random() * 200 - 100;
-          this.box.castShadow = true;
-          this.box.receiveShadow = true;
-          this.scene.add(this.box);
-        }
+        const cubeGeometry = new this.$THREE.BoxBufferGeometry(200, 120, 2);
+        const cubeMaterial = new this.$THREE.MeshStandardMaterial({
+          map: videoTexture,
+        });
+        this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
+        this.box.position.set(30, 0, -30);
+        this.box.castShadow = true;
+        this.box.receiveShadow = true;
+        this.scene.add(this.box);
+      },
+      onMouseMove(event) {
+          const windowHalfX = window.innerWidth / 2;
+          const windowHalfY = window.innerHeight / 2;
+          this.mouseX = (event.clientX - windowHalfX);
+          this.mouseY = (event.clientY - windowHalfY);
       },
       windowResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -110,9 +120,17 @@
       renderScene() {
         this.stats.update();
         requestAnimationFrame(this.renderScene);
-        // this.box.rotation.y += 0.005;
-        // this.box.rotation.x += 0.005;
-        this.composer.render(0.03);
+        // this.box.rotation.y += 0.006;
+        // this.box.rotation.x += 0.003;
+        this.camera.position.x += (this.mouseX - this.camera.position.x) * 0.5;
+        this.camera.position.y += (this.mouseY - this.camera.position.y) * 0.5;
+        this.camera.lookAt(this.scene.position);
+
+        console.log('position:' + this.camera.position.x, this.camera.position.y)
+        console.log('mouse:' + this.mouseX, this.mouseY)
+
+        this.composer.render();
+        // this.renderer.render(this.scene, this.camera);
       },
     },
     beforeDestroy() {
@@ -125,3 +143,13 @@
     }
   }
 </script>
+
+<style lang="stylus" scoped>
+  #video
+    display block
+    height 1px
+    // width 1px
+    position fixed
+    bottom 0
+    left 0
+</style>
