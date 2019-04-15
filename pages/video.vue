@@ -103,6 +103,7 @@
           for (let j = 0; j < 3; j++) {
 
             const videoTexture = new this.$THREE.VideoTexture(video);
+            videoTexture.minFilter = videoTexture.magFilter = this.$THREE.LinearFilter;
 
             videoTexture.repeat.x = 100 / 640;
             videoTexture.offset.x = (i * 2 * displayX / 100) * videoTexture.repeat.x;
@@ -117,14 +118,9 @@
             this.box.position.x = i * (displayX + 4) - 60;
             this.box.position.y = j * (displayY + 4) - 40;
 
-            this.box.castShadow = true;
-            this.box.receiveShadow = true;
             this.scene.add(this.box);
           };
         };
-
-
-
       },
       onMouseMove(event) {
         const windowHalfX = window.innerWidth / 2;
@@ -143,7 +139,7 @@
         this.camera.position.x += (this.mouseX - this.camera.position.x) * 0.5;
         this.camera.position.y += (this.mouseY - this.camera.position.y) * 0.5;
         this.camera.lookAt(this.scene.position);
-
+        // this.renderer.render(this.scene, this.camera);
         this.composer.render();
       },
     },

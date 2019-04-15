@@ -1,5 +1,4 @@
 export const state = () => ({
-  darkTheme: false,
   projectList: [{
       id: 0,
       path: '/',
@@ -86,9 +85,3 @@ export const state = () => ({
     },
   ],
 });
-
-export const mutations = {
-  themeToolge(state) {
-    state.darkTheme = !darkTheme
-  },
-};

@@ -1,6 +1,6 @@
 <template lang="pug">
   #container
-    transition(name="ease" mode="out-in")
+    transition(name="ease" mode="in-out")
       nuxt
     //- ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
     First
@@ -17,30 +17,19 @@
   // import ViewSource from '~/components/ViewSource.vue';
 
   export default {
-    head() {
-      return {
-        title: this.projectID().title,
-        meta: [{
-          hid: 'description',
-          name: 'description',
-          content: this.projectID().description,
-        }]
-      }
-    },
+    // head() {
+    //   return {
+    //     title: this.projectID().title,
+    //     meta: [{
+    //       hid: 'description',
+    //       name: 'description',
+    //       content: this.projectID().description,
+    //     }]
+    //   }
+    // },
     data() {
       return {
-        projectList: [{
-            id: 0,
-            path: '/',
-            title: 'Build with VueJS & webGL',
-            description: 'HomePage',
-            tags: [
-              'threejs', 'webGL', 'Mar2019'
-            ],
-            source: 'https://github.com/',
-            frameColor: 'rgba(255,255,255,.9)',
-            darkTheme: false,
-          },
+        projectList: [
           {
             id: 1,
             path: '/wireframe',
@@ -51,30 +40,6 @@
             ],
             source: 'https://github.com/',
             frameColor: 'rgba(100,100,100,0.8)',
-            darkTheme: true,
-          },
-          {
-            id: 4,
-            path: '/sphere',
-            title: 'Sphere',
-            description: 'Texture and Environment mapping',
-            tags: [
-              'threejs', 'webGL', 'Mar2019'
-            ],
-            source: 'https://github.com/',
-            frameColor: 'rgba(40,55,71,0.9)',
-            darkTheme: true,
-          },
-          {
-            id: 3,
-            path: '/garden',
-            title: 'Gardan',
-            description: 'Environment Reflection',
-            tags: [
-              'threejs', 'webGL', 'Mar2019'
-            ],
-            source: 'https://github.com/',
-            frameColor: 'rgba(244,208,63,0.9)',
             darkTheme: true,
           },
           {
@@ -90,15 +55,27 @@
             darkTheme: true,
           },
           {
-            id: 6,
-            path: '/black-white',
-            title: 'Black & White',
-            description: 'Dot Screen, Color Average and Glitch Filter',
+            id: 3,
+            path: '/garden',
+            title: 'Gardan',
+            description: 'Environment Reflection',
             tags: [
               'threejs', 'webGL', 'Mar2019'
             ],
             source: 'https://github.com/',
-            frameColor: 'rgba(50,50,50,0.8)',
+            frameColor: 'rgba(244,208,63,0.9)',
+            darkTheme: true,
+          },
+          {
+            id: 4,
+            path: '/sphere',
+            title: 'Sphere',
+            description: 'Texture and Environment mapping',
+            tags: [
+              'threejs', 'webGL', 'Mar2019'
+            ],
+            source: 'https://github.com/',
+            frameColor: 'rgba(40,55,71,0.9)',
             darkTheme: true,
           },
           {
@@ -111,6 +88,18 @@
             ],
             source: 'https://github.com/',
             frameColor: 'rgba(0,0,0,0.9)',
+            darkTheme: true,
+          },
+          {
+            id: 6,
+            path: '/black-white',
+            title: 'Black & White',
+            description: 'Dot Screen, Color Average and Glitch Filter',
+            tags: [
+              'threejs', 'webGL', 'Mar2019'
+            ],
+            source: 'https://github.com/',
+            frameColor: 'rgba(50,50,50,0.8)',
             darkTheme: true,
           },
           {
@@ -130,20 +119,27 @@
     },
     methods: {
       projectID() {
-        return this.projectList[this.projectList.findIndex(obj => obj.path === this.$route.path)]
+        let now = this.$route.path;
+        const index = {
+          path: '/',
+          title: 'Build with VueJS & WebGL',
+          description: "Edmond Yip's WebGL Experiment. You can find some example for Threejs here. ",
+          frameColor: 'rgba(255,255,255,.9)',
+          darkTheme: false,
+        };
+        const about = {
+          path: '/about',
+          title: 'About',
+          description: 'Know more about Edmond and this website.',
+          frameColor: 'rgba(0,0,0,.8)',
+          darkTheme: true,
+        };
+        if (now === '/') {
+          return index;
+        } else if (now === '/about') {
+          return about;
+        } return this.projectList[this.projectList.findIndex(obj => obj.path === now)];
       },
-      // title() {
-      //   return this.projectList[this.projectList.findIndex(obj => obj.path === this.$route.path)].title;
-      // },
-      // frameColor() {
-      //   return this.projectList[this.projectList.findIndex(obj => obj.path === this.$route.path)].frameColor;
-      // },
-      // darkTheme() {
-      //   return this.projectList[this.projectList.findIndex(obj => obj.path === this.$route.path)].darkTheme;
-      // },
-      // description() {
-      //   return this.projectList[this.projectList.findIndex(obj => obj.path === this.$route.path)].description;
-      // }
     },
     components: {
       PageHeader,
@@ -167,7 +163,7 @@
       font-family: $titleFont
       font-weight: 300
     .ease-enter-active, .ease-leave-active
-      transition opacity 5s
+      transition opacity 3s
     .ease-enter, .ease-leave-to
       opacity 0
       margin-top -20px

@@ -3,9 +3,6 @@
 </template>
 
 <script>
-  import {
-    ArcCurve
-  } from 'three';
   export default {
     data() {
       return {

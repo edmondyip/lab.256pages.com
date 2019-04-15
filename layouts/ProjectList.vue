@@ -10,7 +10,6 @@
 </template>
 
 <script>
-// import {mapState} from 'vuex';
 import Left from 'left-pad';
 
 export default {
@@ -18,11 +17,8 @@ export default {
     'projectList'
   ],
   computed: {
-    // ...mapState({
-    //   projectList: state => state.projectList
-    // }),
     homelessList() {
-      let array = (this.projectList.slice(1)).reverse();
+      let array = this.projectList.reverse();
       array.sort((a, b) => {
         let objectA = a.id;
         let objectB = b.id;
@@ -49,11 +45,13 @@ export default {
     padding 30px
     position relative
     margin 0 auto 50px
+    pointer-events none
     section
       position relative
       width auto
       margin 50px 30px
       > a
+        pointer-events auto
         width auto
         display inline-block
         text-decoration none

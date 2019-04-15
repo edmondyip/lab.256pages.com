@@ -23,7 +23,6 @@ export default {
     position relative
     background rgba(0,0,0,0.5)
     padding 10px
-    
     #copy
       position absolute
       right 10px
@@ -38,4 +37,8 @@ export default {
     footer
       // height calc(var(--frameWidth) / 2)
       width 100%
+      #copy
+        padding 30px 0 10px
+        position relative
+        text-align center
 </style>

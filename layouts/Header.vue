@@ -2,7 +2,7 @@
   header
     transition(name="ease" mode="in-out" tag="div")
       h1(:class="{dark: theme}") // {{projectTitle}}
-    Close(v-show="$route.name !== 'index'" :class="{dark: theme}")
+    Close(v-show="$route.path !== '/'" :class="{dark: theme}")
 </template>
 
 <script>

@@ -2,11 +2,15 @@
   nav
     ul
       li
-        a(href="https://256pages.com") / Home
+        NuxtLink(to="/") /Home
       li
-        a(href="https://blog.256pages.com") / Blog
+        NuxtLink(to="/about") / About
       li
-        a(href="https://github.com/edmondyip") / Github
+        a(href="https://256pages.com") / 256pages
+      li
+        a(href="https://blog.256pages.com" target="_blank") / Blog
+      li
+        a(href="https://github.com/edmondyip" target="_blank") / Github
 </template>
 
 <style lang="stylus" scoped>
@@ -24,4 +28,7 @@
           text-decoration none
           &:hover
             text-decoration underline
+      @media screen and (max-width $maxWidth)
+        display flex
+        justify-content space-between
 </style>
