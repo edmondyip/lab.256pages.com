@@ -48,8 +48,8 @@
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
-        // this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
-        this.camera = new this.$THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.scene.fog = new this.$THREE.Fog(this.scene.background, 800, 2000);
+        this.camera = new this.$THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1800);
         // this.camera.position.set(150, 150, 150);
         this.camera.position.z = 500;
 
@@ -91,26 +91,46 @@
         const effectPass = new this.$postprocessing.EffectPass(this.camera, dotScreen, glitch);
         effectPass.renderToScreen = true;
         this.composer.addPass(effectPass);
-        },
+      },
       createBox() {
         const video = document.getElementById('video');
-        const videoTexture = new this.$THREE.VideoTexture(video);
+        video.play();
 
-        const cubeGeometry = new this.$THREE.BoxBufferGeometry(200, 120, 2);
-        const cubeMaterial = new this.$THREE.MeshStandardMaterial({
-          map: videoTexture,
-        });
-        this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
-        this.box.position.set(30, 0, -30);
-        this.box.castShadow = true;
-        this.box.receiveShadow = true;
-        this.scene.add(this.box);
+        const displayX = 40;
+        const displayY = 40;
+
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 3; j++) {
+
+            const videoTexture = new this.$THREE.VideoTexture(video);
+
+            videoTexture.repeat.x = 100 / 640;
+            videoTexture.offset.x = (i * 2 * displayX / 100) * videoTexture.repeat.x;
+            videoTexture.repeat.y = 100 / 360;
+            videoTexture.offset.y = (j * 2 * displayY / 100) * videoTexture.repeat.y;
+
+            const cubeGeometry = new this.$THREE.BoxBufferGeometry(displayX, displayY, 2);
+            const cubeMaterial = new this.$THREE.MeshStandardMaterial({
+              map: videoTexture,
+            });
+            this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
+            this.box.position.x = i * (displayX + 4) - 60;
+            this.box.position.y = j * (displayY + 4) - 40;
+
+            this.box.castShadow = true;
+            this.box.receiveShadow = true;
+            this.scene.add(this.box);
+          };
+        };
+
+
+
       },
       onMouseMove(event) {
-          const windowHalfX = window.innerWidth / 2;
-          const windowHalfY = window.innerHeight / 2;
-          this.mouseX = (event.clientX - windowHalfX);
-          this.mouseY = (event.clientY - windowHalfY);
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+        this.mouseX = (event.clientX - windowHalfX);
+        this.mouseY = (event.clientY - windowHalfY);
       },
       windowResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -120,17 +140,11 @@
       renderScene() {
         this.stats.update();
         requestAnimationFrame(this.renderScene);
-        // this.box.rotation.y += 0.006;
-        // this.box.rotation.x += 0.003;
         this.camera.position.x += (this.mouseX - this.camera.position.x) * 0.5;
         this.camera.position.y += (this.mouseY - this.camera.position.y) * 0.5;
         this.camera.lookAt(this.scene.position);
 
-        console.log('position:' + this.camera.position.x, this.camera.position.y)
-        console.log('mouse:' + this.mouseX, this.mouseY)
-
         this.composer.render();
-        // this.renderer.render(this.scene, this.camera);
       },
     },
     beforeDestroy() {
@@ -146,10 +160,5 @@
 
 <style lang="stylus" scoped>
   #video
-    display block
-    height 1px
-    // width 1px
-    position fixed
-    bottom 0
-    left 0
+    display none
 </style>
