@@ -143,11 +143,11 @@
         this.camera.position.x += (this.mouseX - this.camera.position.x) * 0.5;
         this.camera.position.y += (this.mouseY - this.camera.position.y) * 0.5;
         this.camera.lookAt(this.scene.position);
-
+        
         for (let i = 0, il = this.boxes.length; i < il; i++) {
           const box = this.boxes[i];
-          box.rotation.x += Math.random(i)/100;
-          box.rotation.y += Math.random(i)/100;
+          box.rotation.x += Math.random(i)/50;
+          box.rotation.y += Math.random(i)/50;
         }
 
         this.composer.render();

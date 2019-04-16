@@ -104,6 +104,8 @@
         this.composer.setSize(window.innerWidth, window.innerHeight);
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
         const bloom = new this.$postprocessing.BloomEffect();
+        bloom.kernelSize = 3;
+        bloom.setResolutionScale = 1;
         const effectPass = new this.$postprocessing.EffectPass(this.camera, bloom);
         effectPass.renderToScreen = true;
         this.composer.addPass(effectPass);
@@ -116,11 +118,11 @@
       renderScene() {
         this.stats.update();
         requestAnimationFrame(this.renderScene);
-        const timer = Date.now() * 0.00025;
+        const timer = Date.now() * 0.00006;
         this.particleLight.position.x = Math.sin(timer * 7) * 60;
         this.particleLight.position.z = Math.cos(timer * 3) * 60;
         // this.renderer.render(this.scene, this.camera);
-        this.composer.render(60);
+        this.composer.render();
 
       },
     },

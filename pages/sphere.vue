@@ -28,7 +28,7 @@
         this.createObject();
 
         this.controls = new this.$controls(this.camera);
-        // this.controls.enabled = false;
+        this.controls.enabled = false;
         this.controls.enableZoom = false;
         this.controls.minPolarAngle = Math.PI/4;
         this.controls.maxPolarAngle = Math.PI/4;
@@ -43,9 +43,9 @@
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
-        this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 400);
-        this.camera = new this.$THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(40, 150, -150);
+        // this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 400);
+        this.camera = new this.$THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 1, 500);
+        this.camera.position.set(0, 150, -100);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
@@ -64,9 +64,9 @@
         this.scene.add(Light);
 
         this.pointLight = new this.$THREE.PointLight(0xffffff, 1, 600);
-        this.pointLight.position.set(0, 200, 0);
+        this.pointLight.position.set(0, 100, 0);
         this.pointLight.castShadow = true;
-        this.pointLight.shadow.radius = 20;
+        this.pointLight.shadow.radius = 10;
         this.scene.add(this.pointLight);
       },
       createObject() {
@@ -78,7 +78,7 @@
           require('~/assets/img/sphere/pz.jpg'),
           require('~/assets/img/sphere/nz.jpg')];
         const backgroundTexture = new this.$THREE.CubeTextureLoader().load(backgroundImage);
-        const cubeGeometry = new this.$THREE.SphereBufferGeometry(10, 30, 30);
+        const cubeGeometry = new this.$THREE.SphereBufferGeometry(5, 20, 20);
         const cubeMaterial = new this.$THREE.MeshStandardMaterial({
           color: 0xffffff,
           metalness: 0.8,
@@ -88,7 +88,7 @@
         this.sphere = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
         this.sphere.castShadow = true;
         this.sphere.receiveShadow = true;
-        this.sphere.position.y = 10;
+        this.sphere.position.y = 8;
         this.scene.add(this.sphere);
 
         const planeTexture = new this.$THREE.TextureLoader().load(require('~/assets/img/brick.jpg'));
@@ -97,11 +97,12 @@
         planeTexture.repeat.x = 6;
         planeTexture.repeat.y = 6;
 
-        const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(700, 700);
+        const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(280, 280);
         const PlaneMaterial = new this.$THREE.MeshStandardMaterial({
           color: 0xffeeee,
           map: planeTexture,
-          bumpMap: planeTexture
+          bumpMap: planeTexture,
+          metalness: 0.1,
         });
         this.floor = new this.$THREE.Mesh(PlaneGeometry, PlaneMaterial);
         this.floor.rotation.x = -Math.PI / 2;
@@ -119,12 +120,12 @@
         this.controls.update();
         requestAnimationFrame(this.renderScene);
 
-        const timer = Date.now() * 0.00025;
-        this.pointLight.position.x = Math.sin( timer * 3 ) * 20;
-        this.pointLight.position.z = Math.cos( timer * 1 ) * 30;
-        this.sphere.position.x = Math.sin( timer * 5 ) * 20;
+        const timer = Date.now() * 0.00020;
+        // this.pointLight.position.x = Math.sin( timer * 3 ) * 10;
+        // this.pointLight.position.z = Math.cos( timer * 1 ) * 10;
+        this.sphere.position.x = Math.sin( timer * 5 ) * 10;
 				this.sphere.position.y = Math.cos( timer * 3 ) * 10 + 20;
-        this.sphere.position.z = Math.cos( timer * 2 ) * 30;
+        this.sphere.position.z = Math.cos( timer * 2 ) * 10;
 
         this.renderer.render(this.scene, this.camera);
       },
