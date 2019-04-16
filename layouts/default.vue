@@ -17,16 +17,16 @@
   // import ViewSource from '~/components/ViewSource.vue';
 
   export default {
-    // head() {
-    //   return {
-    //     title: this.projectID().title,
-    //     meta: [{
-    //       hid: 'description',
-    //       name: 'description',
-    //       content: this.projectID().description,
-    //     }]
-    //   }
-    // },
+    head() {
+      return {
+        title: this.projectID().title,
+        meta: [{
+          hid: 'description',
+          name: 'description',
+          content: this.projectID().description,
+        }]
+      }
+    },
     data() {
       return {
         projectList: [
