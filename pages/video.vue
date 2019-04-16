@@ -20,10 +20,11 @@
           camera,
           pointLight,
           controls,
-          box,
+          boxes,
           stats,
           mouseX,
-          mouseY
+          mouseY,
+          videogroup
         } = this;
         runTime();
       },
@@ -96,31 +97,33 @@
         const video = document.getElementById('video');
         video.play();
 
-        const displayX = 40;
-        const displayY = 40;
+        const displayX = 30;
+        const displayY = 30;
+        this.boxes = [];
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 3; i++) {
           for (let j = 0; j < 3; j++) {
 
             const videoTexture = new this.$THREE.VideoTexture(video);
             videoTexture.minFilter = videoTexture.magFilter = this.$THREE.LinearFilter;
 
             videoTexture.repeat.x = 100 / 640;
-            videoTexture.offset.x = (i * 2 * displayX / 100) * videoTexture.repeat.x;
+            videoTexture.offset.x = displayX / 100 * i;
             videoTexture.repeat.y = 100 / 360;
-            videoTexture.offset.y = (j * 2 * displayY / 100) * videoTexture.repeat.y;
+            videoTexture.offset.y = displayY / 100 * j;
 
-            const cubeGeometry = new this.$THREE.BoxBufferGeometry(displayX, displayY, 2);
+            const cubeGeometry = new this.$THREE.BoxBufferGeometry(displayX, displayY, 1);
             const cubeMaterial = new this.$THREE.MeshStandardMaterial({
               map: videoTexture,
             });
-            this.box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
-            this.box.position.x = i * (displayX + 4) - 60;
-            this.box.position.y = j * (displayY + 4) - 40;
+            const box = new this.$THREE.Mesh(cubeGeometry, cubeMaterial);
+            box.position.x = i * (displayX + 4) - 30;
+            box.position.y = j * (displayY + 4) - 30;
 
-            this.scene.add(this.box);
+            this.scene.add(box);
+            this.boxes.push(box);
           };
-        };
+        };         
       },
       onMouseMove(event) {
         const windowHalfX = window.innerWidth / 2;
@@ -135,11 +138,18 @@
       },
       renderScene() {
         this.stats.update();
+        const timer = 0.0001 * Date.now();
         requestAnimationFrame(this.renderScene);
         this.camera.position.x += (this.mouseX - this.camera.position.x) * 0.5;
         this.camera.position.y += (this.mouseY - this.camera.position.y) * 0.5;
         this.camera.lookAt(this.scene.position);
-        // this.renderer.render(this.scene, this.camera);
+
+        for (let i = 0, il = this.boxes.length; i < il; i++) {
+          const box = this.boxes[i];
+          box.rotation.x += Math.random(i)/100;
+          box.rotation.y += Math.random(i)/100;
+        }
+
         this.composer.render();
       },
     },
