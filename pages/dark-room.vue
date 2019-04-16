@@ -66,6 +66,8 @@
 
         const pointLight = new this.$THREE.PointLight(0xffeeee, 1, 800);
         pointLight.castShadow = true;
+        pointLight.shadow.radius = 5;
+
         this.particleLight.add(pointLight);
       },
       createObject() {

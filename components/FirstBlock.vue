@@ -4,7 +4,7 @@
       h1 Real time 3D Web Experiment
       p By Edmond Yip
       span Designer & Developer from Hong Kong
-      span Use Computer with over 1080P resolution for better experience
+      span Use Computer for better experience
 </template>
 
 <style lang="stylus" scoped>

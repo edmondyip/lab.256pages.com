@@ -164,6 +164,7 @@
       font-weight: 300
     .ease-enter-active, .ease-leave-active
       transition opacity 3s
+      opacity 1
     .ease-enter, .ease-leave-to
       opacity 0
       margin-top -20px
