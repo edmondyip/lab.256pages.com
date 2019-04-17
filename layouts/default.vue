@@ -114,6 +114,18 @@
             frameColor: 'rgba(125,206,160,0.9)',
             darkTheme: true,
           },
+          {
+            id: 8,
+            path: '/island',
+            title: 'Island',
+            description: 'Low poly island',
+            tags: [
+              'threejs', 'webGL', 'Mar2019'
+            ],
+            source: 'https://github.com/',
+            frameColor: 'rgba(125,206,160,0.9)',
+            darkTheme: true,
+          },
         ],
       }
     },
