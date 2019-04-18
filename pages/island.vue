@@ -25,12 +25,13 @@
         this.createLights();
         this.createObject();
 
-        // this.controls = new this.$controls(this.camera);
+        this.controls = new this.$controls(this.camera, this.renderer.domElement);
+        this.controls.target.set(0,1,0);
         // this.controls.enableZoom = false;
         // this.controls.autoRotate = true;
         // this.controls.enabled = false;
 
-        this.stats = new this.$stats();
+        // this.stats = new this.$stats();
         // document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
@@ -39,9 +40,9 @@
       createScene() {
         this.scene = new this.$THREE.Scene();
         // this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 500);
-        // this.camera = new this.$THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 1, 2000);
-        // this.camera.position.set(0, 40, 40);
-        // this.scene.add(this.camera);
+        this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 3000);
+        this.camera.position.set(5, 5, 5);
+        this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
           alpha: true,
@@ -61,12 +62,15 @@
       createObject() {
         const loader = new this.$gltfloader();
         loader.load (
-          './island/island.gltf', (gltf) => {
+          './model/island.glb', (gltf) => {
+            this.model = gltf.scene;
+            this.model.position.set(1,1,1);
+            this.model.scale.set(0.1,0.1,0.1);
+            this.scene.add((this.model));
 
-
-            this.scene.add((gltf.scene));
-            this.camera = gltf.cameras[0];
-            console.log(this.camera);
+            // this.camera = gltf.cameras[0];
+            // this.camera.aspect = window.innerWidth / window.innerHeight;
+            // this.camera.updateProjectionMatrix();
             this.scene.add(this.camera);
           }
         );
@@ -77,9 +81,10 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
-        this.stats.update();
+        // this.stats.update();
         requestAnimationFrame(this.renderScene);
         // this.controls.update();
+        // this.model.rotation.x += 0.005;
         this.renderer.render(this.scene, this.camera);
       },
     },
