@@ -64,8 +64,8 @@
         loader.load (
           './model/island3.gltf', (gltf) => {
             this.model = gltf.scene;
-            this.model.position.set(1,1,1);
-            this.model.scale.set(0.2,0.2,0.2);
+            this.model.position.set(0,0,0);
+            this.model.scale.set(0.25,0.25,0.25);
             this.scene.add((this.model));
 
             // this.camera = gltf.cameras[0];

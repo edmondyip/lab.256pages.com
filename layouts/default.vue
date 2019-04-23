@@ -10,11 +10,11 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex';
   import PageHeader from '~/layouts/Header.vue';
   import PageFooter from '~/layouts/Footer.vue';
   import First from '~/components/FirstBlock.vue';
   import Projects from '~/layouts/ProjectList.vue';
+  import {mapState} from 'vuex';
   // import ViewSource from '~/components/ViewSource.vue';
 
   export default {
@@ -31,7 +31,7 @@
     computed: {
       ...mapState (
         {
-          projectList: state.projectList
+          projectList: state => state.projectList
         }
       )
     },

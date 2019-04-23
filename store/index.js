@@ -1,3 +1,4 @@
+export const strict = false;
 export const state = () => ({
   projectList: [{
       id: 1,
