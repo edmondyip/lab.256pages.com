@@ -26,9 +26,9 @@
         this.createObject();
 
         this.controls = new this.$controls(this.camera, this.renderer.domElement);
-        this.controls.target.set(0,1,0);
-        // this.controls.enableZoom = false;
-        // this.controls.autoRotate = true;
+        // this.controls.target.set(0,1,0);
+        this.controls.enableZoom = false;
+        this.controls.autoRotate = true;
         // this.controls.enabled = false;
 
         // this.stats = new this.$stats();
@@ -62,10 +62,10 @@
       createObject() {
         const loader = new this.$gltfloader();
         loader.load (
-          './model/island.glb', (gltf) => {
+          './model/island3.gltf', (gltf) => {
             this.model = gltf.scene;
             this.model.position.set(1,1,1);
-            this.model.scale.set(0.1,0.1,0.1);
+            this.model.scale.set(0.2,0.2,0.2);
             this.scene.add((this.model));
 
             // this.camera = gltf.cameras[0];
@@ -83,7 +83,7 @@
       renderScene() {
         // this.stats.update();
         requestAnimationFrame(this.renderScene);
-        // this.controls.update();
+        this.controls.update();
         // this.model.rotation.x += 0.005;
         this.renderer.render(this.scene, this.camera);
       },
