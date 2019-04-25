@@ -37,7 +37,7 @@
       createScene() {
         this.scene = new this.$THREE.Scene();
         // this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 500);
-        this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+        this.camera = new this.$THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 500);
         this.camera.position.set(5, 5, 5);
         this.scene.add(this.camera);
 
@@ -56,28 +56,31 @@
         const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 1);
         this.scene.add(Light);
 
-        const pointLight = new this.$THREE.PointLight(0xffeeee, 1, 100);
-        pointLight.position.set(-8, 5, 5);
-        pointLight.castShadow = true;
-        this.scene.add(pointLight);
+        const spotLight = new this.$THREE.SpotLight(0xffeeee, 1, 0, 0.5, 1);
+        spotLight.position.set(25, 25, 10);
+        spotLight.castShadow = true;
+        this.scene.add(spotLight);
 
-        const pointLight2 = new this.$THREE.PointLight(0xffeeee, 1, 100);
-        pointLight2.position.set(-8, -8, 5);
-        pointLight2.castShadow = true;
-        this.scene.add(pointLight2);
+        // const pointLight2 = new this.$THREE.PointLight(0xffeeee, 1, 100);
+        // pointLight2.position.set(0, -8, 15);
+        // pointLight2.castShadow = true;
+        // this.scene.add(pointLight2);
+
+        // const pointLighthelper1 = new this.$THREE.SpotLightHelper(spotLight, 0x000000);
+        // this.scene.add(pointLighthelper1);
       },
       createObject() {
-        const loader = new this.$gltfloader();
-        // this.$dracoloader.setDecoderPath('./draco/');
-        // loader.setDRACOLoader(new this.$dracoloader());
-        loader.load (
-          './model/tree.gltf', (gltf) => {
-            this.model = gltf.scene;
-            this.model.position.set(0,-1.2,0);
-            this.model.scale.set(1.2,1.2,1.2);
-            this.scene.add((this.model));
-          }
-        );
+        const boxGeometry = new this.$THREE.BoxBufferGeometry(10,5,0.2);
+        const boxMaterial = new this.$THREE.MeshStandardMaterial({
+          color: 0xffffff,
+        });
+        const leftWall = new this.$THREE.Mesh(boxGeometry, boxMaterial);
+        leftWall.position.set(5,0,0);
+        this.scene.add(leftWall);
+        const rightWall = new this.$THREE.Mesh(boxGeometry, boxMaterial);
+        rightWall.rotation.y = Math.PI/2;
+        rightWall.position.set(5,0,0);
+        this.scene.add(rightWall);
       },
       windowResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);

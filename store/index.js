@@ -27,7 +27,7 @@ export const state = () => ({
     {
       id: 3,
       path: '/garden',
-      title: 'Gardan',
+      title: 'Garden',
       description: 'Environment Reflection',
       tags: [
         'threejs', 'webGL', 'Mar2019'
@@ -87,13 +87,25 @@ export const state = () => ({
     {
       id: 8,
       path: '/tree',
-      title: 'Tree',
-      description: 'A low poly tree',
+      title: 'Low-poly Tree',
+      description: 'Use GLTF model as object',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
-      frameColor: 'rgba(125,206,160,0.9)',
+      frameColor: 'rgba(39,174,96,0.9)',
+      darkTheme: true,
+    },
+    {
+      id: 9,
+      path: '/256pages',
+      title: '256pages',
+      description: '256pages in 3D',
+      tags: [
+        'threejs', 'webGL', 'Mar2019'
+      ],
+      source: 'https://github.com/',
+      frameColor: 'rgba(39,174,96,0.9)',
       darkTheme: true,
     },
   ],
