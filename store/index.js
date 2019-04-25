@@ -86,9 +86,9 @@ export const state = () => ({
     },
     {
       id: 8,
-      path: '/island',
-      title: 'Island',
-      description: 'Low poly island',
+      path: '/tree',
+      title: 'Tree',
+      description: 'A low poly tree',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],

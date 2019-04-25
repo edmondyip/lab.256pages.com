@@ -7,7 +7,6 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
     titleTemplate: '%s - WebGL Lab',
     meta: [{
         charset: 'utf-8'
@@ -15,11 +14,6 @@ module.exports = {
       {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimum-scale=1.0',
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: pkg.description
       },
       {
         name: 'msapplication-TileColor',
@@ -84,7 +78,8 @@ module.exports = {
    */
   loading: {
     color: '#F3D03F',
-    height: "100px"
+    throttle: '1000',
+    continuous: true,
   },
 
   /*

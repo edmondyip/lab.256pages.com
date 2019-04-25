@@ -77,6 +77,7 @@
     text-rendering optimizeLegibility
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
+    // background #000
     h1, h2
       font-family: $titleFont
       font-weight: 300

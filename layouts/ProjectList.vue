@@ -63,22 +63,25 @@ export default {
             color rgba(200,200,200,.5)
           p
             color rgba(200,200,200,.5)
+          ul
+            li
+              color rbga(200,200,200,.5)
         span
           position absolute
           top 0px
           left -45px
           font-family $titleFont
           font-size 4rem
-          color rgba(20,20,20,.2)
+          color rgba(200,200,200,.2)
           transition 1s ease
         h2
           font-size: 2.5rem
-          color #111
+          color $titleColor
           transition 2s
           margin 0 20px
           white-space nowrap
         p
-          color #333
+          color $contentColor
           line-height 12px
           margin 0 20px
           transition 2s ease
@@ -92,16 +95,17 @@ export default {
             padding 2px 5px
             border 1px solid #666
             margin 5px
-            color #333333
+            color $contentColor
         &:hover
           h2
-            color #eee
+            color $hoverColor
+            background rgba(255,255,255,.5)
           span
-            color #eee
+            color $hoverColor
             top -20px
             font-size 5rem
           p
-            color #eee
+            color $hoverColor
 
   @media screen and (max-width $maxWidth)
     div#project-list

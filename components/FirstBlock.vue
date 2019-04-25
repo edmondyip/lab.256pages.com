@@ -13,7 +13,7 @@
     height 100vh
     display flex
     align-items center
-    color #111
+    color $titleColor
     section
       padding 0 20px
       h1
@@ -22,7 +22,7 @@
         margin 10px 0
       span
         font-size .8rem
-        color #666
+        color $contentColor
         display block
       p
         font-size 1rem
