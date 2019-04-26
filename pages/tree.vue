@@ -53,16 +53,16 @@
         document.getElementById("three").appendChild(this.renderer.domElement);
       },
       createLights() {
-        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 1);
+        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.4);
         this.scene.add(Light);
 
-        const pointLight = new this.$THREE.PointLight(0xffeeee, 1, 100);
-        pointLight.position.set(-8, 5, 5);
+        const pointLight = new this.$THREE.PointLight(0xE9F7EF, 1.5, 50);
+        pointLight.position.set(-3, 3, -3);
         pointLight.castShadow = true;
         this.scene.add(pointLight);
 
-        const pointLight2 = new this.$THREE.PointLight(0xffeeee, 1, 100);
-        pointLight2.position.set(-8, -8, 5);
+        const pointLight2 = new this.$THREE.PointLight(0xFEF9E7, 1.5, 50);
+        pointLight2.position.set(5, 5, 5);
         pointLight2.castShadow = true;
         this.scene.add(pointLight2);
       },

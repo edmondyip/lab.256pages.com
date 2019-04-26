@@ -66,7 +66,7 @@
 
         const pointLight = new this.$THREE.PointLight(0xffeeee, 1, 800);
         pointLight.castShadow = true;
-        pointLight.shadow.radius = 5;
+        pointLight.shadow.radius = 10;
 
         this.particleLight.add(pointLight);
       },
@@ -89,7 +89,7 @@
         planeTexture.repeat.x = 6;
         planeTexture.repeat.y = 6;
 
-        const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(600, 600);
+        const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(600, 600, 600, 600);
         const PlaneMaterial = new this.$THREE.MeshStandardMaterial({
           map: planeTexture,
           bumpMap: planeTexture,
