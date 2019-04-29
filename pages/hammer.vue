@@ -17,6 +17,7 @@
           controls,
           model,
           stats,
+          floor,
         } = this;
         runTime();
       },
@@ -28,7 +29,7 @@
         this.controls = new this.$controls(this.camera, this.renderer.domElement);
         // this.controls.target.set(0,1,0);
         this.controls.enableZoom = false;
-        this.controls.autoRotate = true;
+        // this.controls.autoRotate = true;
         // this.controls.enabled = false;
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
@@ -45,6 +46,7 @@
           alpha: true,
           antialias: true,
         });
+        this.renderer.setClearColor(0x000000, 1);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.shadowMap.enabled = true;
@@ -53,15 +55,15 @@
         document.getElementById("three").appendChild(this.renderer.domElement);
       },
       createLights() {
-        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.4);
+        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 1);
         this.scene.add(Light);
 
-        const pointLight = new this.$THREE.PointLight(0xE9F7EF, 1.5, 50);
+        const pointLight = new this.$THREE.PointLight(0xE9F7EF, 1, 50);
         pointLight.position.set(-3, 3, -3);
         pointLight.castShadow = true;
         this.scene.add(pointLight);
 
-        const pointLight2 = new this.$THREE.PointLight(0xFEF9E7, 1.5, 50);
+        const pointLight2 = new this.$THREE.PointLight(0xFEF9E7, 1, 50);
         pointLight2.position.set(5, 5, 5);
         pointLight2.castShadow = true;
         this.scene.add(pointLight2);
@@ -75,9 +77,21 @@
             this.model = gltf.scene;
             this.model.position.set(0,-1.2,0);
             this.model.scale.set(0.5,0.5,0.5);
+            this.model.castShadow = true;
+            this.model.receiveShadow = true;
             this.scene.add((this.model));
           }
         );
+
+        // const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(100, 100, 100, 100);
+        // const PlaneMaterial = new this.$THREE.MeshStandardMaterial({
+        //   color: 0xffffff,
+        // });
+        // this.floor = new this.$THREE.Mesh(PlaneGeometry, PlaneMaterial);
+        // this.floor.rotation.x = -Math.PI / 2;
+        // this.floor.position.y = -1;
+        // this.floor.receiveShadow = true;
+        // this.scene.add(this.floor);
       },
       windowResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
