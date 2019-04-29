@@ -98,14 +98,14 @@ export const state = () => ({
     },
     {
       id: 9,
-      path: '/256pages',
-      title: '256pages',
-      description: '256pages in 3D',
+      path: '/hammer',
+      title: 'Thor Hammer',
+      description: 'Low poly hammer',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],
       source: 'https://github.com/',
-      frameColor: 'rgba(39,174,96,0.9)',
+      frameColor: 'rgba(133,146,158,0.9)',
       darkTheme: true,
     },
   ],
