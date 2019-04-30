@@ -99,7 +99,7 @@ export const state = () => ({
     {
       id: 9,
       path: '/hammer',
-      title: 'Thor Hammer',
+      title: 'Hammer',
       description: 'Low poly hammer',
       tags: [
         'threejs', 'webGL', 'Mar2019'

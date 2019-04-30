@@ -25,7 +25,7 @@
     "stats-js": "^1.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "three": "^0.103.0",
+    "three": "0.104.0",
     "three-dlc": "^0.100.0-alpha-3"
   },
   "devDependencies": {
