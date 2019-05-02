@@ -16,22 +16,20 @@
           camera,
           controls,
           model,
-          stats,
           floor,
-          lightningStrike
         } = this;
         runTime();
       },
       runTime() {
         this.createScene();
         this.createLights();
-        // this.createEffect();
+        this.createEffect();
         this.createObject();
 
         this.controls = new this.$controls(this.camera, this.renderer.domElement);
         // this.controls.target.set(0,1,0);
         this.controls.enableZoom = false;
-        // this.controls.autoRotate = true;
+        this.controls.autoRotate = true;
         // this.controls.enabled = false;
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
@@ -53,6 +51,9 @@
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap;
+        this.renderer.gammaFactor = 1.2;
+        this.renderer.gammaOutput = true;
+        this.renderer.outputEncoding = this.$THREE.sRGBEncoding;
 
         document.getElementById("three").appendChild(this.renderer.domElement);
       },
@@ -60,59 +61,46 @@
         const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 1);
         this.scene.add(Light);
 
-        const pointLight = new this.$THREE.PointLight(0xE9F7EF, 2, 50);
-        pointLight.position.set(-3, 3, -3);
+        const pointLight = new this.$THREE.PointLight(0xE9F7EF, 1.9, 50);
+        pointLight.position.set(-2, 3, -2);
         pointLight.castShadow = true;
         this.scene.add(pointLight);
 
-        const pointLight2 = new this.$THREE.PointLight(0xFEF9E7, 2, 50);
-        pointLight2.position.set(5, 5, 5);
-        pointLight2.castShadow = true;
-        this.scene.add(pointLight2);
+        // const pointLight2 = new this.$THREE.PointLight(0xFEF9E7, 1.5, 50);
+        // pointLight2.position.set(2, 5, 5);
+        // pointLight2.castShadow = true;
+        // this.scene.add(pointLight2);
       },
       createObject() {
         const loader = new this.$gltfloader();
+        this.$dracoloader.setDecoderPath('./draco/');
+        loader.setDRACOLoader(new this.$dracoloader());
+
         loader.load (
           './model/hammer.gltf', (gltf) => {
             this.model = gltf.scene;
+            gltf.scene.traverse((node)=> {
+              if ( node.isMesh || node.isLight ) node.castShadow = true;
+              if ( node.isMesh || node.isLight ) node.receiveShadow = true;
+            });
             this.model.position.set(0,-1.2,0);
             this.model.scale.set(0.5,0.5,0.5);
-            this.model.rotation.y = 3.8;
-            this.model.castShadow = true;
-            this.model.receiveShadow = true;
             this.scene.add((this.model));
+          },
+          (error) => {
+            console.error(error);
           }
         );
-
-        // const lightningShape = new this.$THREE.Shape();
-        // lightningShape.moveTo(1, 0);
-        // lightningShape.lineTo(3, -0);
-        // lightningShape.lineTo(2, -2);
-        // lightningShape.lineTo(3, -2);
-        // lightningShape.lineTo(0, -5);
-        // lightningShape.lineTo(1, -3);
-        // lightningShape.lineTo(0, -3);
-        // lightningShape.lineTo(1, 0);
-
-        // const extrubeSetting = {
-        //   amount: 1,
-        //   bevelEnabled: false,
-        //   bevelSegments: 1,
-        //   steps: 1,
-        // };
-
-        // const lightningGeometry = new this.$THREE.ExtrudeGeometry(lightningShape, extrubeSetting);
-        // const lightning = new this.$THREE.Mesh(lightningGeometry, new this.$THREE.MeshBasicMaterial({color: 0xffee00}));
-        // lightning.scale.set(0.5, 0.5, 0.5)
-        // this.scene.add(lightning);
       },
       createEffect() {
         this.composer = new this.$postprocessing.EffectComposer(this.renderer);
         this.composer.setSize(window.innerWidth, window.innerHeight);
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
-        const bloom = new this.$postprocessing.BloomEffect();
-        bloom.kernelSize = 4;
-        bloom.setResolutionScale = 1;
+        const bloom = new this.$postprocessing.BokehEffect({
+          focus: 0.5
+        });
+        // bloom.kernelSize = 1;
+        // bloom.setResolutionScale = 1;
         const effectPass = new this.$postprocessing.EffectPass(this.camera, bloom);
         effectPass.renderToScreen = true;
         this.composer.addPass(effectPass);

@@ -88,7 +88,7 @@ export const state = () => ({
       id: 8,
       path: '/tree',
       title: 'Tree',
-      description: 'Use GLTF model as object',
+      description: 'GLTF2 model',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],
@@ -100,7 +100,7 @@ export const state = () => ({
       id: 9,
       path: '/hammer',
       title: 'Hammer',
-      description: 'Low poly hammer',
+      description: 'GLTF2 model with Draco',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],

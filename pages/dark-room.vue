@@ -18,7 +18,7 @@
           controls,
           sphere,
           particleLight,
-          stats,
+          // stats,
         } = this;
         runTime();
       },
@@ -31,7 +31,7 @@
         this.controls = new this.$controls(this.camera);
         this.controls.enabled = false;
 
-        this.stats = new this.$stats();
+        // this.stats = new this.$stats();
         // document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
@@ -118,7 +118,7 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
-        this.stats.update();
+        // this.stats.update();
         requestAnimationFrame(this.renderScene);
         const timer = Date.now() * 0.00006;
         this.particleLight.position.x = Math.sin(timer * 7) * 60;

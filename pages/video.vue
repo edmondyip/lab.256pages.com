@@ -21,7 +21,7 @@
           pointLight,
           controls,
           boxes,
-          stats,
+          // stats,
           mouseX,
           mouseY,
           videogroup
@@ -38,7 +38,7 @@
         this.controls = new this.$controls(this.camera);
         this.controls.enabled = false;
 
-        this.stats = new this.$stats();
+        // this.stats = new this.$stats();
         // document.getElementById("three").appendChild(this.stats.dom);
         this.mouseX = 0;
         this.mouseY = 0;
@@ -137,7 +137,7 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
-        this.stats.update();
+        // this.stats.update();
         const timer = 0.0001 * Date.now();
         requestAnimationFrame(this.renderScene);
         this.camera.position.x += (this.mouseX - this.camera.position.x) * 0.5;

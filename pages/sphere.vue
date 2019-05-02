@@ -18,7 +18,7 @@
           sphere,
           pointLight,
           pointLight2,
-          stats,
+          // stats,
         } = this;
         runTime();
       },
@@ -35,7 +35,7 @@
         this.controls.autoRotate = true;
         this.controls.autoRotateSpeed = 1;
 
-        this.stats = new this.$stats();
+        // this.stats = new this.$stats();
         // document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
@@ -116,7 +116,7 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
-        this.stats.update();
+        // this.stats.update();
         this.controls.update();
         requestAnimationFrame(this.renderScene);
 
