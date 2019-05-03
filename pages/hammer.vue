@@ -38,8 +38,8 @@
       createScene() {
         this.scene = new this.$THREE.Scene();
         // this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 500);
-        this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
-        this.camera.position.set(5, 2, 5);
+        this.camera = new this.$THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 500);
+        this.camera.position.set(5, 3, 5);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
@@ -61,13 +61,13 @@
         const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 1);
         this.scene.add(Light);
 
-        const pointLight = new this.$THREE.PointLight(0xE9F7EF, 1.9, 50);
-        pointLight.position.set(-2, 3, -2);
+        const pointLight = new this.$THREE.PointLight(0xE9F7EF, 2, 50);
+        pointLight.position.set(0.5, 5, 0.5);
         pointLight.castShadow = true;
         this.scene.add(pointLight);
 
-        // const pointLight2 = new this.$THREE.PointLight(0xFEF9E7, 1.5, 50);
-        // pointLight2.position.set(2, 5, 5);
+        // const pointLight2 = new this.$THREE.PointLight(0xFEF9E7, 1, 50);
+        // pointLight2.position.set(2, 3, 2);
         // pointLight2.castShadow = true;
         // this.scene.add(pointLight2);
       },
@@ -87,9 +87,9 @@
             this.model.scale.set(0.5,0.5,0.5);
             this.scene.add((this.model));
           },
-          (error) => {
-            console.error(error);
-          }
+          // (error) => {
+          //   console.error(error);
+          // }
         );
       },
       createEffect() {
