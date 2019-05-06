@@ -30,7 +30,7 @@
         // this.controls.target.set(0,1,0);
         this.controls.enableZoom = false;
         this.controls.autoRotate = true;
-        // this.controls.enabled = false;
+        this.controls.enabled = false;
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         this.renderScene();
@@ -39,7 +39,7 @@
         this.scene = new this.$THREE.Scene();
         // this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 500);
         this.camera = new this.$THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 500);
-        this.camera.position.set(5, 3, 5);
+        this.camera.position.set(5, 2, 5);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
@@ -62,7 +62,7 @@
         this.scene.add(Light);
 
         const pointLight = new this.$THREE.PointLight(0xE9F7EF, 2, 50);
-        pointLight.position.set(0.5, 5, 0.5);
+        pointLight.position.set(2, 5, 2);
         pointLight.castShadow = true;
         this.scene.add(pointLight);
 
@@ -97,7 +97,10 @@
         this.composer.setSize(window.innerWidth, window.innerHeight);
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
         const bloom = new this.$postprocessing.BokehEffect({
-          focus: 0.5
+          focus: 0.865,
+          dof: 0,
+          aperture: 0.1,
+          maxBlur: 2
         });
         // bloom.kernelSize = 1;
         // bloom.setResolutionScale = 1;
@@ -113,8 +116,8 @@
       renderScene() {
         requestAnimationFrame(this.renderScene);
         this.controls.update();
-        this.renderer.render(this.scene, this.camera);
-        // this.composer.render();
+        // this.renderer.render(this.scene, this.camera);
+        this.composer.render();
       },
     },
     beforeDestroy() {
