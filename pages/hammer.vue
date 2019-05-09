@@ -97,10 +97,10 @@
         this.composer.setSize(window.innerWidth, window.innerHeight);
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
         const bloom = new this.$postprocessing.BokehEffect({
-          focus: 0.865,
-          dof: 0,
-          aperture: 0.1,
-          maxBlur: 2
+          focus: 0.866,
+          dof: 0.001,
+          aperture: 0.12,
+          maxBlur: 1
         });
         // bloom.kernelSize = 1;
         // bloom.setResolutionScale = 1;
