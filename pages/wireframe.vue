@@ -28,13 +28,13 @@
         this.controls = new this.$controls(this.camera);
         this.controls.enabled = false;
 
-        window.addEventListener('resize', this.windowResize.bind(this), false);
+        // window.addEventListener('resize', this.windowResize.bind(this), false);
         this.renderScene();
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
         this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
-        this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+        this.camera = new this.$THREE.PerspectiveCamera(45, this.$store.state.threeWidth / this.$store.state.threeHeight, 1, 1000);
         this.camera.position.set(150, 150, 150);
         this.scene.add(this.camera);
 
@@ -42,7 +42,7 @@
           alpha: true,
           antialias: true
         });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(this.$store.state.threeWidth, this.$store.state.threeHeight,);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap;

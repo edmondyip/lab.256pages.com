@@ -40,7 +40,7 @@ export default {
       overflow hidden
       h1
         font-size 1.8rem
-        padding 0 var(--frameWidth)
-        line-height var(--frameWidth)
+        padding 0 40px
+        line-height 40px
 </style>
 

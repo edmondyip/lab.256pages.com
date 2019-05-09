@@ -1,5 +1,7 @@
 export const strict = false;
 export const state = () => ({
+  threeHeight: 500,
+  threeWidth: 1000,
   projectList: [{
       id: 1,
       path: '/wireframe',
@@ -100,7 +102,7 @@ export const state = () => ({
       id: 9,
       path: '/hammer',
       title: 'Hammer',
-      description: 'GLTF2 model with Draco',
+      description: 'GLTF2 model with Bokeh',
       tags: [
         'threejs', 'webGL', 'Mar2019'
       ],

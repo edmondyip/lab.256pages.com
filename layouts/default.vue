@@ -1,12 +1,13 @@
 <template lang="pug">
-  #container
-    transition(name="ease" mode="in-out")
-      nuxt
-    //- ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
-    First
-    Projects(:projectList="projectList")
-    PageFooter
-    PageHeader(:style="{background: projectID().frameColor}" :projectTitle="projectID().title" :theme="projectID().darkTheme")
+  #background(:style="{background: projectID().frameColor}" )
+    #container
+      transition(name="ease" mode="in-out")
+        nuxt(:style="{height: threeHeight + 'px', width: threeWidth + 'px'}")
+      //- ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
+      First
+      Projects(:projectList="projectList")
+      PageFooter
+      PageHeader(:style="{background: projectID().frameColor}" :projectTitle="projectID().title" :theme="projectID().darkTheme")
 </template>
 
 <script>
@@ -31,7 +32,9 @@
     computed: {
       ...mapState (
         {
-          projectList: state => state.projectList
+          projectList: state => state.projectList,
+          threeHeight: state => state.threeHeight,
+          threeWidth: state => state.threeWidth
         }
       )
     },
