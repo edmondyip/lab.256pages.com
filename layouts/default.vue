@@ -2,7 +2,7 @@
   #background(:style="{background: projectID().frameColor}" )
     #container
       transition(name="ease" mode="in-out")
-        nuxt(:style="{height: threeHeight + 'px', width: threeWidth + 'px'}")
+        nuxt
       //- ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
       First
       Projects(:projectList="projectList")
@@ -33,8 +33,6 @@
       ...mapState (
         {
           projectList: state => state.projectList,
-          threeHeight: state => state.threeHeight,
-          threeWidth: state => state.threeWidth
         }
       )
     },
@@ -80,14 +78,8 @@
     text-rendering optimizeLegibility
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
-    // background #000
+    background #ffffff
     h1, h2
       font-family: $titleFont
       font-weight: 300
-    .ease-enter-active, .ease-leave-active
-      transition opacity 3s
-      opacity 1
-    .ease-enter, .ease-leave-to
-      opacity 0
-      margin-top -20px
 </style>

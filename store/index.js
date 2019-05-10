@@ -1,7 +1,5 @@
 export const strict = false;
 export const state = () => ({
-  threeHeight: 500,
-  threeWidth: 1000,
   projectList: [{
       id: 1,
       path: '/wireframe',
