@@ -1,7 +1,7 @@
 <template lang="pug">
   #background(:style="{background: projectID().frameColor}" )
     #container
-      transition(name="ease" mode="in-out")
+      transition(name="ease" mode="out-in")
         nuxt
       //- ViewSource(:source="sourceURL" v-show="$route.name !== 'index'")
       First

@@ -10,6 +10,7 @@
     margin 0 auto
     position relative
     #three
+      display block
       position fixed
       top 0
       bottom 0
@@ -21,11 +22,10 @@
         position relative
 
   .ease-enter-active, .ease-leave-active
-    transition opacity 3s
+    transition 3s
     opacity 1
   .ease-enter, .ease-leave-to
     opacity 0
-    margin-top -20px
 
   @media screen and (max-width $maxWidth)
     #container

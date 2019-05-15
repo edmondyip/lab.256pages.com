@@ -11,6 +11,8 @@
       init() {
         const {
           runTime,
+          canvasHeight,
+          camvasWidth,
           scene,
           renderer,
           composer,
@@ -23,6 +25,9 @@
         runTime();
       },
       runTime() {
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
+
         this.createScene();
         this.createLights();
         this.createEffect();
@@ -40,7 +45,7 @@
       createScene() {
         this.scene = new this.$THREE.Scene();
         this.scene.fog = new this.$THREE.Fog(0x000000, 200, 400);
-        this.camera = new this.$THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+        this.camera = new this.$THREE.PerspectiveCamera(60, this.canvasWidth / this.canvasHeight, 1, 1000);
         this.camera.position.set(100, 100, 150);
         this.scene.add(this.camera);
 
@@ -48,8 +53,7 @@
           alpha: true,
           antialias: true
         });
-        this.renderer.setClearColor(0x000000, 1);
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap;
@@ -103,7 +107,7 @@
       },
       createEffect() {
         this.composer = new this.$postprocessing.EffectComposer(this.renderer);
-        this.composer.setSize(window.innerWidth, window.innerHeight);
+        this.composer.setSize(this.canvasWidth, this.canvasHeight);
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
         const bloom = new this.$postprocessing.BloomEffect();
         bloom.kernelSize = 3;
@@ -113,8 +117,11 @@
         this.composer.addPass(effectPass);
       },
       windowResize() {
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
+
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
+        this.camera.aspect = this.canvasWidth / this.canvasHeight;
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
@@ -125,7 +132,6 @@
         this.particleLight.position.z = Math.cos(timer * 3) * 60;
         // this.renderer.render(this.scene, this.camera);
         this.composer.render();
-
       },
     },
     beforeDestroy() {
@@ -140,6 +146,8 @@
 </script>
 
 <style lang="stylus" scoped>
-  #three 
-    background #000000
+  #three
+    width 1200px
+    height 600px
+    background rgba(0,0,0,1)
 </style>

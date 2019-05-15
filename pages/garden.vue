@@ -11,6 +11,8 @@
       init() {
         const {
           runTime,
+          canvasHeight,
+          camvasWidth,
           scene,
           renderer,
           camera,
@@ -22,6 +24,9 @@
         runTime();
       },
       runTime() {
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
+
         this.createScene();
         this.createLights();
         this.createObject();
@@ -40,7 +45,7 @@
       createScene() {
         this.scene = new this.$THREE.Scene();
         // this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 500);
-        this.camera = new this.$THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 2000);
+        this.camera = new this.$THREE.PerspectiveCamera(55, this.canvasWidth / this.canvasHeight, 1, 2000);
         this.camera.position.set(150, 100, -150);
         this.scene.add(this.camera);
 
@@ -48,7 +53,7 @@
           alpha: true,
           antialias: true,
         });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap;
@@ -95,8 +100,11 @@
         this.scene.background = backgroundTexture;
       },
       windowResize() {
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
+
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
+        this.camera.aspect = this.canvasWidth / this.canvasHeight;
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
@@ -126,3 +134,10 @@
     }
   }
 </script>
+
+<style lang="stylus" scoped>
+  #three
+    width 1000px
+    height 500px
+    background #ffffff
+</style>

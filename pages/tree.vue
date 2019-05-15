@@ -107,10 +107,3 @@
     }
   }
 </script>
-
-<style lang="stylus" scoped>
-  #three
-    width 1200px
-    height 600px
-    background rgba(255,255,255,1)
-</style>
