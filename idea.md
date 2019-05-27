@@ -12,12 +12,18 @@
 
 # Dynamic 3D
 - Face Tracking
-- Panorama - 50%
+- Panorama Video - 50%
 - Physics
 - water - 5%
 - Ironman
 
 # Website UI
-- Improve Responsive - 40%
-- Add Source
+- Improve Responsive - 80%
+- Add Full screen btn
+- Add Source btn
 - Add Tutorial - 10%
+
+# Server
+- k8s auto depoly
+- auto build
+- API CMS for update
