@@ -11,6 +11,8 @@
       init() {
         const {
           runTime,
+          canvasHeight,
+          canvasWidth,
           scene,
           renderer,
           camera,
@@ -21,13 +23,15 @@
         runTime();
       },
       runTime() {
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
 
         this.createScene();
         this.createLights();
         this.createBox();
 
         this.controls = new this.$controls(this.camera);
-        this.controls.enabled = false;
+        // this.controls.enabled = false;
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         this.renderScene();
@@ -35,7 +39,7 @@
       createScene() {
         this.scene = new this.$THREE.Scene();
         this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
-        this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+        this.camera = new this.$THREE.PerspectiveCamera(45, this.canvasWidth / this.canvasHeight, 1, 1000);
         this.camera.position.set(150, 150, 150);
         this.scene.add(this.camera);
 
@@ -43,7 +47,7 @@
           alpha: true,
           antialias: true
         });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap;
@@ -52,13 +56,20 @@
       },
       createLights() {
         const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.8);
+        Light.castShadow = true;
         this.scene.add(Light);
+
+        const pointLight = new this.$THREE.PointLight(0xffffff, 1, 2000);
+        pointLight.position.set(200, 100, 200);
+        pointLight.castShadow = true;
+        pointLight.shadow.radius = 20;
+        this.scene.add(pointLight);
       },
       createBox() {
         const waterGeometry = new this.$THREE.PlaneBufferGeometry(20, 20, 100, 100);
-        const waterMaterial = new this.$THREE.MeshPhongMaterial({
+        const waterMaterial = new this.$THREE.MeshLambertMaterial({
           color: 0x2288ff,
-          shininess: 100,
+          side: this.$THREE.DoubleSide
         });
 
       waterMaterial.onBeforeCompile = (shader) => {
@@ -71,23 +82,31 @@
         const customTransform = `
           vec3 transformed = vec3(position);
           float freq = 3.0;
-          float amp = 0.1;
+          float amp = 0.5;
           float angle = (time + position.x)*freq;
           transformed.z += sin(angle)*amp;
         `
         shader.vertexShader = shader.vertexShader.replace(token, customTransform)
-        waterShader = shader;
+        const waterShader = shader;
       }
+
+      const water = new this.$THREE.Mesh(waterGeometry, waterMaterial);
+      water.castShadow = true;
+      water.receiveShadow = true;
+      this.scene.add(water);
 
       },
       windowResize() {
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
+
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
+        this.camera.aspect = this.canvasWidth / this.canvasHeight;
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
         requestAnimationFrame(this.renderScene);
-        this.box.rotation.y += 0.005;
+        // this.box.rotation.y += 0.005;
         this.renderer.render(this.scene, this.camera);
       },
     },
