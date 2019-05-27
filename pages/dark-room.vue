@@ -12,7 +12,7 @@
         const {
           runTime,
           canvasHeight,
-          camvasWidth,
+          canvasWidth,
           scene,
           renderer,
           composer,
@@ -147,7 +147,7 @@
 
 <style lang="stylus" scoped>
   #three
-    width 1200px
+    width 800px
     height 600px
     background rgba(0,0,0,1)
 </style>

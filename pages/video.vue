@@ -1,7 +1,5 @@
 <template lang="pug">
   div
-    video#video(autoplay loop muted playsinline)
-      source(src="~/assets/video/bg.mp4" type="video/mp4")
     #three
 </template>
 
@@ -14,6 +12,8 @@
       init() {
         const {
           runTime,
+          canvasHeight,
+          canvasWidth,
           scene,
           renderer,
           composer,
@@ -29,6 +29,8 @@
         runTime();
       },
       runTime() {
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
 
         this.createScene();
         this.createLights();
@@ -50,7 +52,7 @@
       createScene() {
         this.scene = new this.$THREE.Scene();
         this.scene.fog = new this.$THREE.Fog(this.scene.background, 800, 2000);
-        this.camera = new this.$THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1800);
+        this.camera = new this.$THREE.PerspectiveCamera(20, this.canvasWidth / this.canvasHeight, 0.1, 1800);
         // this.camera.position.set(150, 150, 150);
         this.camera.position.z = 500;
 
@@ -60,7 +62,7 @@
           alpha: true,
           antialias: true
         });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap;
@@ -79,7 +81,7 @@
       },
       createEffect() {
         this.composer = new this.$postprocessing.EffectComposer(this.renderer);
-        this.composer.setSize(window.innerWidth, window.innerHeight);
+        this.composer.setSize(this.canvasWidth, this.canvasHeight);
         this.composer.addPass(new this.$postprocessing.RenderPass(this.scene, this.camera));
 
         const dotScreen = new this.$postprocessing.DotScreenEffect({
@@ -94,7 +96,15 @@
         this.composer.addPass(effectPass);
       },
       createBox() {
-        const video = document.getElementById('video');
+        const videoPath = require('~/assets/video/bg.mp4');
+        const video = document.createElement('video');
+        video.crossOrigin = 'anonymous';
+        video.width = 640;
+        video.height = 300;
+        video.loop = true;
+        video.muted = true;
+        video.src = videoPath;
+        video.setAttribute('webkit-playsinline', 'webkitplaysinline');
         video.play();
 
         const displayX = 30;
@@ -132,8 +142,11 @@
         this.mouseY = (event.clientY - windowHalfY);
       },
       windowResize() {
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
+
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
+        this.camera.aspect = this.canvasWidth / this.canvasHeight;
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
@@ -165,6 +178,8 @@
 </script>
 
 <style lang="stylus" scoped>
-  #video
-    display none
+  #three
+    width 95vw
+    height 95vh
+    background #ffffff
 </style>

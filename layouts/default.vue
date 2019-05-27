@@ -1,5 +1,4 @@
 <template lang="pug">
-  #background(:style="{background: projectID().frameColor}" )
     #container
       transition(name="ease" mode="out-in")
         nuxt

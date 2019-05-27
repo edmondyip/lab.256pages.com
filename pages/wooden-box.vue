@@ -11,6 +11,8 @@
       init() {
         const {
           runTime,
+          canvasHeight,
+          canvasWidth,
           scene,
           renderer,
           camera,
@@ -22,6 +24,8 @@
         runTime();
       },
       runTime() {
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
 
         this.createScene();
         this.createLights();
@@ -38,7 +42,7 @@
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
-        this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+        this.camera = new this.$THREE.PerspectiveCamera(45, this.canvasWidth / this.canvasHeight, 1, 1000);
         this.camera.position.set(150, 150, 150);
         this.scene.add(this.camera);
 
@@ -46,7 +50,7 @@
           alpha: true,
           antialias: true
         });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap;
@@ -80,8 +84,11 @@
       
       },
       windowResize() {
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.canvasHeight = document.getElementById("three").offsetHeight;
+        this.canvasWidth = document.getElementById("three").offsetWidth;
+
+        this.renderer.setSize(this.canvasWidth, this.canvasHeight);
+        this.camera.aspect = this.canvasWidth / this.canvasHeight;
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
@@ -102,3 +109,10 @@
     }
   }
 </script>
+
+<style lang="stylus" scoped>
+  #three
+    width 100%
+    height 100%
+    background #ffffff
+</style>

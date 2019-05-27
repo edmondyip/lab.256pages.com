@@ -12,7 +12,7 @@
         const {
           runTime,
           canvasHeight,
-          camvasWidth,
+          canvasWidth,
           scene,
           renderer,
           camera,
