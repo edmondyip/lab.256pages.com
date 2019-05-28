@@ -1,8 +1,8 @@
-<template lang="pug">
-  #three
+<template lang="pug"> 
+  #three 
 </template>
 
-<script>
+  <script>
   export default {
     mounted() {
       this.init();
@@ -18,7 +18,10 @@
           camera,
           controls,
           box,
-          waterMaterial
+          waterShader,
+          time,
+          mouseX,
+          mouseY,
         } = this;
         runTime();
       },
@@ -34,13 +37,15 @@
         // this.controls.enabled = false;
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
+        window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
+
         this.renderScene();
       },
       createScene() {
         this.scene = new this.$THREE.Scene();
-        this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
-        this.camera = new this.$THREE.PerspectiveCamera(45, this.canvasWidth / this.canvasHeight, 1, 1000);
-        this.camera.position.set(150, 150, 150);
+        // this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
+        this.camera = new this.$THREE.PerspectiveCamera(25, this.canvasWidth / this.canvasHeight, 1, 1000);
+        this.camera.position.set(30, 30, 0);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
@@ -55,46 +60,54 @@
         document.getElementById("three").appendChild(this.renderer.domElement);
       },
       createLights() {
-        const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 0.8);
-        Light.castShadow = true;
-        this.scene.add(Light);
+        // const Light = new this.$THREE.HemisphereLight(0xffffff, 0x080820, 1);
+        // Light.castShadow = true;
+        // this.scene.add(Light);
 
-        const pointLight = new this.$THREE.PointLight(0xffffff, 1, 2000);
-        pointLight.position.set(200, 100, 200);
+        const pointLight = new this.$THREE.PointLight(0xffffff, 1.2, 100);
+        pointLight.position.set(0, 20, 0);
         pointLight.castShadow = true;
         pointLight.shadow.radius = 20;
         this.scene.add(pointLight);
       },
       createBox() {
-        const waterGeometry = new this.$THREE.PlaneBufferGeometry(20, 20, 100, 100);
-        const waterMaterial = new this.$THREE.MeshLambertMaterial({
+        const waterGeometry = new this.$THREE.PlaneBufferGeometry(20, 20, 200, 200);
+        const waterMaterial = new this.$THREE.MeshPhongMaterial({
           color: 0x2288ff,
-          side: this.$THREE.DoubleSide
+          // side: this.$THREE.DoubleSide,
+          // shininess: 100,
+          // wireframe: true,
         });
 
-      waterMaterial.onBeforeCompile = (shader) => {
-        shader.uniforms.time = {value: 0}
-        shader.vertexShader = `
-          uniform float time;
-        ` + shader.vertexShader
+        waterMaterial.onBeforeCompile = (shader) => {
+          shader.uniforms.time = {value: 0}
+          shader.vertexShader = 'uniform float time;\n'+shader.vertexShader;
+          shader.vertexShader = shader.vertexShader.replace(
+              '#include <begin_vertex>',
+              'vec3 transformed = vec3(position);\
+               float dx = position.x;\
+               float dy = position.y;\
+               float freq = sqrt(dx*dx + dy*dy);\
+               float amp = 0.1;\
+               float angle = -time*10.0+freq*6.0;\
+               transformed.z += sin(angle)*amp;\
+               objectNormal = normalize(vec3(0.0,-amp * freq * cos(angle),1.0));\
+               vNormal = normalMatrix * objectNormal;'
+            );
+          this.waterShader = shader
+        };
 
-        const token = `include <begin_vertex>`
-        const customTransform = `
-          vec3 transformed = vec3(position);
-          float freq = 3.0;
-          float amp = 0.5;
-          float angle = (time + position.x)*freq;
-          transformed.z += sin(angle)*amp;
-        `
-        shader.vertexShader = shader.vertexShader.replace(token, customTransform)
-        const waterShader = shader;
-      }
-
-      const water = new this.$THREE.Mesh(waterGeometry, waterMaterial);
-      water.castShadow = true;
-      water.receiveShadow = true;
-      this.scene.add(water);
-
+        const water = new this.$THREE.Mesh(waterGeometry, waterMaterial);
+        water.castShadow = true;
+        water.receiveShadow = true;
+        water.rotation.x = -Math.PI / 2;
+        this.scene.add(water);
+      },
+      onMouseMove(event) {
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+        this.mouseX = (event.clientX - windowHalfX);
+        this.mouseY = (event.clientY - windowHalfY);
       },
       windowResize() {
         this.canvasHeight = document.getElementById("three").offsetHeight;
@@ -104,9 +117,9 @@
         this.camera.aspect = this.canvasWidth / this.canvasHeight;
         this.camera.updateProjectionMatrix();
       },
-      renderScene() {
+      renderScene(time) {
         requestAnimationFrame(this.renderScene);
-        // this.box.rotation.y += 0.005;
+        if (this.waterShader) this.waterShader.uniforms.time.value = time/2000;
         this.renderer.render(this.scene, this.camera);
       },
     },
@@ -118,5 +131,5 @@
       window.removeEventListener('resize', this.windowResize.bind(this), false);
       window.removeEventListener('resize', this.windowResize.bind(this), true);
     }
-  }
-</script>
+  } 
+  </script>
