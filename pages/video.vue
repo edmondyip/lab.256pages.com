@@ -173,6 +173,8 @@
       this.renderer.forceContextLoss();
       window.removeEventListener('resize', this.windowResize.bind(this), false);
       window.removeEventListener('resize', this.windowResize.bind(this), true);
+      window.removeEventListener('mousemove', this.windowResize.bind(this), false);
+      window.removeEventListener('mousemove', this.windowResize.bind(this), true);
     }
   }
 </script>
