@@ -16,7 +16,9 @@
     p v1.2 Add Tree
     p v1.1 Add Video
     p v1.0 Public website
-    #three
+    h2 Material from
+    p
+      a(href="https://hdrihaven.com/" rel="nofollow" target="_blank") HDRI Haven
 </template>
 
 <style lang="stylus" scoped>
@@ -30,6 +32,7 @@
     background rgba(0,0,0,0.8)
     padding 20px
     color #ffffff
+    z-index 9999
     h1
       font-size 2.5rem
     h2
