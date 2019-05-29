@@ -102,11 +102,23 @@ export const state = () => ({
       title: 'Hammer',
       description: 'GLTF2 model with Bokeh',
       tags: [
-        'threejs', 'webGL', 'Mar2019'
+        'threejs', 'webGL', 'April2019'
       ],
       source: 'https://github.com/',
       frameColor: 'rgba(133,146,158,0.9)',
       darkTheme: true,
     },
+    {
+      id: 10,
+      path: '/water',
+      title: 'Water Wave',
+      description: 'Custom Vertex Shader',
+      tags: [
+        'Vertex Shader', 'May2019', 'Water', 'Wave'
+      ],
+      source: 'https://github.com',
+      frameColor: 'rgba(52,152,219,0.8)',
+      darkTheme: true,
+    }
   ],
 });
