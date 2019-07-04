@@ -36,7 +36,7 @@
 
         this.controls = new this.$controls(this.camera);
         this.controls.enableZoom = false;
-        this.controls.autoRotate = true;
+        // this.controls.autoRotate = true;
         this.controls.enabled = false;
 
         this.stats = new this.$stats();
@@ -51,7 +51,7 @@
         this.scene = new this.$THREE.Scene();
         // this.scene.fog = new this.$THREE.Fog(this.scene.background, 1, 600);
         this.camera = new this.$THREE.PerspectiveCamera(25, this.canvasWidth / this.canvasHeight, 1, 1000);
-        this.camera.position.set(30, 30, 0);
+        this.camera.position.set(30, 20, 15);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
@@ -70,19 +70,19 @@
         // Light.castShadow = true;
         // this.scene.add(Light);
 
-        const pointLight = new this.$THREE.PointLight(0xffffff, 2, 100);
+        const pointLight = new this.$THREE.PointLight(0xffffff, 1, 100);
         pointLight.position.set(0, 30, 20);
         pointLight.castShadow = true;
         pointLight.shadow.radius = 20;
         this.scene.add(pointLight);
       },
       createBox() {
-        const waterGeometry = new this.$THREE.PlaneBufferGeometry(20, 20, 200, 200);
+        const waterGeometry = new this.$THREE.PlaneBufferGeometry(65, 65, 80, 80);
         const waterMaterial = new this.$THREE.MeshPhongMaterial({
-          color: 0x2288ff,
+          // color: 0x2288ff,
           // side: this.$THREE.DoubleSide,
           // shininess: 100,
-          // wireframe: true,
+          wireframe: true,
         });
 
         waterMaterial.onBeforeCompile = (shader) => {
@@ -94,8 +94,8 @@
                float dx = position.x;\
                float dy = position.y;\
                float freq = sqrt(dx*dx + dy*dy);\
-               float amp = 0.1;\
-               float angle = -time*3.0+freq*3.0;\
+               float amp = 0.35;\
+               float angle = -time*2.0+freq*1.0;\
                transformed.z += sin(angle)*amp;\
                objectNormal = normalize(vec3(0.0,-amp * freq * cos(angle),1.0));\
                vNormal = normalMatrix * objectNormal;'

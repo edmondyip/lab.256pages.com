@@ -8,11 +8,11 @@
     p If you have any question or freelance please 
       a(href="mailto:neta.edmond@gmail.com")  contact me.
     h2 // About This Website
-    p This page built by WebGL, Threejs, Vuejs, Nuxtjs.
+    p This page built by Threejs, Nuxtjs.
     p Server using Nodejs with Docker.
     h2 // Update History
     p v1.6 Limit height for some effect
-    p v1.5 Add Water
+    p v1.5 Add Wave
     p v1.4 Update UI
     p v1.3 Add Hammer
     p v1.2 Add Tree
