@@ -11,6 +11,8 @@
     p This page built by WebGL, Threejs, Vuejs, Nuxtjs.
     p Server using Nodejs with Docker.
     h2 // Update History
+    p v1.6 Limit height for some effect
+    p v1.5 Add Water
     p v1.4 Update UI
     p v1.3 Add Hammer
     p v1.2 Add Tree
@@ -18,7 +20,7 @@
     p v1.0 Public website
     h2 Material from
     p
-      a(href="https://hdrihaven.com/" rel="nofollow" target="_blank") HDRI Haven
+      a(href="https://hdrihaven.com/" rel="noopener noreferrer" target="_blank") HDRI Haven
 </template>
 
 <style lang="stylus" scoped>

@@ -22,6 +22,7 @@
           time,
           mouseX,
           mouseY,
+          stats
         } = this;
         runTime();
       },
@@ -34,7 +35,12 @@
         this.createBox();
 
         this.controls = new this.$controls(this.camera);
-        // this.controls.enabled = false;
+        this.controls.enableZoom = false;
+        this.controls.autoRotate = true;
+        this.controls.enabled = false;
+
+        this.stats = new this.$stats();
+        document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
@@ -64,8 +70,8 @@
         // Light.castShadow = true;
         // this.scene.add(Light);
 
-        const pointLight = new this.$THREE.PointLight(0xffffff, 1.2, 100);
-        pointLight.position.set(0, 20, 0);
+        const pointLight = new this.$THREE.PointLight(0xffffff, 2, 100);
+        pointLight.position.set(0, 30, 20);
         pointLight.castShadow = true;
         pointLight.shadow.radius = 20;
         this.scene.add(pointLight);
@@ -89,7 +95,7 @@
                float dy = position.y;\
                float freq = sqrt(dx*dx + dy*dy);\
                float amp = 0.1;\
-               float angle = -time*10.0+freq*6.0;\
+               float angle = -time*3.0+freq*3.0;\
                transformed.z += sin(angle)*amp;\
                objectNormal = normalize(vec3(0.0,-amp * freq * cos(angle),1.0));\
                vNormal = normalMatrix * objectNormal;'
@@ -118,6 +124,8 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene(time) {
+        this.stats.update();
+        this.controls.update();
         requestAnimationFrame(this.renderScene);
         if (this.waterShader) this.waterShader.uniforms.time.value = time/2000;
         this.renderer.render(this.scene, this.camera);

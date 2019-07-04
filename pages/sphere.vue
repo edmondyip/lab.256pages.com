@@ -50,7 +50,7 @@
         this.scene = new this.$THREE.Scene();
         // this.scene.fog = new this.$THREE.Fog(this.scene.background, 200, 400);
         this.camera = new this.$THREE.PerspectiveCamera(25, this.canvasWidth / this.canvasHeight, 1, 500);
-        this.camera.position.set(0, 150, -100);
+        this.camera.position.set(0, 110, -100);
         this.scene.add(this.camera);
 
         this.renderer = new this.$THREE.WebGLRenderer({
@@ -102,7 +102,7 @@
         planeTexture.repeat.x = 6;
         planeTexture.repeat.y = 6;
 
-        const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(280, 280);
+        const PlaneGeometry = new this.$THREE.PlaneBufferGeometry(300, 300);
         const PlaneMaterial = new this.$THREE.MeshStandardMaterial({
           color: 0xffeeee,
           map: planeTexture,
@@ -151,6 +151,6 @@
 
 <style lang="stylus" scoped>
   #three
-    width 1000px
+    width 100%
     height 500px
 </style>

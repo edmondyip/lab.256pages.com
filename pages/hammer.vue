@@ -35,7 +35,7 @@
         // this.controls.target.set(0,1,0);
         this.controls.enableZoom = false;
         this.controls.autoRotate = true;
-        this.controls.enabled = false;
+        // this.controls.enabled = false;
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         this.renderScene();

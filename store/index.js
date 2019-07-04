@@ -111,7 +111,7 @@ export const state = () => ({
     {
       id: 10,
       path: '/water',
-      title: 'Water Wave',
+      title: 'Water',
       description: 'Custom Vertex Shader',
       tags: [
         'Vertex Shader', 'May2019', 'Water', 'Wave'
