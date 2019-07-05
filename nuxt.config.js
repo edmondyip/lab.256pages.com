@@ -92,6 +92,7 @@ module.exports = {
    */
   plugins: [
     '~plugins/Three.client.js',
+    '~plugins/clmtrackr.js',
   ],
   /*
    ** Nuxt.js modules
@@ -121,7 +122,7 @@ module.exports = {
     /*
      ** You can extend webpack config here 
      */
-    vendor: ['three', 'three-orbitcontrols', 'postprocessing', 'stats-js'],
+    vendor: ['three', 'three-orbitcontrols', 'postprocessing', 'stats-js', 'clmtrackr'],
     extend(config, ctx) {
       config.performance = config.performance || {}
       config.performance.maxEntrypointSize = 1200 * 1024

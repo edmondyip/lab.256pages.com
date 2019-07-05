@@ -39,8 +39,8 @@
         // this.controls.autoRotate = true;
         this.controls.enabled = false;
 
-        this.stats = new this.$stats();
-        document.getElementById("three").appendChild(this.stats.dom);
+        // this.stats = new this.$stats();
+        // document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
@@ -124,7 +124,7 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene(time) {
-        this.stats.update();
+        // this.stats.update();
         this.controls.update();
         requestAnimationFrame(this.renderScene);
         if (this.waterShader) this.waterShader.uniforms.time.value = time/2000;
@@ -141,3 +141,10 @@
     }
   } 
   </script>
+
+  <style lang="stylus" scoped>
+  #three
+    width 100%
+    height 100%
+    background #ffffff
+</style>
