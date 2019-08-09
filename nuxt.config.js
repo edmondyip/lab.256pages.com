@@ -7,7 +7,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - WebGL Lab',
+    titleTemplate: '%s - 256pages Lab',
     meta: [{
         charset: 'utf-8'
       },
@@ -53,8 +53,8 @@ module.exports = {
    */
 
   manifest: {
-    name: 'Real 3D Web Experiment',
-    short_name: 'WebGL',
+    name: 'Real Time 3D Web Experiment',
+    short_name: '256pages',
     description: 'Real Time 3D Web Experiment by Edmond Yip',
     display: 'fullscreen',
     lang: "en",
@@ -91,7 +91,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~plugins/Three.client.js',
+    {src: '~plugins/Three.client.js'},
   ],
   /*
    ** Nuxt.js modules

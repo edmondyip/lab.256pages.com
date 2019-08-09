@@ -119,6 +119,6 @@ export const state = () => ({
       source: 'https://github.com',
       frameColor: 'rgba(52,152,219,0.8)',
       darkTheme: true,
-    }
+    },
   ],
 });

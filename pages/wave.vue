@@ -1,9 +1,16 @@
-<template lang="pug"> 
-  #three 
+<template lang="pug">
+  div
+    #three
+    button(@click="colorBox()") Color {{colorWireframe}}
 </template>
 
   <script>
   export default {
+    data() {
+      return {
+        colorWireframe: false,
+      }
+    },
     mounted() {
       this.init();
     },
@@ -22,7 +29,8 @@
           time,
           mouseX,
           mouseY,
-          stats
+          stats,
+          waterMaterial,
         } = this;
         runTime();
       },
@@ -39,8 +47,8 @@
         // this.controls.autoRotate = true;
         this.controls.enabled = false;
 
-        this.stats = new this.$stats();
-        document.getElementById("three").appendChild(this.stats.dom);
+        // this.stats = new this.$stats();
+        // document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
@@ -77,15 +85,19 @@
         this.scene.add(pointLight);
       },
       createBox() {
-        const waterGeometry = new this.$THREE.PlaneBufferGeometry(65, 65, 80, 80);
-        const waterMaterial = new this.$THREE.MeshPhongMaterial({
-          // color: 0x2288ff,
-          // side: this.$THREE.DoubleSide,
-          // shininess: 100,
-          wireframe: true,
-        });
-
-        waterMaterial.onBeforeCompile = (shader) => {
+        const waterGeometry = new this.$THREE.PlaneGeometry(65, 65, 100, 100);
+        if (this.colorWireframe === false) {
+          this.waterMaterial = new this.$THREE.MeshPhongMaterial({
+            wireframe: true,
+          });
+        } else {
+          this.waterMaterial = new this.$THREE.MeshPhongMaterial({
+            color: 0x2288ff,
+            side: this.$THREE.DoubleSide,
+            shininess: 100,
+          });
+        }
+        this.waterMaterial.onBeforeCompile = (shader) => {
           shader.uniforms.time = {value: 0}
           shader.vertexShader = 'uniform float time;\n'+shader.vertexShader;
           shader.vertexShader = shader.vertexShader.replace(
@@ -103,11 +115,26 @@
           this.waterShader = shader
         };
 
-        const water = new this.$THREE.Mesh(waterGeometry, waterMaterial);
+        const water = new this.$THREE.Mesh(waterGeometry, this.waterMaterial);
         water.castShadow = true;
         water.receiveShadow = true;
         water.rotation.x = -Math.PI / 2;
         this.scene.add(water);
+      },
+      colorBox() {
+        if (this.colorWireframe === false) {
+          // this.waterMaterial = new this.$THREE.MeshPhongMaterial({
+          //   wireframe: true,
+          // });
+          this.colorWireframe = !this.colorWireframe;
+        } else {
+          // this.waterMaterial = new this.$THREE.MeshPhongMaterial({
+          //   color: 0x2288ff,
+          //   side: this.$THREE.DoubleSide,
+          //   shininess: 100,
+          // });
+          this.colorWireframe = !this.colorWireframe;
+        }
       },
       onMouseMove(event) {
         const windowHalfX = window.innerWidth / 2;
@@ -124,7 +151,6 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene(time) {
-        this.stats.update();
         this.controls.update();
         requestAnimationFrame(this.renderScene);
         if (this.waterShader) this.waterShader.uniforms.time.value = time/2000;
@@ -140,4 +166,15 @@
       window.removeEventListener('resize', this.windowResize.bind(this), true);
     }
   } 
-  </script>
+</script>
+
+<style lang="stylus" scoped>
+  #three
+    width 100%
+    height 100%
+    background #ffffff
+  button
+    position fixed
+    top 0
+    left 0
+</style>

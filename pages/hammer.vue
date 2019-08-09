@@ -104,11 +104,9 @@
         const bloom = new this.$postprocessing.BokehEffect({
           focus: 0.866,
           dof: 0.001,
-          aperture: 0.12,
+          aperture: 0.13,
           maxBlur: 1
         });
-        // bloom.kernelSize = 1;
-        // bloom.setResolutionScale = 1;
         const effectPass = new this.$postprocessing.EffectPass(this.camera, bloom);
         effectPass.renderToScreen = true;
         this.composer.addPass(effectPass);
@@ -138,10 +136,3 @@
     }
   }
 </script>
-
-<style lang="stylus" scoped>
-  #three
-    width 1000px
-    height 700px
-    background #ffffff
-</style>

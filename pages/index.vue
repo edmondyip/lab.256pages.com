@@ -7,7 +7,7 @@
 
   export default {
     head: {
-      title: "Edmond Yip WebGL 3D Development"
+      title: "Real Time 3D Web Experiment by Edmond Yip"
     },
     components: {
       Effect,

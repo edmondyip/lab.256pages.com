@@ -138,6 +138,7 @@
 <style lang="stylus" scoped>
   #three
     width 100%
+    max-width 1200px
     height 500px
     background #ffffff
 </style>

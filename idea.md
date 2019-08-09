@@ -11,15 +11,17 @@
 - lightmap
 
 # Dynamic 3D
-- Face Tracking
+- Face Tracking - 1%
+- OpenCV hand tracking
 - Panorama Video - 50%
 - Physics
-- water - 5%
+- water - 100%
 - Ironman
+- logo
 
 # Website UI
-- Improve Responsive - 80%
-- Add Full screen btn
+- Improve Responsive - 100%
+- Add Full screen btn - 5%
 - Add Source btn
 - Add Tutorial - 10%
 
