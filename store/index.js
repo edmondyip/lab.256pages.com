@@ -120,5 +120,17 @@ export const state = () => ({
       frameColor: 'rgba(52,152,219,0.8)',
       darkTheme: true,
     },
+    {
+      id: 11,
+      path: '/face-track',
+      title: 'Face Tracking',
+      description: 'Face Tracking',
+      tags: [
+        'Vertex Shader', 'May2019', 'Water', 'Wave'
+      ],
+      source: 'https://github.com',
+      frameColor: 'rgba(52,152,219,0.8)',
+      darkTheme: true,
+    },
   ],
 });
