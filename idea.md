@@ -12,10 +12,12 @@
 
 # Dynamic 3D
 - Face Tracking - 1%
+- OpenCV hand tracking
 - Panorama Video - 50%
 - Physics
 - water - 100%
 - Ironman
+- logo
 
 # Website UI
 - Improve Responsive - 100%

@@ -4,6 +4,7 @@
 </template>
 
 <script>
+
   export default {
     mounted() {
       this.faceTrack();
@@ -12,13 +13,6 @@
       faceTrack() {
         const video = document.getElementById('video');
 
-        const tracker = new $clm.tracker({
-          faceDetection: {
-            useWebWorkers: false,
-          },
-        });
-        clmtracker.init();
-        clmtracker.start(video);
       },
     }
   }

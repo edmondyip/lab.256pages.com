@@ -19,7 +19,6 @@
           pointLight,
           controls,
           box,
-          // stats,
         } = this;
         runTime();
       },
@@ -33,9 +32,6 @@
 
         this.controls = new this.$controls(this.camera);
         this.controls.enabled = false;
-
-        // this.stats = new this.$stats();
-        // document.getElementById("three").appendChild(this.stats.dom);
 
         window.addEventListener('resize', this.windowResize.bind(this), false);
         this.renderScene();
@@ -92,7 +88,6 @@
         this.camera.updateProjectionMatrix();
       },
       renderScene() {
-        // this.stats.update();
         requestAnimationFrame(this.renderScene);
         this.box.rotation.y += 0.005;
         this.box.rotation.x += 0.005;

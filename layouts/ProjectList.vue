@@ -110,7 +110,7 @@ export default {
   @media screen and (max-width $maxWidth)
     div#project-list
       padding 10px 20px
-      width calc(100% - 20px)
+      width calc(100vw - 40px)
       section
         width 100%
         margin 0

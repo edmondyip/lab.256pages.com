@@ -36,7 +36,7 @@ export default {
   @media screen and (max-width $maxWidth)
     footer
       // height calc(var(--frameWidth) / 2)
-      width 100%
+      width calc(100vw - 20px)
       #copy
         padding 30px 0 10px
         position relative
