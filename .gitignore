@@ -63,6 +63,3 @@ typings/
 # nuxt.js build output
 .nuxt
 dist/*
-
-sw.js
-package-lock.json
