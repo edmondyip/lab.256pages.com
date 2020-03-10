@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     #three
-    button(@click="colorBox()") Color {{colorWireframe}}
+    //- button(@click="colorBox()") Color {{colorWireframe}}
 </template>
 
   <script>
